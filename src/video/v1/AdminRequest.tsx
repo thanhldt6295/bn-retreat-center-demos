@@ -29,7 +29,12 @@ export function RequestList({ next }: SceneProps) {
             </div>
             <button className="lds-btn outline" style={{ marginLeft: 'auto' }}>Assign Label</button>
           </div>
-          <table className="lds-table">
+          <table className="lds-table" style={{ tableLayout: 'fixed' }}>
+            <colgroup>
+              {[110, 150, 338, 150, 200, 70, 130, 120, 116].map((w, i) => (
+                <col key={i} style={{ width: w }} />
+              ))}
+            </colgroup>
             <thead>
               <tr>
                 {['Request', 'Contact', 'Group name', 'Group type', 'Dates', 'Rooms', 'Rate range', 'Status', 'Next step'].map((h) => (

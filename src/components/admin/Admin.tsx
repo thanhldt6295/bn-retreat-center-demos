@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactNode } from 'react'
+import { asset } from '../../lib/asset'
 import './admin.css'
 
 export const NAV = [
@@ -12,42 +13,15 @@ export const NAV = [
   'Control Panel',
 ]
 
-const Ninja = () => (
-  <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round">
-    <path d="M3 8l10-3-5 6 10-2M6 20l8-8 6 2" />
-  </svg>
-)
 
-/** Salesforce-style global header + object nav bar. */
+/** Salesforce global header (the Figma header image) + object nav bar. */
 export function GlobalNav({ active }: { active?: string }) {
   return (
     <header className="lds-top">
-      <div className="lds-top-row">
-        <div className="lds-logo">
-          <Ninja />
-        </div>
-        <div className="lds-search">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#444" strokeWidth="1.8">
-            <circle cx="6" cy="6" r="4.2" />
-            <path d="M9.2 9.2L13 13" />
-          </svg>
-          Search...
-        </div>
-        <div className="lds-top-icons">
-          <span className="ico" style={{ borderRadius: 4, width: 44 }} />
-          <span className="ico" />
-          <span className="ico" />
-          <span className="ico" />
-          <span className="ico" />
-          <span className="ico" />
-          <div className="lds-avatar" />
-        </div>
-      </div>
+      <img className="lds-hdr" src={asset('img/sf-header.png')} alt="" />
       <nav className="lds-nav">
         <span className="lds-waffle">
-          {Array.from({ length: 9 }).map((_, i) => (
-            <i key={i} />
-          ))}
+          <img src={asset('img/sf-waffle.svg')} width={20} height={20} alt="" />
         </span>
         <span className="lds-appname">Booking Ninjas</span>
         {NAV.map((n) => (
@@ -55,9 +29,7 @@ export function GlobalNav({ active }: { active?: string }) {
             {n}
           </a>
         ))}
-        <svg className="lds-pencil" width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
-          <path d="M1 13l1-4 8-8 3 3-8 8-4 1z" />
-        </svg>
+        <img className="lds-pencil" src={asset('img/sf-pencil.svg')} width={14} height={14} alt="" />
       </nav>
     </header>
   )

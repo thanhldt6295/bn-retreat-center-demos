@@ -1,8 +1,10 @@
 import type { CSSProperties, ReactNode } from 'react'
 import { organizer } from '../../data/demo'
+import { asset } from '../../lib/asset'
 import './guest.css'
 
 export function Logo({ light }: { light?: boolean }) {
+  if (!light) return <img src={asset('img/logo.svg')} width={213} height={48} alt="Booking Ninjas" style={{ display: 'block' }} />
   return (
     <span className={`g-logo ${light ? 'light' : ''}`}>
       <svg width="30" height="26" viewBox="0 0 30 26" fill="none" stroke={light ? '#fff' : '#000'} strokeWidth="3" strokeLinecap="round">
@@ -24,11 +26,14 @@ export function PublicShell({ children }: { children: ReactNode }) {
       </div>
       <div className="g-main">{children}</div>
       <div className="g-pub-footer">
-        <span>© 2026 Booking Ninjas. All rights reserved.</span>
-        <span style={{ display: 'flex', gap: 24 }}>
-          <span>Privacy Policy</span>
-          <span>Terms of Service</span>
-        </span>
+        <div className="div" />
+        <div className="legal">
+          <span>© 2026 Booking Ninjas. All rights reserved.</span>
+          <span style={{ display: 'flex', gap: 24 }}>
+            <span>Privacy Policy</span>
+            <span>Terms of Service</span>
+          </span>
+        </div>
       </div>
     </div>
   )

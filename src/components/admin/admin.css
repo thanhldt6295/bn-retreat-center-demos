@@ -83,18 +83,16 @@
   align-items: stretch;
   padding-left: 14px;
 }
+.lds-hdr {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2846 / 100;
+}
 .lds-waffle {
-  display: grid;
-  grid-template-columns: repeat(3, 5px);
-  gap: 2px;
+  display: flex;
   align-self: center;
   margin-right: 14px;
-}
-.lds-waffle i {
-  width: 5px;
-  height: 5px;
-  background: #747474;
-  border-radius: 1px;
 }
 .lds-appname {
   align-self: center;
