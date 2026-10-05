@@ -1,0 +1,129 @@
+.doc {
+  width: 606px;
+  max-width: 100%;
+  background: #fff;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.18);
+  padding: 40px 42px 44px;
+  font-family: Inter, system-ui, sans-serif;
+  color: #1a1a1a;
+  font-size: 10px;
+  line-height: 1.5;
+  text-align: left;
+}
+.doc-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #ddd;
+}
+.doc-brand {
+  font-weight: 800;
+  font-size: 14px;
+  color: #0f4a38;
+  letter-spacing: 0.02em;
+}
+.doc-sub {
+  font-size: 9px;
+  color: #666;
+}
+.doc-kind {
+  font-size: 8.5px;
+  letter-spacing: 0.04em;
+  color: #666;
+}
+.doc-code {
+  font-size: 19px;
+  font-weight: 800;
+  margin-top: 2px;
+}
+.doc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  padding: 12px 0 14px;
+}
+.doc-grid small {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 0.04em;
+  color: #666;
+}
+.doc-grid b {
+  font-size: 9.5px;
+}
+.doc-sec {
+  color: #0f4a38;
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 0.03em;
+  margin: 12px 0 8px;
+}
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 9px;
+}
+.doc-table th {
+  font-weight: 500;
+  color: #666;
+  padding: 6px 0;
+  border-bottom: 1.5px solid #222;
+  font-size: 8.5px;
+}
+.doc-table td {
+  padding: 6px 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+.doc-totals {
+  width: 230px;
+  margin: 18px 0 0 auto;
+  font-size: 10px;
+  color: #777;
+}
+.doc-totals div {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 0;
+}
+.doc-totals b {
+  font-weight: 500;
+}
+.doc-totals .grand {
+  color: #111;
+  font-weight: 700;
+}
+.doc-totals .grand b {
+  font-weight: 700;
+}
+.doc-sigs {
+  display: flex;
+  gap: 30px;
+  margin-top: 46px;
+}
+.doc-sigs > div {
+  width: 214px;
+  display: flex;
+  flex-direction: column;
+  font-size: 8.5px;
+  color: #666;
+  line-height: 1.6;
+}
+.doc-sigs .line {
+  border-top: 1.5px solid #222;
+  margin-bottom: 4px;
+}
+.doc-sigs b {
+  font-weight: 600;
+}
+.doc-clause {
+  margin-top: 14px;
+}
+.doc-clause b {
+  font-size: 10.5px;
+}
+.doc-clause p {
+  margin: 2px 0 0;
+  color: #555;
+  font-size: 9.5px;
+}

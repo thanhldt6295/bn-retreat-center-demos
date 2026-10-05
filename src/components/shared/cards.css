@@ -1,0 +1,87 @@
+.card-wrap {
+  min-height: 100vh;
+  background: #061a2e;
+  display: grid;
+  place-items: center;
+}
+.card {
+  position: relative;
+  container-type: size;
+  width: min(100vw, 177.78vh);
+  aspect-ratio: 16 / 9;
+  background: #0b2e4f;
+  color: #fff;
+  overflow: hidden;
+  font-family: Inter, system-ui, sans-serif;
+}
+.card-ninja {
+  position: absolute;
+  left: 33%;
+  top: 4%;
+  width: 22%;
+  color: rgba(120, 150, 185, 0.28);
+}
+.card-rings {
+  position: absolute;
+  width: 40%;
+}
+.card-rings.tr {
+  right: 0;
+  top: 0;
+  width: 42%;
+}
+.card-rings.bl {
+  left: 0;
+  bottom: 0;
+  width: 32%;
+}
+.card-body {
+  position: absolute;
+  left: 8.3%;
+  right: 8%;
+  top: 34%;
+}
+.card-brand {
+  display: flex;
+  align-items: center;
+  gap: 1.1cqw;
+  margin-bottom: 2.6cqw;
+}
+.card-brand i {
+  width: 1px;
+  height: 1.6cqw;
+  background: rgba(255, 255, 255, 0.6);
+}
+.card-brand .rc {
+  font-size: 0.85cqw;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+}
+.card-title {
+  font-size: 3.7cqw;
+  line-height: 1.12;
+  font-weight: 700;
+  margin: 0;
+  max-width: 72cqw;
+}
+.card-sub {
+  font-size: 1.35cqw;
+  margin: 2cqw 0 0;
+  color: #e6eef8;
+}
+.card-fine {
+  font-size: 0.72cqw;
+  margin: 2cqw 0 0;
+  color: #d3deec;
+}
+.card-cta {
+  margin-top: 2.2cqw;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.95cqw;
+  color: #0b6bcb;
+  background: #fff;
+  border: 0;
+  border-radius: 0.5cqw;
+  padding: 0.95cqw 1.8cqw;
+}

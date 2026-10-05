@@ -1,0 +1,150 @@
+.player-stage {
+  min-height: 100vh;
+}
+
+/* ---------- helper overlay (hide with H while recording) ---------- */
+.helper {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  z-index: 9000;
+  width: 270px;
+  background: rgba(10, 25, 41, 0.92);
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font: 12px/1.35 Inter, system-ui, sans-serif;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+}
+.helper-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.helper-row strong {
+  flex: 1;
+  font-size: 12px;
+}
+.helper-home {
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+}
+.helper-count {
+  opacity: 0.7;
+}
+.helper-step {
+  margin: 6px 0;
+  font-size: 13px;
+}
+.helper-keys {
+  opacity: 0.75;
+}
+.helper kbd {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 3px;
+  padding: 0 4px;
+  font: inherit;
+}
+.helper-btns {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+.helper-btns button,
+.helper-list button {
+  font: inherit;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+  border: 0;
+  border-radius: 5px;
+  padding: 3px 8px;
+  cursor: pointer;
+}
+.helper-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  max-height: 260px;
+  overflow: auto;
+}
+.helper-list li {
+  margin: 2px 0;
+}
+.helper-list button {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+}
+.helper-list button:hover,
+.helper-list button.on {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ---------- toasts ---------- */
+.toast-layer {
+  position: fixed;
+  top: 66px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 8000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 22px 10px 14px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  animation: toast-in 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2) both, toast-out 0.35s ease-in 3.2s both;
+}
+.toast-check {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  color: #fff;
+  flex: none;
+}
+.toast-admin {
+  background: #c6efd9;
+  color: #0b4a35;
+  font-family: 'Salesforce Sans', -apple-system, 'Segoe UI', Arial, sans-serif;
+}
+.toast-admin .toast-check {
+  background: #0b7a55;
+}
+.toast-guest {
+  background: #0f4a38;
+  color: #fff;
+  font-family: Inter, sans-serif;
+  border-radius: 12px;
+}
+.toast-guest .toast-check {
+  background: #f5c842;
+  color: #0f2a20;
+}
+@keyframes toast-in {
+  from {
+    transform: translateY(-24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes toast-out {
+  to {
+    transform: translateY(-16px);
+    opacity: 0;
+  }
+}
