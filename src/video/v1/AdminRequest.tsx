@@ -100,7 +100,7 @@ export function RecordPage({
       <GlobalNav />
       <div className="lds-page">
         <div className="lds-head" style={{ paddingBottom: 26 }}>
-          <ObjectIcon />
+          <ObjectIcon size={48} />
           <div>
             <div className="lds-crumb">
               <a className="lds-link">Group Block Requests</a> ›

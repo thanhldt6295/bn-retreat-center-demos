@@ -1,5 +1,10 @@
 /* G3 email + G4b/G4c viewers · values from Figma 192:7775, 200:7741, 200:7872 */
 .em {
+  --yellow: #f6c945;
+  --yellow-d: #eab92f;
+  --green: #06503f;
+  --mint: #c9f0e1;
+  --ink: #0b1f17;
   min-height: 100vh;
   box-sizing: border-box;
   background: #f4f1ea;

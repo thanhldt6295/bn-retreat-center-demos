@@ -11,7 +11,6 @@ import { G3, G4b, G4c } from './EmailViewers'
 import { G5, G6, G7 } from './GuestPay'
 import { Reservation } from './Reservation'
 import { Wizard } from './Wizard'
-import './v1.css'
 
 export const steps: Step[] = [
   { id: 'T0', label: 'Title card', view: 'title' },

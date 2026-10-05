@@ -35,12 +35,9 @@ export function GlobalNav({ active }: { active?: string }) {
   )
 }
 
-export const ObjectIcon = () => (
-  <div className="lds-icon">
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M4 6l7 7-7 7M12 6l7 7-7 7" />
-    </svg>
-  </div>
+/** Standard object icon from the Figma file (Standard Icons / M / macros). */
+export const ObjectIcon = ({ size = 40 }: { size?: number }) => (
+  <img src={asset('img/sf-object-macros.svg')} width={size} height={size} alt="" style={{ flex: 'none', display: 'block' }} />
 )
 
 type Tone = 'warn' | 'ok' | 'mint' | 'blue' | ''

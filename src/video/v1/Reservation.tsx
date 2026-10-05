@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { ActionButton } from '../../components/shared/ActionButton'
 import { DatePicker } from '../../components/shared/DatePicker'
 import { Badge, Field, GlobalNav, Modal } from '../../components/admin/Admin'
+import { asset } from '../../lib/asset'
 import { group, groupReservation, money, organizer, quote, timeline } from '../../data/demo'
 import { usePlayer, type SceneProps } from '../../player/Player'
 
@@ -20,7 +21,11 @@ const DateBox = ({ value, onChange, min }: { value: string; onChange: (v: string
   </DatePicker>
 )
 
-const ROOM_IMG = ['#a8714a', '#a8714a', '#a8714a', '#4a5560', '#4a5560', '#6d4a2e', '#6d4a2e']
+const ROOM_IMG: Record<string, string> = {
+  'Standard Single Room': 'img/room-single.png',
+  'Standard Double Room': 'img/room-double.png',
+  Cabin: 'img/room-cabin.png',
+}
 
 /** 4.3 Pending Approval, 4.4 invoice (modal), 4.3b Confirmed */
 export function Reservation({ step, from, goto }: SceneProps) {
@@ -161,9 +166,9 @@ export function Reservation({ step, from, goto }: SceneProps) {
               <tbody>
                 {groupReservation.roomsShown.map((r, i) => (
                   <tr key={i} style={{ borderTop: '1px solid #e5e5e5' }}>
-                    <td style={{ height: 58 }}>
+                    <td style={{ height: 80 }}>
                       <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                        <span style={{ width: 46, height: 46, borderRadius: 3, background: ROOM_IMG[i], flex: 'none' }} />
+                        <img src={asset(ROOM_IMG[r.type])} width={64} height={64} alt="" style={{ borderRadius: 8, objectFit: 'cover', background: '#f3f3f3', flex: 'none' }} />
                         <div>
                           <div style={{ fontSize: 10.5, color: '#555' }}>From Cedar Valley Retreat &amp; Conference Center</div>
                           <b style={{ color: '#032d60', fontSize: 12.5 }}>{r.type}</b>
@@ -179,7 +184,7 @@ export function Reservation({ step, from, goto }: SceneProps) {
                     <td>3 nights</td>
                     <td><b>{money(r.amount)}</b><div style={{ color: '#666' }}>+Tax {money(r.tax)}</div></td>
                     <td><b>{money(r.amount)}</b><div style={{ color: '#666' }}>+Tax {money(r.tax)}</div></td>
-                    <td><span style={{ color: '#0b5cff', fontSize: 18 }}>⌄</span></td>
+                    <td><span style={{ width: 24, height: 24, border: '1px solid #5c5c5c', borderRadius: '50%', display: 'inline-grid', placeItems: 'center', background: '#fff' }}><img src={asset('img/ic-row-action.svg')} width={14} height={14} alt="" /></span></td>
                   </tr>
                 ))}
               </tbody>

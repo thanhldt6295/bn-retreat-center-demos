@@ -98,7 +98,8 @@
 .gp-agree {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  white-space: nowrap;
   font-size: 14px;
 }
 .gp-forms {
