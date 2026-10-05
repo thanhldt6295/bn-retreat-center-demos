@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { ActionButton } from '../../components/shared/ActionButton'
 import { DatePicker } from '../../components/shared/DatePicker'
-import { Badge, Field, GlobalNav, Modal } from '../../components/admin/Admin'
+import { AdminPage, Badge, Field, GlobalNav, Input, Modal, Select, TextArea } from '../../components/admin/Admin'
+import { Icon } from '../../components/admin/Icon'
 import { asset } from '../../lib/asset'
 import { group, groupReservation, money, organizer, quote, timeline } from '../../data/demo'
 import { usePlayer, type SceneProps } from '../../player/Player'
@@ -11,11 +12,9 @@ const th = { fontSize: 11.5, textTransform: 'uppercase', letterSpacing: '.04em',
 const DateBox = ({ value, onChange, min }: { value: string; onChange: (v: string) => void; min?: string }) => (
   <DatePicker theme="lds" value={value} onChange={onChange} min={min}>
     {(open) => (
-      <div className="lds-input" style={{ width: 124, borderRadius: 4, borderColor: open ? '#0b5cff' : undefined }}>
-        {value}
-        <svg width="12" height="12" viewBox="0 0 14 14" fill="#0b5cff" style={{ marginLeft: 'auto' }}>
-          <path d="M3 1h1.5v1.5h5V1H11v1.5h1.5V13h-11V2.5H3V1zm-.5 5v5.5h9V6h-9z" />
-        </svg>
+      <div className={`slds-input-has-icon slds-input-has-icon_right ${open ? 'slds-has-focus' : ''}`} style={{ width: 150 }}>
+        <Icon name="date_input" className="slds-input__icon slds-input__icon_right" color="#0b5cff" />
+        <input className="slds-input" readOnly value={value} aria-label="Date" style={{ cursor: 'pointer' }} />
       </div>
     )}
   </DatePicker>
@@ -47,24 +46,24 @@ export function Reservation({ step, from, goto }: SceneProps) {
   const modalOpen = step === '4.4' && invoiceOpen
 
   return (
-    <div className="lds">
+    <AdminPage>
       <GlobalNav active="Reservations" />
       <div className="lds-page" style={{ paddingTop: 12 }}>
-        <div className="lds-card" style={{ borderRadius: 8, padding: '14px 12px', display: 'flex', alignItems: 'center' }}>
+        <div className="slds-card" style={{ borderRadius: 8, padding: '14px 12px', display: 'flex', alignItems: 'center' }}>
           <div>
             <div style={{ fontSize: 12, color: '#444' }}>
               Reservation <b style={{ color: '#0b5cff', fontSize: 22, marginLeft: 6, fontWeight: 500 }}>{groupReservation.number}</b>
             </div>
             <div style={{ fontSize: 12, color: '#444', marginTop: 4 }}>
-              Group Block <a className="lds-link" style={{ marginLeft: 6 }}>{group.code}</a>
+              Group Block <a className="slds-text-link" style={{ marginLeft: 6 }}>{group.code}</a>
             </div>
           </div>
           <div style={{ marginLeft: 'auto', display: 'flex', gap: 8 }}>
-            <button className="lds-btn outline" disabled={!confirmed}>Check-In</button>
-            <button className="lds-btn outline" disabled={!confirmed}>Check-Out</button>
+            <button className="slds-button slds-button_neutral" disabled={!confirmed}>Check-In</button>
+            <button className="slds-button slds-button_neutral" disabled={!confirmed}>Check-Out</button>
             {!confirmed && (
               <ActionButton
-                className="lds-btn brand"
+                className="slds-button slds-button_brand"
                 primary={step === '4.4' && !modalOpen}
                 loadingMs={1000}
                 onDone={() => goto('4.3b')}
@@ -75,16 +74,16 @@ export function Reservation({ step, from, goto }: SceneProps) {
           </div>
         </div>
 
-        <div className="lds-card" style={{ borderRadius: 8, margin: '12px 0', display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', textAlign: 'center', padding: '10px 0', fontSize: 12, fontWeight: 700 }}>
+        <div className="slds-card" style={{ borderRadius: 8, margin: '12px 0', display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', textAlign: 'center', padding: '10px 0', fontSize: 12, fontWeight: 700 }}>
           <span>Cancelled</span>
           <span>{confirmed ? 'Pending Approval' : <Badge tone="warn">Pending Approval</Badge>}</span>
           <span>{confirmed ? <Badge tone="mint">Confirmed</Badge> : 'Confirmed'}</span>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-          <div className="lds-card" style={{ borderRadius: 8, padding: 12, minHeight: 210 }}>
+          <div className="slds-card" style={{ borderRadius: 8, padding: 12, minHeight: 210 }}>
             <div style={{ fontSize: 20, color: '#032d60', margin: '6px 0 12px' }}>Reservation Info</div>
-            <div className="lds-card" style={{ borderRadius: 6, padding: 12, boxShadow: 'none' }}>
+            <div className="slds-card" style={{ borderRadius: 6, padding: 12, boxShadow: 'none' }}>
               <div style={{ display: 'flex', gap: 12 }}>
                 <Field label="Start Date"><DateBox value={start} onChange={setStart} /></Field>
                 <Field label="End Date"><DateBox value={end} onChange={setEnd} min={start} /></Field>
@@ -95,8 +94,8 @@ export function Reservation({ step, from, goto }: SceneProps) {
                 <div><div style={{ color: '#555' }}>Taxes</div><div style={{ marginTop: 3 }}>{money(quote.tax)}</div></div>
               </div>
               <div style={{ display: 'flex', alignItems: 'flex-end' }}>
-                <button className="lds-btn outline" style={{ marginRight: 8 }}>Add room</button>
-                <button className="lds-btn outline">Add item</button>
+                <button className="slds-button slds-button_neutral" style={{ marginRight: 8 }}>Add room</button>
+                <button className="slds-button slds-button_neutral">Add item</button>
                 <div style={{ marginLeft: 'auto', textAlign: 'right' }}>
                   <div style={{ fontSize: 11, color: '#555' }}>Grand Total</div>
                   <div style={{ fontSize: 24, color: '#032d60', fontWeight: 500 }}>{money(quote.total)}</div>
@@ -104,21 +103,21 @@ export function Reservation({ step, from, goto }: SceneProps) {
               </div>
             </div>
           </div>
-          <div className="lds-card" style={{ borderRadius: 8, padding: 12 }}>
+          <div className="slds-card" style={{ borderRadius: 8, padding: 12 }}>
             <div style={{ fontSize: 20, color: '#032d60', margin: '6px 0 12px' }}>Billing Info</div>
-            <div className="lds-card" style={{ borderRadius: 6, padding: 12, boxShadow: 'none' }}>
+            <div className="slds-card" style={{ borderRadius: 6, padding: 12, boxShadow: 'none' }}>
               <div style={{ fontSize: 11.5, color: '#555' }}>Contact Name</div>
               <div style={{ display: 'flex', gap: 8, margin: '4px 0 12px' }}>
-                <div className="lds-input" style={{ borderRadius: 4, flex: 1 }}>{organizer.name}</div>
-                <button className="lds-btn outline">Change</button>
+                <div style={{ flex: 1 }}><Input value={organizer.name} /></div>
+                <button className="slds-button slds-button_neutral">Change</button>
               </div>
               <div style={{ display: 'flex', gap: 30, fontSize: 12, paddingBottom: 12, borderBottom: '1px solid #ddd' }}>
                 <div><div style={{ color: '#555' }}>Email</div><div style={{ marginTop: 3 }}>{organizer.email}</div></div>
-                <div><div style={{ color: '#555' }}>Invoice</div><a className="lds-link ab" style={{ display: 'block', marginTop: 3 }} onClick={() => goto('4.4')}>{groupReservation.invoice}</a></div>
+                <div><div style={{ color: '#555' }}>Invoice</div><a className="slds-text-link ab" style={{ display: 'block', marginTop: 3 }} onClick={() => goto('4.4')}>{groupReservation.invoice}</a></div>
               </div>
               <div style={{ display: 'flex', alignItems: 'flex-end', marginTop: 10 }}>
-                <button className="lds-btn outline ab" style={{ marginRight: 8 }} onClick={() => goto('4.4')}>Invoice</button>
-                <button className="lds-btn outline">Payments</button>
+                <button className="slds-button slds-button_neutral ab" style={{ marginRight: 8 }} onClick={() => goto('4.4')}>Invoice</button>
+                <button className="slds-button slds-button_neutral">Payments</button>
                 <div style={{ marginLeft: 'auto', textAlign: 'right' }}>
                   <div style={{ fontSize: 11, color: '#555' }}>Balance Due</div>
                   <div style={{ fontSize: 24, color: '#032d60', fontWeight: 500 }}>{money(quote.balance)}</div>
@@ -128,7 +127,7 @@ export function Reservation({ step, from, goto }: SceneProps) {
           </div>
         </div>
 
-        <div className="lds-card" style={{ borderRadius: 8, marginTop: 12, padding: '16px 24px 24px' }}>
+        <div className="slds-card" style={{ borderRadius: 8, marginTop: 12, padding: '16px 24px 24px' }}>
           <div style={{ display: 'flex', gap: 22, fontSize: 13, borderBottom: '1px solid #ddd', paddingBottom: 8 }}>
             <b style={{ color: '#0b5cff', borderBottom: '2px solid #0b5cff', paddingBottom: 8 }}>Details</b>
             <span>Payments</span>
@@ -136,8 +135,8 @@ export function Reservation({ step, from, goto }: SceneProps) {
             <span>Activities</span>
           </div>
           <div style={{ fontSize: 15, fontWeight: 700, color: '#032d60', margin: '22px 0 10px' }}>Space <small style={{ fontWeight: 400, color: '#555' }}>1</small></div>
-          <div className="lds-card" style={{ borderRadius: 6, overflow: 'hidden' }}>
-            <table className="lds-table" style={{ fontSize: 12 }}>
+          <div className="slds-card" style={{ borderRadius: 6, overflow: 'hidden' }}>
+            <table className="slds-table slds-table_bordered slds-table_cell-buffer" style={{ fontSize: 12 }}>
               <thead>
                 <tr>{['Space', 'Description', 'Start date', 'End date', 'Time', 'Days', 'Status', 'Amount'].map((h) => <th key={h} style={th}>{h}</th>)}</tr>
               </thead>
@@ -158,8 +157,8 @@ export function Reservation({ step, from, goto }: SceneProps) {
           <div style={{ fontSize: 15, fontWeight: 700, color: '#032d60', margin: '22px 0 10px' }}>
             Reservation Rooms <small style={{ fontWeight: 400, color: '#555' }}>(22/22)</small>
           </div>
-          <div className="lds-card" style={{ borderRadius: 6, overflow: 'hidden' }}>
-            <table className="lds-table" style={{ fontSize: 12 }}>
+          <div className="slds-card" style={{ borderRadius: 6, overflow: 'hidden' }}>
+            <table className="slds-table slds-table_bordered slds-table_cell-buffer" style={{ fontSize: 12 }}>
               <thead>
                 <tr>{['Room', 'Guest', 'Start date', 'End date', 'Guests', 'Status', 'Length', 'Room only', 'Total', 'Actions'].map((h) => <th key={h} style={th}>{h}</th>)}</tr>
               </thead>
@@ -172,7 +171,7 @@ export function Reservation({ step, from, goto }: SceneProps) {
                         <div>
                           <div style={{ fontSize: 10.5, color: '#555' }}>From Cedar Valley Retreat &amp; Conference Center</div>
                           <b style={{ color: '#032d60', fontSize: 12.5 }}>{r.type}</b>
-                          <div><a className="lds-link">Assign Room</a></div>
+                          <div><a className="slds-text-link">Assign Room</a></div>
                         </div>
                       </div>
                     </td>
@@ -189,14 +188,14 @@ export function Reservation({ step, from, goto }: SceneProps) {
                 ))}
               </tbody>
             </table>
-            <div style={{ padding: '10px 12px', fontSize: 12 }}>Showing 7 of 22 rooms · <a className="lds-link">View all</a></div>
+            <div style={{ padding: '10px 12px', fontSize: 12 }}>Showing 7 of 22 rooms · <a className="slds-text-link">View all</a></div>
           </div>
           <div style={{ textAlign: 'center', margin: '16px 0' }}>
-            <button className="lds-btn outline">Add</button>
+            <button className="slds-button slds-button_neutral">Add</button>
           </div>
           <div style={{ fontSize: 15, fontWeight: 700, color: '#032d60', margin: '8px 0 10px' }}>Items <small style={{ fontWeight: 400, color: '#555' }}>(1)</small></div>
-          <div className="lds-card" style={{ borderRadius: 6, overflow: 'hidden' }}>
-            <table className="lds-table" style={{ fontSize: 12 }}>
+          <div className="slds-card" style={{ borderRadius: 6, overflow: 'hidden' }}>
+            <table className="slds-table slds-table_bordered slds-table_cell-buffer" style={{ fontSize: 12 }}>
               <thead>
                 <tr>{['Item', 'Start date', 'End date', 'Calculation rule', 'Qty', 'Status', 'Amount', ''].map((h) => <th key={h} style={th}>{h}</th>)}</tr>
               </thead>
@@ -209,7 +208,7 @@ export function Reservation({ step, from, goto }: SceneProps) {
                   <td>{quote.catering.qty}</td>
                   <td><Badge tone={confirmed ? 'mint' : 'warn'}>{confirmed ? 'Confirmed' : 'Pending'}</Badge></td>
                   <td><b>{money(quote.catering.total)}</b><div style={{ color: '#666' }}>+Tax {money(quote.catering.total / 10)}</div></td>
-                  <td><a className="lds-link">Remove</a></td>
+                  <td><a className="slds-text-link">Remove</a></td>
                 </tr>
               </tbody>
             </table>
@@ -223,24 +222,22 @@ export function Reservation({ step, from, goto }: SceneProps) {
           width={800}
           footer={
             <>
-              <ActionButton className="lds-btn outline" primary loadingMs={600} onDone={() => setInvoiceOpen(false)}>Close</ActionButton>
-              <button className="lds-btn brand">Send</button>
+              <ActionButton className="slds-button slds-button_neutral" primary loadingMs={600} onDone={() => setInvoiceOpen(false)}>Close</ActionButton>
+              <button className="slds-button slds-button_brand">Send</button>
             </>
           }
         >
           <div style={{ fontWeight: 700, color: '#032d60', fontSize: 16, marginBottom: 12 }}>{groupReservation.invoice}</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-            <Field label="Billed to"><div className="lds-input">{organizer.name}</div></Field>
-            <Field label="Invoice Date"><div className="lds-input">{timeline.depositPaid}</div></Field>
-            <Field label="Status"><div className="lds-input lds-select">Partially Paid</div></Field>
-            <Field label="Due Date"><div className="lds-input">{timeline.balanceDue}</div></Field>
+            <Field label="Billed to"><Input value={organizer.name} /></Field>
+            <Field label="Invoice Date"><Input value={timeline.depositPaid} /></Field>
+            <Field label="Status"><Select value="Partially Paid" /></Field>
+            <Field label="Due Date"><Input value={timeline.balanceDue} /></Field>
           </div>
           <Field label="Notes" style={{ marginTop: 12 }}>
-            <div className="lds-input area" style={{ height: 58 }}>
-              Annual Leadership Retreat · {group.code} · Deposit invoice {money(quote.deposit, 0)} paid Sep 22. Remaining balance {money(quote.balance, 0)} due Nov 05.
-            </div>
+            <TextArea rows={2} value={`Annual Leadership Retreat · ${group.code} · Deposit invoice ${money(quote.deposit, 0)} paid Sep 22. Remaining balance ${money(quote.balance, 0)} due Nov 05.`} />
           </Field>
-          <table className="lds-table" style={{ marginTop: 14, fontSize: 12.5 }}>
+          <table className="slds-table slds-table_bordered slds-table_cell-buffer" style={{ marginTop: 14, fontSize: 12.5 }}>
             <thead>
               <tr>{['Date', 'Code', 'Description', 'Qty', 'Measure', 'Rate', 'Total'].map((h) => <th key={h} style={{ ...th, fontSize: 12 }}>{h}</th>)}</tr>
             </thead>
@@ -264,7 +261,7 @@ export function Reservation({ step, from, goto }: SceneProps) {
               ))}
             </tbody>
           </table>
-          <div className="lds-card" style={{ borderRadius: 8, padding: 14, marginTop: 12, fontSize: 13 }}>
+          <div className="slds-card" style={{ borderRadius: 8, padding: 14, marginTop: 12, fontSize: 13 }}>
             {[
               ['Subtotal', money(quote.subtotal)],
               ['Tax', money(quote.tax)],
@@ -283,6 +280,6 @@ export function Reservation({ step, from, goto }: SceneProps) {
           </div>
         </Modal>
       )}
-    </div>
+    </AdminPage>
   )
 }

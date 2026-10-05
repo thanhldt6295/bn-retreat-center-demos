@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from 'react'
 import { DatePicker } from '../shared/DatePicker'
-import { GlobalNav } from './Admin'
-import { Badge } from './Admin'
+import { AdminPage, Badge, Check, GlobalNav, Select } from './Admin'
+import { Icon } from './Icon'
 import './grid.css'
 
 /* Availability grid used by V1 (1.4, 4.5) and V2 (C4, C7, C8). */
@@ -62,7 +62,7 @@ export function PopCard({ title, badge, badgeTone, sub, rows, actions }: {
   actions: [string, boolean][]
 }) {
   return (
-    <div className="ag-pop-card">
+    <div className="slds-popover ag-pop-card" role="dialog">
       <div className="ag-pop-h">
         <b>{title}</b>
         <Badge tone={badgeTone}>{badge}</Badge>
@@ -76,7 +76,7 @@ export function PopCard({ title, badge, badgeTone, sub, rows, actions }: {
       ))}
       <div className="ag-pop-actions">
         {actions.map(([t, brand]) => (
-          <button key={t} className={`lds-btn ${brand ? 'brand' : 'outline'}`} style={{ flex: 1 }}>
+          <button key={t} className={`slds-button ${brand ? 'slds-button_brand' : 'slds-button_neutral'}`} style={{ flex: 1, margin: 0 }}>
             {t}
           </button>
         ))}
@@ -126,20 +126,17 @@ type Props = {
   onOpenReservation?: () => void
 }
 
-const CalIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 14 14" fill="#0b5cff" style={{ marginLeft: 'auto' }}>
-    <path d="M3 1h1.5v1.5h5V1H11v1.5h1.5V13h-11V2.5H3V1zm-.5 5v5.5h9V6h-9z" />
-  </svg>
-)
-
 export function AvailabilityPage(props: Props) {
   const [dates, setDates] = useState<Record<string, string>>({ 'Start Date': 'Nov 12, 2026', 'End Date': 'Nov 15, 2026' })
   return (
-    <div className="lds">
+    <AdminPage>
       <GlobalNav active="Availability" />
       <div className="lds-page" style={{ paddingTop: 16 }}>
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 12 }}>
-          <button className="lds-btn brand">＋ New Reservation</button>
+          <button className="slds-button slds-button_brand">
+            <Icon name="add" className="slds-button__icon slds-button__icon_left" />
+            New Reservation
+          </button>
         </div>
         <div className="ag-filters">
           {[
@@ -151,30 +148,38 @@ export function AvailabilityPage(props: Props) {
             ['Floor', 'All'],
           ].map(([l, v]) => (
             <div key={l} style={{ flex: 1 }}>
-              <div className="lds-label" style={{ fontSize: 13 }}>{l}</div>
+              <div className="lds-label" style={{ fontSize: 13 }}>
+                {l}
+              </div>
               {l in dates ? (
                 <DatePicker theme="lds" value={dates[l]} onChange={(x) => setDates((d) => ({ ...d, [l]: x }))} min={l === 'End Date' ? dates['Start Date'] : undefined}>
                   {(open) => (
-                    <div className="lds-input" style={{ borderRadius: 6, borderColor: open ? '#0b5cff' : undefined }}>
-                      {dates[l]}
-                      <CalIcon />
+                    <div className={`slds-input-has-icon slds-input-has-icon_right ${open ? 'slds-has-focus' : ''}`}>
+                      <Icon name="date_input" className="slds-input__icon slds-input__icon_right" color="#0b5cff" />
+                      <input className="slds-input" readOnly value={dates[l]} aria-label={l} style={{ borderRadius: 6, cursor: 'pointer' }} />
                     </div>
                   )}
                 </DatePicker>
               ) : (
-                <div className="lds-input" style={{ borderRadius: 6 }}>{v}</div>
+                <Select value={v} style={{ borderRadius: 6 }} />
               )}
             </div>
           ))}
           <label style={{ display: 'flex', alignItems: 'center', gap: 8, height: 32, color: '#444' }}>
-            <span className="lds-check" /> Only Available
+            <Check label="Only Available" />
           </label>
-          <button className="lds-btn brand">🔍 Search</button>
-          <button className="lds-btn outline">⟳ Reset all</button>
+          <button className="slds-button slds-button_brand">
+            <Icon name="search" className="slds-button__icon slds-button__icon_left" />
+            Search
+          </button>
+          <button className="slds-button slds-button_neutral">
+            <Icon name="refresh" className="slds-button__icon slds-button__icon_left" />
+            Reset all
+          </button>
         </div>
         <AvailabilityGrid {...props} />
       </div>
-    </div>
+    </AdminPage>
   )
 }
 
@@ -193,13 +198,23 @@ export function AvailabilityGrid({ bookings, forced, requestedHover, legendReque
         <div className="ag-slider">
           <i />
         </div>
-        <span className="ag-circ">–</span>
+        <button className="slds-button slds-button_icon slds-button_icon-border-filled ag-circ" title="Zoom out" disabled>
+          <Icon name="dash" />
+        </button>
         <span style={{ color: '#444' }}>Day</span>
-        <span className="ag-circ on">＋</span>
+        <button className="slds-button slds-button_icon slds-button_icon-border-filled ag-circ on" title="Zoom in">
+          <Icon name="add" color="#0b5cff" />
+        </button>
         <span style={{ color: '#444', marginLeft: 8 }}>Sort by</span>
-        <div className="lds-input" style={{ width: 170, borderRadius: 6 }}>Property</div>
-        <span className="ag-circ dark">↑</span>
-        <span className="ag-circ on" style={{ marginLeft: 'auto' }}>↺</span>
+        <div style={{ width: 170 }}>
+          <Select value="Property" style={{ borderRadius: 6 }} />
+        </div>
+        <button className="slds-button slds-button_icon slds-button_icon-border-filled ag-circ dark" title="Sort ascending">
+          <Icon name="arrowup" color="#181818" />
+        </button>
+        <button className="slds-button slds-button_icon slds-button_icon-border-filled ag-circ on" style={{ marginLeft: 'auto' }} title="Undo">
+          <Icon name="undo" color="#0b5cff" />
+        </button>
       </div>
       <div className="ag-bar" />
       <div className="ag-table">
@@ -264,7 +279,7 @@ export function AvailabilityGrid({ bookings, forced, requestedHover, legendReque
               })}
               {/* popovers */}
               {active && active.type === 'requested' && active.row === r && (
-                <div className="ag-tip" style={{ left: `calc(${(3 / 16) * 100}% + 14px)`, top: 22 }}>
+                <div className="slds-popover slds-popover_tooltip slds-nubbin_bottom-left ag-tip" role="tooltip" style={{ left: `calc(${(3 / 16) * 100}% + 14px)`, top: 22 }}>
                   <b>Requested stay · Nov 12 – 15</b>
                   <br />
                   22 rooms needed · all room types available
@@ -284,9 +299,25 @@ export function AvailabilityGrid({ bookings, forced, requestedHover, legendReque
                 </div>
               )}
               {sel && sel.done && sel.row === r && selRange && (
-                <div className="ag-menu" style={{ left: `calc(${((selRange[1] + 1) / 16) * 100}% + 14px)`, top: 30 }}>
-                  <div>＋ &nbsp;New Reservation</div>
-                  <div>⚙ &nbsp;Out of Order</div>
+                <div className="slds-dropdown slds-dropdown_left ag-menu" style={{ left: `calc(${((selRange[1] + 1) / 16) * 100}% + 14px)`, top: 30 }}>
+                  <ul className="slds-dropdown__list" role="menu">
+                    <li className="slds-dropdown__item" role="presentation">
+                      <a role="menuitem">
+                        <span className="slds-truncate">
+                          <Icon name="add" className="slds-icon-text-default slds-m-right_x-small" color="#5c5c5c" />
+                          New Reservation
+                        </span>
+                      </a>
+                    </li>
+                    <li className="slds-dropdown__item" role="presentation">
+                      <a role="menuitem">
+                        <span className="slds-truncate">
+                          <Icon name="user" className="slds-icon-text-default slds-m-right_x-small" color="#5c5c5c" />
+                          Out of Order
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               )}
             </div>

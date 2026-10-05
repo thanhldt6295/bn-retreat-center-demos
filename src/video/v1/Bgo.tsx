@@ -1,6 +1,7 @@
 import { useEffect, type CSSProperties, type ReactNode } from 'react'
 import { ActionButton } from '../../components/shared/ActionButton'
-import { Badge, Field, GlobalNav, Modal, Stepper } from '../../components/admin/Admin'
+import { AdminPage, Badge, Field, GlobalNav, Input, Modal, Stepper, TextArea } from '../../components/admin/Admin'
+import { Icon } from '../../components/admin/Icon'
 import { QuoteSummary } from '../../components/admin/QuoteSummary'
 import { agenda, group, money, organizer, quote, staff, timeline } from '../../data/demo'
 import { usePlayer, type SceneProps } from '../../player/Player'
@@ -11,7 +12,7 @@ const th = { fontSize: 12, textTransform: 'uppercase', letterSpacing: '.04em', f
 
 function Panel({ title, count, tag, right, children }: { title: string; count?: number; tag?: string; right?: ReactNode; children: ReactNode }) {
   return (
-    <div className="lds-card" style={{ borderRadius: 12, marginBottom: 12, overflow: 'hidden' }}>
+    <div className="slds-card" style={{ borderRadius: 12, marginBottom: 12, overflow: 'hidden' }}>
       <div className="lds-card-h" style={{ padding: '14px 14px 10px', fontSize: 19 }}>
         {title}
         {count !== undefined && <small>{count}</small>}
@@ -45,27 +46,27 @@ export function BgoPage({
   const st = confirmed ? 'Confirmed' : 'Sent'
   const tone = confirmed ? 'mint' : 'warn'
   return (
-    <div className="lds">
+    <AdminPage>
       <GlobalNav />
       <div className="lds-page">
         <div style={{ display: 'flex', alignItems: 'flex-start', padding: '16px 0 12px' }}>
           <div>
             <div className="lds-crumb">
-              <a className="lds-link">Group Block Requests</a> › <a className="lds-link">Banquet Event Order</a>
+              <a className="slds-text-link">Group Block Requests</a> › <a className="slds-text-link">Banquet Event Order</a>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 6 }}>
               <h1 className="lds-h1" style={{ fontSize: 28, marginTop: 0 }}>{group.code}</h1>
               <Badge tone={tone}>{st}</Badge>
             </div>
             <div className="lds-sub">
-              {group.type} · {group.name} · <a className="lds-link">{organizer.name}</a>
+              {group.type} · {group.name} · <a className="slds-text-link">{organizer.name}</a>
             </div>
           </div>
           <div style={{ marginLeft: 'auto', display: 'flex', gap: 8 }}>
-            <button className="lds-btn outline">{group.code} ↗</button>
-            <button className="lds-btn outline ab" onClick={onSend}>Send</button>
-            <button className="lds-btn outline">Edit</button>
-            <button className="lds-btn outline ab" onClick={onConvert}>Convert</button>
+            <button className="slds-button slds-button_neutral">{group.code} ↗</button>
+            <button className="slds-button slds-button_neutral ab" onClick={onSend}>Send</button>
+            <button className="slds-button slds-button_neutral">Edit</button>
+            <button className="slds-button slds-button_neutral ab" onClick={onConvert}>Convert</button>
           </div>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '350px 1fr', gap: 12, alignItems: 'start' }}>
@@ -74,11 +75,11 @@ export function BgoPage({
               <div style={{ padding: '4px 14px 4px' }}>
                 <KV label="Group Name">{group.name}</KV>
                 <KV label="Status"><Badge tone={tone}>{st}</Badge></KV>
-                <KV label="Contact"><a className="lds-link" style={{ fontWeight: 400 }}>{organizer.name}</a></KV>
+                <KV label="Contact"><a className="slds-text-link" style={{ fontWeight: 400 }}>{organizer.name}</a></KV>
                 <KV label="Start Date → End Date">Nov 12, 2026 → Nov 15, 2026</KV>
                 <KV label="Group Type">{group.type}</KV>
                 <KV label="Payment options">Card</KV>
-                <KV label="Group Block Request"><a className="lds-link" style={{ fontWeight: 400 }}>{group.code}</a></KV>
+                <KV label="Group Block Request"><a className="slds-text-link" style={{ fontWeight: 400 }}>{group.code}</a></KV>
               </div>
             </Panel>
             <Panel title="Summary">
@@ -97,8 +98,8 @@ export function BgoPage({
             </Panel>
           </div>
           <div>
-            <Panel title="Agenda" count={3} right={<button className="lds-btn outline">New</button>}>
-              <table className="lds-table" style={{ fontSize: 12 }}>
+            <Panel title="Agenda" count={3} right={<button className="slds-button slds-button_neutral">New</button>}>
+              <table className="slds-table slds-table_bordered slds-table_cell-buffer" style={{ fontSize: 12 }}>
                 <thead>
                   <tr>
                     {['#', 'Agenda', 'Guests', 'Start time', 'End time', 'Location', 'Status'].map((h) => (
@@ -156,11 +157,11 @@ export function BgoPage({
                 </div>
               </div>
             </Panel>
-            <Panel title="Notes" count={confirmed ? 2 : 1} right={<button className="lds-btn brand">Add Note</button>}>
+            <Panel title="Notes" count={confirmed ? 2 : 1} right={<button className="slds-button slds-button_brand">Add Note</button>}>
               {confirmed && <Note t="Contract signed and deposit received." m="Sep 22, 2026 · System" />}
               <Note t={`Quote sent to ${organizer.email}.${confirmed ? '' : ' Waiting for approval.'}`} m={`${timeline.quote} · ${staff.sam.name}`} />
             </Panel>
-            <Panel title="Files" count={confirmed ? 2 : 1} right={<button className="lds-btn outline">Upload Files</button>}>
+            <Panel title="Files" count={confirmed ? 2 : 1} right={<button className="slds-button slds-button_neutral">Upload Files</button>}>
               {confirmed ? (
                 <>
                   <File n="Contract_GBR-008.pdf" m="Signed electronically · Sep 22, 2026" b="Signed" tone="mint" />
@@ -174,7 +175,7 @@ export function BgoPage({
         </div>
       </div>
       {children}
-    </div>
+    </AdminPage>
   )
 }
 
@@ -218,14 +219,14 @@ const File = ({ n, m, b, tone }: { n: string; m: string; b: string; tone: 'mint'
     </div>
     <span style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 14 }}>
       <Badge tone={tone}>{b}</Badge>
-      <a className="lds-link" style={{ fontSize: 12 }}>View</a>
+      <a className="slds-text-link" style={{ fontSize: 12 }}>View</a>
     </span>
   </div>
 )
 
 function Tbl({ head, rows, tall }: { head: string[]; rows: (string | number)[][]; tall?: boolean }) {
   return (
-    <table className="lds-table" style={{ fontSize: 12 }}>
+    <table className="slds-table slds-table_bordered slds-table_cell-buffer" style={{ fontSize: 12 }}>
       <thead>
         <tr>
           {head.map((h) => (
@@ -261,13 +262,13 @@ export function BgoConfirmed({ step, next, prev, goto }: SceneProps) {
   const footer =
     n === 1 ? (
       <>
-        <button className="lds-btn outline">Cancel</button>
-        <ActionButton className="lds-btn brand" primary loadingMs={700} onDone={next}>Next</ActionButton>
+        <button className="slds-button slds-button_neutral">Cancel</button>
+        <ActionButton className="slds-button slds-button_brand" primary loadingMs={700} onDone={next}>Next</ActionButton>
       </>
     ) : (
       <>
-        <button className="lds-btn outline" onClick={prev}>Back</button>
-        <ActionButton className="lds-btn brand" primary loadingMs={1200} onDone={() => goto('4.5')}>Book</ActionButton>
+        <button className="slds-button slds-button_neutral" onClick={prev}>Back</button>
+        <ActionButton className="slds-button slds-button_brand" primary loadingMs={1200} onDone={() => goto('4.5')}>Book</ActionButton>
       </>
     )
   return (
@@ -279,24 +280,25 @@ export function BgoConfirmed({ step, next, prev, goto }: SceneProps) {
             {n === 1 ? (
               <>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-                  <Field label="GB Code"><div className="lds-input">{group.code}</div></Field>
-                  <Field label="Group Name"><div className="lds-input">Retreat – {group.name}</div></Field>
+                  <Field label="GB Code"><Input value={group.code} /></Field>
+                  <Field label="Group Name"><Input value={`Retreat – ${group.name}`} /></Field>
                 </div>
                 <div className="lds-section" style={{ marginTop: 14 }}>Reservation Info</div>
                 <div style={{ display: 'flex', gap: 16, alignItems: 'flex-end' }}>
-                  <Field label="Status" style={{ flex: 1 }}><div className="lds-input disabled">Pending Approval</div></Field>
+                  <Field label="Status" style={{ flex: 1 }}><Input value="Pending Approval" disabled /></Field>
                   <Field label="Color"><div style={{ width: 36, height: 30, background: '#fbd354', borderRadius: 4 }} /></Field>
                 </div>
                 <Field label="Notes" style={{ marginTop: 12 }}>
-                  <div className="lds-input area">Group reservation for {group.code}. Assign rooms after approval.</div>
+                  <TextArea rows={2} value={`Group reservation for ${group.code}. Assign rooms after approval.`} />
                 </Field>
               </>
             ) : (
               <>
                 <QuoteSummary lineStyle="for" />
                 <Field label="Stored Value">
-                  <div className="lds-input" style={{ justifyContent: 'space-between' }}>
-                    Apply a discount, voucher or credit <span>🎫</span>
+                  <div className="slds-input-has-icon slds-input-has-icon_right">
+                    <Icon name="moneybag" className="slds-input__icon slds-input__icon_right" color="#5c5c5c" />
+                    <input className="slds-input" readOnly placeholder="Apply a discount, voucher or credit" aria-label="Stored Value" />
                   </div>
                 </Field>
               </>

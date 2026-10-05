@@ -10,6 +10,8 @@ import {
   type ReactNode,
 } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
+import { Icon } from '../components/admin/Icon'
+import '../components/admin/slds.css'
 import './player.css'
 
 export type Step = { id: string; label: string; view: string }
@@ -178,10 +180,22 @@ export function Player({ title, steps, views, Provider }: Props) {
         </div>
         <div className="toast-layer" aria-live="polite">
           {toasts.map((t) => (
-            <div key={t.id} className={`toast toast-${t.kind}`}>
-              <span className="toast-check">✓</span>
-              <span>{t.text}</span>
-            </div>
+            t.kind === 'admin' ? (
+              <div key={t.id} className="toast toast-admin slds-notify slds-notify_toast slds-theme_success" role="status">
+                <span className="slds-icon_container slds-icon-utility-success slds-m-right_small slds-no-flex">
+                  <Icon name="success" size="small" color="#0b7a55" />
+                </span>
+                <div className="slds-notify__content">
+                  <h2 className="slds-text-heading_small">{t.text}</h2>
+                </div>
+                <Icon name="close" size="x-small" color="#0b4a35" className="slds-m-left_medium" />
+              </div>
+            ) : (
+              <div key={t.id} className={`toast toast-${t.kind}`}>
+                <span className="toast-check">✓</span>
+                <span>{t.text}</span>
+              </div>
+            )
           ))}
         </div>
         {!hidden && (

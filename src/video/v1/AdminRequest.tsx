@@ -1,44 +1,59 @@
 import { useEffect, type ReactNode } from 'react'
 import { ActionButton } from '../../components/shared/ActionButton'
-import { Badge, GlobalNav, ObjectIcon } from '../../components/admin/Admin'
+import { AdminPage, Badge, GlobalNav, ObjectIcon } from '../../components/admin/Admin'
+import { Icon } from '../../components/admin/Icon'
 import { group, gbrList, organizer, timeline } from '../../data/demo'
 import { usePlayer, type SceneProps } from '../../player/Player'
 
 /* ---------------- 1.1 list ---------------- */
 export function RequestList({ next }: SceneProps) {
+  const cols = [110, 150, 338, 150, 200, 70, 130, 120, 116]
   return (
-    <div className="lds">
+    <AdminPage>
       <GlobalNav />
       <div className="lds-page">
         <div className="lds-head" style={{ paddingBottom: 6 }}>
           <ObjectIcon />
           <div>
             <div className="lds-crumb">Group Block Requests</div>
-            <h1 className="lds-h1" style={{ fontWeight: 600 }}>All requests</h1>
+            <h1 className="lds-h1" style={{ fontWeight: 600 }}>
+              All requests
+            </h1>
           </div>
           <div className="lds-head-right">
-            <button className="lds-btn outline">New</button>
+            <button className="slds-button slds-button_neutral">New</button>
           </div>
         </div>
-        <div className="lds-sub" style={{ margin: '0 0 12px' }}>6 items · Sorted by Start Date · Updated a few seconds ago</div>
-        <div className="lds-card" style={{ borderRadius: 6, overflow: 'hidden' }}>
+        <div className="lds-sub" style={{ margin: '0 0 12px' }}>
+          6 items · Sorted by Start Date · Updated a few seconds ago
+        </div>
+        <div className="slds-card" style={{ borderRadius: 6, overflow: 'hidden' }}>
           <div style={{ padding: '14px 20px', display: 'flex', alignItems: 'flex-end' }}>
-            <div style={{ width: 320 }}>
-              <div className="lds-label" style={{ fontSize: 13, color: '#333' }}>Search</div>
-              <div className="lds-input" style={{ borderRadius: 8, color: '#444' }}>Search this list...</div>
+            <div className="slds-form-element" style={{ width: 320 }}>
+              <label className="slds-form-element__label" style={{ fontSize: 13, color: '#333' }} htmlFor="req-search">
+                Search
+              </label>
+              <div className="slds-form-element__control slds-input-has-icon slds-input-has-icon_left">
+                <Icon name="search" className="slds-input__icon slds-input__icon_left" color="#5c5c5c" />
+                <input id="req-search" className="slds-input" placeholder="Search this list..." style={{ borderRadius: 8 }} />
+              </div>
             </div>
-            <button className="lds-btn outline" style={{ marginLeft: 'auto' }}>Assign Label</button>
+            <button className="slds-button slds-button_neutral" style={{ marginLeft: 'auto' }}>
+              Assign Label
+            </button>
           </div>
-          <table className="lds-table" style={{ tableLayout: 'fixed' }}>
+          <table className="slds-table slds-table_bordered slds-table_cell-buffer slds-table_fixed-layout">
             <colgroup>
-              {[110, 150, 338, 150, 200, 70, 130, 120, 116].map((w, i) => (
+              {cols.map((w, i) => (
                 <col key={i} style={{ width: w }} />
               ))}
             </colgroup>
             <thead>
-              <tr>
+              <tr className="slds-line-height_reset">
                 {['Request', 'Contact', 'Group name', 'Group type', 'Dates', 'Rooms', 'Rate range', 'Status', 'Next step'].map((h) => (
-                  <th key={h}>{h}</th>
+                  <th key={h} scope="col">
+                    <div className="slds-truncate">{h}</div>
+                  </th>
                 ))}
               </tr>
             </thead>
@@ -49,15 +64,17 @@ export function RequestList({ next }: SceneProps) {
                 return (
                   <tr
                     key={r.code}
-                    className="row-hover"
-                    style={{ cursor: live ? 'pointer' : 'default', background: live ? '#eaf1fe' : undefined }}
+                    className="slds-hint-parent"
+                    style={{ cursor: live ? 'pointer' : 'default', background: live ? '#eaf1fe' : undefined, height: 48 }}
                     onClick={live ? next : undefined}
                   >
-                    <td style={{ height: 48 }}>
-                      <span className="lds-link">{r.code}</span>
-                    </td>
+                    <th scope="row" style={{ textTransform: 'none', letterSpacing: 0, fontWeight: 400, background: 'transparent' }}>
+                      <a className="slds-text-link">{r.code}</a>
+                    </th>
                     <td>{r.contact}</td>
-                    <td>{r.name}</td>
+                    <td>
+                      <div className="slds-truncate">{r.name}</div>
+                    </td>
                     <td>{r.type}</td>
                     <td>{r.dates}</td>
                     <td>{r.rooms}</td>
@@ -66,7 +83,7 @@ export function RequestList({ next }: SceneProps) {
                       <Badge>{r.status}</Badge>
                     </td>
                     <td>
-                      <span className="lds-link">{act}</span>
+                      <a className="slds-text-link">{act}</a>
                     </td>
                   </tr>
                 )
@@ -75,7 +92,7 @@ export function RequestList({ next }: SceneProps) {
           </table>
         </div>
       </div>
-    </div>
+    </AdminPage>
   )
 }
 
@@ -96,18 +113,18 @@ export function RecordPage({
   children?: ReactNode
 }) {
   return (
-    <div className="lds">
+    <AdminPage>
       <GlobalNav />
       <div className="lds-page">
         <div className="lds-head" style={{ paddingBottom: 26 }}>
           <ObjectIcon size={48} />
           <div>
             <div className="lds-crumb">
-              <a className="lds-link">Group Block Requests</a> ›
+              <a className="slds-text-link">Group Block Requests</a> ›
             </div>
             <h1 className="lds-h1">{group.name}</h1>
             <div className="lds-sub">
-              {group.code} · Created {timeline.request.replace(', 2026', ', 2026')}
+              {group.code} · Created {timeline.request}
             </div>
           </div>
           <div className="lds-head-right">
@@ -115,7 +132,7 @@ export function RecordPage({
           </div>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 480px', gap: 20 }}>
-          <div className="lds-card" style={{ borderRadius: 18 }}>
+          <div className="slds-card" style={{ borderRadius: 18 }}>
             <div style={{ display: 'flex', borderBottom: '1px solid #dddbda', padding: '20px 24px' }}>
               <Stat label="Stay dates" value="Nov 12 – Nov 15, 2026" sub="3 nights" />
               <Stat label="Rooms requested" value="22 rooms" sub="12 single bed · 10 double bed" divider />
@@ -124,7 +141,7 @@ export function RecordPage({
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, padding: '24px', minHeight: 300 }}>
               <div>
                 <div style={{ fontWeight: 700, color: '#032d60', fontSize: 15, marginBottom: 14 }}>Organizer</div>
-                <Info label="Contact" value={<a className="lds-link">{organizer.name}</a>} />
+                <Info label="Contact" value={<a className="slds-text-link">{organizer.name}</a>} />
                 <Info label="Organization" value={organizer.org} />
                 <Info label="Email" value={organizer.email} />
                 <Info label="Address" value={organizer.address} />
@@ -135,29 +152,29 @@ export function RecordPage({
               </div>
             </div>
           </div>
-          <div className="lds-card" style={{ borderRadius: 18, padding: 24, alignSelf: 'start' }}>
+          <div className="slds-card" style={{ borderRadius: 18, padding: 24, alignSelf: 'start' }}>
             <div style={{ fontSize: 22, color: '#032d60', marginBottom: 28 }}>Next step</div>
             <Num n={1} title="Review the request" body="Dates, rooms and special request." />
             <Num n={2} title="Check availability" body="Rooms and the Meeting Hall for Nov 12 – 14.">
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 6 }}>
                 <Badge tone="mint">Available</Badge>
-                <a className="lds-link" style={{ fontSize: 13 }} onClick={onOpenGrid}>
+                <a className="slds-text-link" style={{ fontSize: 13 }} onClick={onOpenGrid}>
                   Open availability grid
                 </a>
               </div>
             </Num>
             <Num n={3} title="Confirm the request" body={confirmed ? 'Status is Confirmed.' : 'Set the status to Confirmed.'} />
             {confirmed ? (
-              <button className="lds-btn brand wide ab" style={{ marginTop: 14 }} onClick={onConvert}>
+              <button className="slds-button slds-button_brand slds-button_stretch ab" style={{ marginTop: 14 }} onClick={onConvert}>
                 Convert To Group Block Code
               </button>
             ) : (
-              <ActionButton className="lds-btn brand wide" primary loading={loading} onDone={onConfirm} loadingMs={1000}>
+              <ActionButton className="slds-button slds-button_brand slds-button_stretch" primary loading={loading} onDone={onConfirm} loadingMs={1000}>
                 Confirm request
               </ActionButton>
             )}
             {!confirmed && (
-              <button className="lds-btn outline wide" style={{ marginTop: 14 }} disabled>
+              <button className="slds-button slds-button_neutral slds-button_stretch" style={{ marginTop: 14, marginLeft: 0 }} disabled>
                 Convert To Group Block Code
               </button>
             )}
@@ -168,7 +185,7 @@ export function RecordPage({
         </div>
       </div>
       {children}
-    </div>
+    </AdminPage>
   )
 }
 
@@ -230,12 +247,5 @@ export function RequestRecord({ step, from, next, goto }: SceneProps) {
     if (step === '1.3' && from === '1.2') toast('GBR-008 status updated to Confirmed.')
   }, [step, from, toast])
 
-  return (
-    <RecordPage
-      confirmed={confirmed}
-      onConfirm={next}
-      onOpenGrid={() => goto('1.4')}
-      onConvert={() => goto('2.1')}
-    />
-  )
+  return <RecordPage confirmed={confirmed} onConfirm={next} onOpenGrid={() => goto('1.4')} onConvert={() => goto('2.1')} />
 }

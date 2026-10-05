@@ -1,87 +1,6 @@
-/* Salesforce Lightning (LDS v2) look for staff screens */
-.lds {
-  --brand: #0b5cff;
-  --brand-dark: #0348d6;
-  --navy: #032d60;
-  --text: #181818;
-  --muted: #5c5c5c;
-  --border: #c9c9c9;
-  --bg: #f3f3f3;
-  --teal: #0b9d8a;
-  min-height: 100vh;
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Salesforce Sans', -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  min-width: 1180px;
-  padding-bottom: 60px;
-}
+/* Layout helpers for staff screens. Components themselves come from SLDS (see slds.css / slds2-theme.css). */
 .lds * {
   box-sizing: border-box;
-}
-
-/* ---- global header + nav ---- */
-.lds-top {
-  background: #fff;
-  border-bottom: 1px solid #dddbda;
-  position: relative;
-}
-.lds-top-row {
-  height: 52px;
-  display: flex;
-  align-items: center;
-  padding: 0 12px 0 10px;
-}
-.lds-logo {
-  width: 41px;
-  height: 41px;
-  background: #6b86f5;
-  border-radius: 3px;
-  display: grid;
-  place-items: center;
-  color: #fff;
-}
-.lds-search {
-  position: absolute;
-  left: 50%;
-  top: 9px;
-  transform: translateX(-50%);
-  width: 408px;
-  height: 32px;
-  border: 1px solid #747474;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 0 12px;
-  color: #747474;
-  font-size: 13px;
-}
-.lds-top-icons {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  color: #706e6b;
-}
-.lds-top-icons .ico {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #706e6b;
-}
-.lds-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #3b4a6b;
-  border: 3px solid #cfd7ea;
-}
-.lds-nav {
-  height: 39px;
-  display: flex;
-  align-items: stretch;
-  padding-left: 14px;
 }
 .lds-hdr {
   display: block;
@@ -89,41 +8,12 @@
   height: auto;
   aspect-ratio: 2846 / 100;
 }
-.lds-waffle {
-  display: flex;
-  align-self: center;
-  margin-right: 14px;
+.lds .slds-context-bar {
+  height: 2.5rem;
 }
-.lds-appname {
-  align-self: center;
-  font-size: 19px;
-  color: var(--navy);
-  margin-right: 32px;
+.lds .slds-icon-waffle_container {
+  margin-right: 0.25rem;
 }
-.lds-nav a {
-  align-self: stretch;
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  font-weight: 700;
-  color: var(--navy);
-  font-size: 13px;
-  text-decoration: none;
-  border-bottom: 3px solid transparent;
-  cursor: default;
-}
-.lds-nav a.on {
-  border-bottom-color: var(--brand);
-  color: var(--brand-dark);
-}
-.lds-pencil {
-  margin-left: auto;
-  align-self: center;
-  margin-right: 14px;
-  color: var(--brand);
-}
-
-/* ---- page chrome ---- */
 .lds-page {
   padding: 0 24px;
 }
@@ -133,31 +23,18 @@
   gap: 12px;
   padding: 22px 0 18px;
 }
-.lds-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 4px;
-  background: var(--teal);
-  display: grid;
-  place-items: center;
-  color: #fff;
-  flex: none;
-}
 .lds-crumb {
   font-size: 13px;
-  color: var(--muted);
-}
-.lds-crumb a {
-  color: var(--brand-dark);
+  color: #5c5c5c;
 }
 .lds-h1 {
   font-size: 24px;
-  color: var(--navy);
+  color: #032d60;
   font-weight: 500;
   margin: 2px 0 0;
 }
 .lds-sub {
-  color: var(--muted);
+  color: #5c5c5c;
   font-size: 13px;
   margin-top: 4px;
 }
@@ -167,18 +44,11 @@
   align-items: center;
   gap: 8px;
   font-size: 13px;
-  color: var(--muted);
-}
-
-/* ---- cards ---- */
-.lds-card {
-  background: #fff;
-  border: 1px solid #dddbda;
-  border-radius: 12px;
+  color: #5c5c5c;
 }
 .lds-card-h {
   padding: 16px 24px;
-  color: var(--navy);
+  color: #032d60;
   font-size: 20px;
   font-weight: 400;
   display: flex;
@@ -187,260 +57,39 @@
 }
 .lds-card-h small {
   font-size: 12px;
-  color: var(--muted);
+  color: #5c5c5c;
 }
 .lds-card-h .push {
   margin-left: auto;
 }
-
-/* ---- buttons ---- */
-.lds-btn {
-  font: inherit;
-  font-size: 13px;
-  height: 32px;
-  padding: 0 16px;
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  background: #fff;
-  color: var(--brand-dark);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  white-space: nowrap;
-}
-.lds-btn:hover:not(:disabled) {
-  background: #f3f3f3;
-}
-.lds-btn.outline {
-  border-color: #b7b7b7;
-}
-.lds-btn.brand {
-  background: var(--brand);
-  border-color: var(--brand);
-  color: #fff;
-}
-.lds-btn.brand:hover:not(:disabled) {
-  background: var(--brand-dark);
-}
-.lds-btn:disabled {
-  color: #a8b7d9;
-  background: #fff;
-  border-color: #cfd7e8;
-  cursor: not-allowed;
-}
-.lds-btn.brand:disabled {
-  background: #9dbaf5;
-  border-color: #9dbaf5;
-  color: #fff;
-}
-.lds-btn.wide {
-  width: 100%;
-  height: 32px;
-}
-
-/* ---- badges ---- */
-.lds-badge {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 3px;
-  font-size: 12px;
-  line-height: 18px;
-  background: #e5e5e5;
-  color: #444;
-  transition: background-color 0.4s, color 0.4s;
-}
-.lds-badge.warn {
-  background: #fcdaa5;
-  color: #6b3d00;
-}
-.lds-badge.ok {
-  background: #b5e8c9;
-  color: #0b4a35;
-}
-.lds-badge.mint {
-  background: #c6f0e4;
-  color: #0b5a48;
-}
-.lds-badge.blue {
-  background: #d8e6fe;
-  color: #0a3d9c;
-}
-
-/* ---- tables ---- */
-.lds-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.lds-table th {
-  text-align: left;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #444;
-  background: #f3f3f3;
-  padding: 10px 8px;
-  white-space: nowrap;
-}
-.lds-table td {
-  padding: 10px 8px;
-  vertical-align: middle;
-}
-.lds-table.lines td,
-.lds-table.lines th {
-  border-bottom: 1px solid #e5e5e5;
-}
-.lds-table th:first-child,
-.lds-table td:first-child {
-  padding-left: 12px;
-}
-.lds-table tr.row-hover:hover td {
-  background: #eef4ff;
-}
-.lds-table tr.sel td {
-  background: #e8f0fe;
-}
 .lds-link {
-  color: var(--brand-dark);
+  color: #0250d9;
   cursor: pointer;
-  text-decoration: none;
 }
 .lds-link:hover {
   text-decoration: underline;
 }
-
-/* ---- forms ---- */
-.lds-field label,
 .lds-label {
   display: block;
   font-size: 12px;
-  color: var(--muted);
+  color: #5c5c5c;
   margin-bottom: 4px;
 }
-.lds-input {
-  width: 100%;
-  height: 32px;
-  border: 1px solid #747474;
-  border-radius: 4px;
-  padding: 0 10px;
-  font: inherit;
-  font-size: 13px;
-  background: #fff;
-  color: var(--text);
-  display: flex;
-  align-items: center;
-}
-.lds-input.disabled {
-  background: #f3f3f3;
-  border-color: #dddbda;
-  color: #a0a0a0;
-}
-.lds-input.area {
-  height: 56px;
-  align-items: flex-start;
-  padding-top: 8px;
-}
-.lds-select::after {
-  content: '▾';
-  margin-left: auto;
-  font-size: 11px;
-}
-.lds-check {
-  width: 16px;
-  height: 16px;
-  border: 1px solid #747474;
-  border-radius: 3px;
-  display: inline-grid;
-  place-items: center;
-  background: #fff;
-  flex: none;
-  font-size: 11px;
-  color: #fff;
-}
-.lds-check.on {
-  background: var(--brand);
-  border-color: var(--brand);
-}
 
-/* ---- modal ---- */
-.lds-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(8, 7, 7, 0.62);
-  z-index: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  animation: lds-fade 0.2s ease-out both;
-}
-.lds-modal {
-  position: relative;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
-  width: 760px;
-  max-height: calc(100vh - 48px);
-  display: flex;
-  flex-direction: column;
-  animation: lds-pop 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.1) both;
-}
-.lds-modal.narrow {
-  width: 760px;
-}
-.lds-modal-close {
-  position: absolute;
-  top: -12px;
-  right: -12px;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: #fff;
-  color: var(--brand);
-  display: grid;
-  place-items: center;
-  font-size: 14px;
-  font-weight: 700;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-}
-.lds-modal-h {
-  text-align: center;
-  font-size: 20px;
-  color: var(--navy);
-  padding: 16px 24px 14px;
-  border-bottom: 1px solid #dddbda;
-}
-.lds-modal-b {
-  padding: 16px 16px 16px;
-  overflow: auto;
-}
-.lds-modal-f {
-  border-top: 1px solid #dddbda;
-  padding: 12px 16px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-}
-@keyframes lds-fade {
-  from {
-    opacity: 0;
-  }
-}
-@keyframes lds-pop {
-  from {
-    opacity: 0;
-    transform: translateY(14px) scale(0.98);
-  }
-}
-
-/* ---- wizard stepper ---- */
+/* wizard path (numbered steps) */
 .lds-steps {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 13px;
-  margin-bottom: 8px;
+}
+.lds-steps .st {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 .lds-steps .dot {
   width: 20px;
@@ -456,35 +105,29 @@
 }
 .lds-steps .on .dot,
 .lds-steps .done .dot {
-  background: var(--brand);
-  border-color: var(--brand);
+  background: #0b5cff;
+  border-color: #0b5cff;
   color: #fff;
 }
 .lds-steps .on {
   font-weight: 700;
-  color: var(--navy);
-}
-.lds-steps .st {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  color: #032d60;
 }
 .lds-steps .bar {
   width: 34px;
   height: 1px;
   background: #b0adab;
+  margin-left: 2px;
 }
 .lds-section {
   background: #f3f3f3;
   border-radius: 6px;
   padding: 8px 10px;
   font-weight: 700;
-  color: var(--navy);
+  color: #032d60;
   font-size: 13px;
   margin: 10px 0;
 }
-
-/* wizard step transition */
 .lds-stepbody {
   animation: lds-slide 0.3s ease-out both;
 }

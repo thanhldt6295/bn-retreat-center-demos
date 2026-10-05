@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { Icon } from '../admin/Icon'
 import './datepicker.css'
 
 const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
@@ -54,7 +55,77 @@ export function DatePicker({ value, onChange, theme = 'venue', min, max, childre
       <div onClick={() => setOpen((o) => !o)} style={{ cursor: 'pointer' }}>
         {children(open)}
       </div>
-      {open && (
+      {open && theme === 'lds' && (
+        <div className="slds-datepicker slds-dropdown slds-dropdown_left" style={{ display: 'block', top: 'calc(100% + 4px)', left: 0, zIndex: 300 }} role="dialog" aria-label="Choose a date">
+          <div className="slds-datepicker__filter slds-grid">
+            <div className="slds-datepicker__filter_month slds-grid slds-grid_align-spread slds-grow">
+              <div className="slds-align-middle">
+                <button type="button" className="slds-button slds-button_icon slds-button_icon-container" title="Previous Month" onClick={() => setMonth(new Date(month.getFullYear(), month.getMonth() - 1, 1))}>
+                  <Icon name="left" />
+                </button>
+              </div>
+              <h2 className="slds-align-middle" aria-live="assertive" aria-atomic="true">
+                {month.toLocaleDateString('en-US', { month: 'long' })}
+              </h2>
+              <div className="slds-align-middle">
+                <button type="button" className="slds-button slds-button_icon slds-button_icon-container" title="Next Month" onClick={() => setMonth(new Date(month.getFullYear(), month.getMonth() + 1, 1))}>
+                  <Icon name="right" />
+                </button>
+              </div>
+            </div>
+            <div className="slds-shrink-none">
+              <span className="slds-align-middle" style={{ padding: '0 0.5rem' }}>
+                {month.getFullYear()}
+              </span>
+            </div>
+          </div>
+          <table className="slds-datepicker__month" role="grid">
+            <thead>
+              <tr>
+                {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((d) => (
+                  <th key={d} scope="col">
+                    <abbr title={d}>{d}</abbr>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {Array.from({ length: Math.ceil(cells.length / 7) }).map((_, w) => (
+                <tr key={w}>
+                  {cells.slice(w * 7, w * 7 + 7).map((d, i) => {
+                    const off = d ? ((lo && d < lo) || (hi && d > hi) || false) : false
+                    return (
+                      <td
+                        key={i}
+                        className={`${d && same(d, today) ? 'slds-is-today' : ''} ${d && same(d, base) ? 'slds-is-selected' : ''} ${off ? 'slds-disabled-text' : ''}`}
+                        aria-selected={d ? same(d, base) : undefined}
+                        role="gridcell"
+                      >
+                        {d && (
+                          <span
+                            className="slds-day"
+                            style={off ? { cursor: 'not-allowed' } : { cursor: 'pointer' }}
+                            onClick={() => {
+                              if (off) return
+                              onChange(fmt(d))
+                              setOpen(false)
+                            }}
+                          >
+                            {d.getDate()}
+                          </span>
+                        )}
+                      </td>
+                    )
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <button type="button" className="slds-button slds-align_absolute-center slds-text-link" onClick={() => { onChange(fmt(today)); setOpen(false) }}>
+            Today
+          </button>
+        </div>
+      )}      {open && theme !== 'lds' && (
         <div className="dp-pop" role="dialog" aria-label="Choose a date">
           <div className="dp-head">
             <button type="button" aria-label="Previous month" onClick={() => setMonth(new Date(month.getFullYear(), month.getMonth() - 1, 1))}>

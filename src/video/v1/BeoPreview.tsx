@@ -1,5 +1,5 @@
 import { ActionButton } from '../../components/shared/ActionButton'
-import { Check, GlobalNav } from '../../components/admin/Admin'
+import { AdminPage, Check, GlobalNav, Select, TextArea } from '../../components/admin/Admin'
 import { BeoDoc } from '../../components/shared/Docs'
 import { Badge } from '../../components/admin/Admin'
 import { organizer, staff, venue } from '../../data/demo'
@@ -9,7 +9,7 @@ import { usePlayer, type SceneProps } from '../../player/Player'
 export function BeoPreview({ next }: SceneProps) {
   const { toast } = usePlayer()
   return (
-    <div className="lds">
+    <AdminPage>
       <GlobalNav />
       <div className="lds-page" style={{ paddingTop: 14 }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', marginBottom: 14 }}>
@@ -22,10 +22,10 @@ export function BeoPreview({ next }: SceneProps) {
             <div className="lds-sub">Version 2 · Updated Sep 12, 2026 · Preview as the client will see it</div>
           </div>
           <div style={{ marginLeft: 'auto', display: 'flex', gap: 8 }}>
-            <button className="lds-btn outline">Edit BEO</button>
-            <button className="lds-btn outline">Download</button>
+            <button className="slds-button slds-button_neutral">Edit BEO</button>
+            <button className="slds-button slds-button_neutral">Download</button>
             <ActionButton
-              className="lds-btn brand"
+              className="slds-button slds-button_brand"
               primary
               loadingMs={1100}
               onDone={() => {
@@ -38,18 +38,18 @@ export function BeoPreview({ next }: SceneProps) {
           </div>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 320px', gap: 14, alignItems: 'start' }}>
-          <div className="lds-card" style={{ borderRadius: 18, padding: '24px 20px 30px' }}>
+          <div className="slds-card" style={{ borderRadius: 18, padding: '24px 20px 30px' }}>
             <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginBottom: 18 }}>
-              <span className="lds-btn brand" style={{ fontWeight: 700 }}>BEO</span>
-              <span className="lds-btn outline" style={{ fontWeight: 700, color: '#222' }}>Contract</span>
-              <span className="lds-btn outline" style={{ fontWeight: 700, color: '#222' }}>Agenda</span>
+              <span className="slds-button slds-button_brand" style={{ fontWeight: 700 }}>BEO</span>
+              <span className="slds-button slds-button_neutral" style={{ fontWeight: 700, color: '#222' }}>Contract</span>
+              <span className="slds-button slds-button_neutral" style={{ fontWeight: 700, color: '#222' }}>Agenda</span>
             </div>
             <div style={{ background: '#ededed', borderRadius: 10, padding: '28px 0', display: 'flex', justifyContent: 'center' }}>
               <BeoDoc variant="admin" />
             </div>
           </div>
           <div>
-            <div className="lds-card" style={{ borderRadius: 18, padding: 16, marginBottom: 14 }}>
+            <div className="slds-card" style={{ borderRadius: 18, padding: 16, marginBottom: 14 }}>
               <div style={{ fontSize: 20, color: '#555', marginBottom: 14 }}>E-signature</div>
               <b style={{ fontSize: 13 }}>Documents to sign</b>
               {['BEO_GBR-008.pdf', 'Contract_GBR-008.pdf'].map((f) => (
@@ -71,13 +71,11 @@ export function BeoPreview({ next }: SceneProps) {
                 </div>
               ))}
               <div className="lds-label" style={{ marginTop: 12 }}>Message to the client</div>
-              <div className="lds-input area" style={{ height: 70, fontSize: 12.5 }}>
-                Hi Maya, please review the BEO and sign the contract to confirm your retreat. The deposit is paid in the next step.
-              </div>
+              <TextArea rows={3} value="Hi Maya, please review the BEO and sign the contract to confirm your retreat. The deposit is paid in the next step." />
               <div className="lds-label" style={{ marginTop: 12 }}>Reminder</div>
-              <div className="lds-input lds-select">After 3 days if unsigned</div>
+              <Select value="After 3 days if unsigned" />
             </div>
-            <div className="lds-card" style={{ borderRadius: 18, padding: 16, fontSize: 13 }}>
+            <div className="slds-card" style={{ borderRadius: 18, padding: 16, fontSize: 13 }}>
               <div style={{ fontSize: 20, color: '#555', marginBottom: 10 }}>After you send</div>
               <ul style={{ margin: 0, paddingLeft: 18, lineHeight: 1.7 }}>
                 <li>Maya signs first with her secure link; then Jordan Reyes countersigns for the venue.</li>
@@ -88,6 +86,6 @@ export function BeoPreview({ next }: SceneProps) {
           </div>
         </div>
       </div>
-    </div>
+    </AdminPage>
   )
 }
