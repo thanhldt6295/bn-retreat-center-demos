@@ -1,0 +1,173 @@
+/* G4 · values from Figma frame 192:7847 */
+.g4-cols {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+.g4-summary {
+  width: 640px;
+  flex: none;
+}
+.g4-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 24px 24px;
+}
+.g4-dates {
+  display: flex;
+  gap: 24px;
+}
+.g4-dates > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.g4-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.g4-field span {
+  font-size: 12px;
+  color: #69716c;
+}
+.g4-field b {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0b1f17;
+}
+.g4-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #0b1f17;
+}
+.g4-line.muted {
+  color: #69716c;
+}
+.g4-line.bold {
+  font-weight: 700;
+}
+.g4-line.bold span:first-child {
+  font-size: 16px;
+}
+.g4-line.bold span:last-child {
+  font-size: 20px;
+}
+.g4-docs {
+  width: 400px;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.g4-doc {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 24px;
+}
+.g4-doc > b {
+  font-size: 16px;
+  color: #0b1f17;
+}
+.g4-doc > span {
+  font-size: 13px;
+  color: #69716c;
+}
+.g4-preview {
+  height: 200px;
+  border-radius: 10px;
+  background: #f4f1ea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.g4-page {
+  width: 220px;
+  height: 176px;
+  box-sizing: border-box;
+  padding: 12px 14px 10px;
+  background: #fff;
+  border: 1px solid #d9ddd8;
+  border-radius: 3px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow: hidden;
+  font-size: 7px;
+  white-space: nowrap;
+}
+.g4-dh {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.g4-dh b {
+  color: #06503f;
+}
+.g4-dh span {
+  color: #69716c;
+  font-weight: 600;
+}
+.g4-dt {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #0b1f17;
+}
+.g4-ds {
+  margin: 0;
+  color: #69716c;
+}
+.g4-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 0;
+  border-bottom: 0.5px solid #d9ddd8;
+}
+.g4-row span {
+  color: #69716c;
+}
+.g4-row b {
+  font-weight: 600;
+  color: #0b1f17;
+}
+.g4-sigs {
+  display: flex;
+  gap: 14px;
+  padding-top: 6px;
+  font-size: 6px;
+  color: #69716c;
+}
+.g4-sigs > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.g4-sigs i {
+  display: block;
+  width: 80px;
+  height: 0.8px;
+  background: #69716c;
+}
+.g4-btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.g4-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.g4-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}

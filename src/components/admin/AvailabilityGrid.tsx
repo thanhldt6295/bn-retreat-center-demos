@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from 'react'
+import { DatePicker } from '../shared/DatePicker'
 import { GlobalNav } from './Admin'
 import { Badge } from './Admin'
 import './grid.css'
@@ -125,7 +126,14 @@ type Props = {
   onOpenReservation?: () => void
 }
 
+const CalIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="#0b5cff" style={{ marginLeft: 'auto' }}>
+    <path d="M3 1h1.5v1.5h5V1H11v1.5h1.5V13h-11V2.5H3V1zm-.5 5v5.5h9V6h-9z" />
+  </svg>
+)
+
 export function AvailabilityPage(props: Props) {
+  const [dates, setDates] = useState<Record<string, string>>({ 'Start Date': 'Nov 12, 2026', 'End Date': 'Nov 15, 2026' })
   return (
     <div className="lds">
       <GlobalNav active="Availability" />
@@ -144,7 +152,18 @@ export function AvailabilityPage(props: Props) {
           ].map(([l, v]) => (
             <div key={l} style={{ flex: 1 }}>
               <div className="lds-label" style={{ fontSize: 13 }}>{l}</div>
-              <div className="lds-input" style={{ borderRadius: 6 }}>{v}</div>
+              {l in dates ? (
+                <DatePicker theme="lds" value={dates[l]} onChange={(x) => setDates((d) => ({ ...d, [l]: x }))} min={l === 'End Date' ? dates['Start Date'] : undefined}>
+                  {(open) => (
+                    <div className="lds-input" style={{ borderRadius: 6, borderColor: open ? '#0b5cff' : undefined }}>
+                      {dates[l]}
+                      <CalIcon />
+                    </div>
+                  )}
+                </DatePicker>
+              ) : (
+                <div className="lds-input" style={{ borderRadius: 6 }}>{v}</div>
+              )}
             </div>
           ))}
           <label style={{ display: 'flex', alignItems: 'center', gap: 8, height: 32, color: '#444' }}>

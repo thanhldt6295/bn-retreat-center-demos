@@ -1,10 +1,24 @@
 import { useEffect, useState } from 'react'
 import { ActionButton } from '../../components/shared/ActionButton'
+import { DatePicker } from '../../components/shared/DatePicker'
 import { Badge, Field, GlobalNav, Modal } from '../../components/admin/Admin'
 import { group, groupReservation, money, organizer, quote, timeline } from '../../data/demo'
 import { usePlayer, type SceneProps } from '../../player/Player'
 
 const th = { fontSize: 11.5, textTransform: 'uppercase', letterSpacing: '.04em', fontWeight: 700 } as const
+
+const DateBox = ({ value, onChange, min }: { value: string; onChange: (v: string) => void; min?: string }) => (
+  <DatePicker theme="lds" value={value} onChange={onChange} min={min}>
+    {(open) => (
+      <div className="lds-input" style={{ width: 124, borderRadius: 4, borderColor: open ? '#0b5cff' : undefined }}>
+        {value}
+        <svg width="12" height="12" viewBox="0 0 14 14" fill="#0b5cff" style={{ marginLeft: 'auto' }}>
+          <path d="M3 1h1.5v1.5h5V1H11v1.5h1.5V13h-11V2.5H3V1zm-.5 5v5.5h9V6h-9z" />
+        </svg>
+      </div>
+    )}
+  </DatePicker>
+)
 
 const ROOM_IMG = ['#a8714a', '#a8714a', '#a8714a', '#4a5560', '#4a5560', '#6d4a2e', '#6d4a2e']
 
@@ -13,6 +27,8 @@ export function Reservation({ step, from, goto }: SceneProps) {
   const { toast } = usePlayer()
   const confirmed = step === '4.3b'
   const [invoiceOpen, setInvoiceOpen] = useState(step === '4.4')
+  const [start, setStart] = useState('Nov 12, 2026')
+  const [end, setEnd] = useState('Nov 15, 2026')
 
   useEffect(() => {
     setInvoiceOpen(step === '4.4')
@@ -65,8 +81,8 @@ export function Reservation({ step, from, goto }: SceneProps) {
             <div style={{ fontSize: 20, color: '#032d60', margin: '6px 0 12px' }}>Reservation Info</div>
             <div className="lds-card" style={{ borderRadius: 6, padding: 12, boxShadow: 'none' }}>
               <div style={{ display: 'flex', gap: 12 }}>
-                <Field label="Start Date"><div className="lds-input" style={{ width: 124, borderRadius: 4 }}>Nov 12, 2026</div></Field>
-                <Field label="End Date"><div className="lds-input" style={{ width: 124, borderRadius: 4 }}>Nov 15, 2026</div></Field>
+                <Field label="Start Date"><DateBox value={start} onChange={setStart} /></Field>
+                <Field label="End Date"><DateBox value={end} onChange={setEnd} min={start} /></Field>
               </div>
               <div style={{ display: 'flex', gap: 22, margin: '12px 0', fontSize: 12 }}>
                 <div><div style={{ color: '#555' }}>Booked by</div><div style={{ marginTop: 3 }}>{organizer.name}</div></div>

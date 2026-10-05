@@ -1,0 +1,387 @@
+/* G3 email + G4b/G4c viewers · values from Figma 192:7775, 200:7741, 200:7872 */
+.em {
+  min-height: 100vh;
+  box-sizing: border-box;
+  background: #f4f1ea;
+  padding: 32px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Inter, system-ui, sans-serif;
+  color: #0b1f17;
+}
+.em p {
+  margin: 0;
+}
+.em-subject {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding-bottom: 14px;
+  white-space: nowrap;
+}
+.em-subject b {
+  font-size: 13px;
+  font-weight: 600;
+  color: #06503f;
+}
+.em-subject span {
+  font-size: 12px;
+  color: #69716c;
+}
+.em-card {
+  width: 640px;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid #d9ddd8;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.em-head {
+  background: #1d2723;
+  padding: 24px 32px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+.em-head > div:first-child {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.em-head .k {
+  font-size: 12px;
+  font-weight: 600;
+  color: #c7cdc9;
+}
+.em-head .k.small {
+  font-size: 11px;
+}
+.em-head .t {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+.em-head .id {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  white-space: nowrap;
+}
+.em-head .n {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+}
+.em-meta {
+  display: flex;
+  gap: 24px;
+  padding: 16px 32px;
+}
+.em-meta > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.em-meta .k {
+  font-size: 11px;
+  font-weight: 600;
+  color: #69716c;
+}
+.em-meta .b {
+  font-size: 14px;
+  font-weight: 600;
+}
+.em-meta .m {
+  font-size: 13px;
+  color: #69716c;
+}
+.em-lines {
+  padding: 8px 32px 0;
+}
+.em-lines .hd,
+.em-lines .row {
+  display: flex;
+}
+.em-lines .hd {
+  font-size: 12px;
+  font-weight: 600;
+  color: #69716c;
+  padding-bottom: 8px;
+}
+.em-lines .row {
+  border-top: 1px solid #d9ddd8;
+  padding: 9px 0;
+  font-size: 13px;
+}
+.em-lines p:first-child {
+  flex: 1;
+}
+.em-lines .w60 {
+  width: 60px;
+  text-align: right;
+}
+.em-lines .w70 {
+  width: 70px;
+  text-align: right;
+}
+.em-lines .w80 {
+  width: 80px;
+  text-align: right;
+}
+.em-lines .w90 {
+  width: 90px;
+  text-align: right;
+}
+.em-totals {
+  padding: 16px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  color: #69716c;
+}
+.em-totals > div {
+  display: flex;
+  justify-content: space-between;
+}
+.em-totals .grand {
+  color: #0b1f17;
+  font-weight: 700;
+  align-items: center;
+}
+.em-totals .grand span:first-child {
+  font-size: 16px;
+}
+.em-totals .grand span:last-child {
+  font-size: 20px;
+}
+.em-action {
+  padding: 0 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.em-action p {
+  font-size: 12px;
+  color: #69716c;
+}
+.em-secure {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 32px 24px;
+  font-size: 12px;
+  color: #69716c;
+}
+
+/* viewers */
+.vw {
+  min-height: 100vh;
+  background: #e7eae6;
+  font-family: Inter, system-ui, sans-serif;
+}
+.vw-bar {
+  background: #1d2723;
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+}
+.vw-bar .l,
+.vw-bar .r {
+  display: flex;
+  align-items: center;
+}
+.vw-bar .l {
+  gap: 16px;
+}
+.vw-bar .r {
+  gap: 10px;
+}
+.vw-bar .back {
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.vw-bar i {
+  width: 1px;
+  height: 20px;
+  background: #5c6862;
+}
+.vw-bar b {
+  font-size: 14px;
+  font-weight: 600;
+}
+.vw-bar .meta {
+  font-size: 12px;
+  color: #c7cdc9;
+}
+.vw-btn {
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: transparent;
+  border: 1px solid #fff;
+  border-radius: 8px;
+  padding: 9px 16px;
+  line-height: normal;
+}
+.vw-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+.vw-btn.yellow {
+  background: #f6c945;
+  border-color: #f6c945;
+  color: #0b1f17;
+}
+.vw-btn.yellow:hover {
+  background: #eab92f;
+}
+.vw-stage {
+  display: flex;
+  justify-content: center;
+  padding: 36px 0 48px;
+}
+.vw-doc {
+  width: 794px;
+  box-sizing: border-box;
+  background: #fff;
+  padding: 48px 56px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  color: #0b1f17;
+}
+.vw-doc p {
+  margin: 0;
+}
+.vw-dh {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  white-space: nowrap;
+}
+.vw-dh > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.vw-dh .brand {
+  font-size: 16px;
+  color: #06503f;
+}
+.vw-dh span {
+  font-size: 11px;
+  color: #69716c;
+}
+.vw-dh .id {
+  align-items: flex-end;
+  font-weight: 700;
+}
+.vw-dh .id b {
+  font-size: 22px;
+}
+.vw-rule {
+  display: block;
+  height: 1px;
+  background: #d9ddd8;
+}
+.vw-meta {
+  display: flex;
+  gap: 32px;
+}
+.vw-meta > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-weight: 600;
+  min-width: 0;
+}
+.vw-meta small {
+  font-size: 10px;
+  color: #69716c;
+}
+.vw-meta b {
+  font-size: 12px;
+}
+.vw-sec {
+  font-size: 11px;
+  font-weight: 700;
+  color: #06503f;
+}
+.vw-table .h,
+.vw-table .r {
+  display: flex;
+}
+.vw-table .h {
+  border-bottom: 1px solid #0b1f17;
+  padding: 6px 0;
+  font-size: 10px;
+  font-weight: 600;
+  color: #69716c;
+}
+.vw-table .r {
+  border-bottom: 1px solid #d9ddd8;
+  padding: 7px 0;
+  font-size: 11px;
+}
+.vw-totals {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-end;
+  font-size: 14px;
+}
+.vw-totals > div {
+  width: 320px;
+  display: flex;
+  justify-content: space-between;
+}
+.vw-totals .muted {
+  color: #69716c;
+}
+.vw-sigs {
+  display: flex;
+  gap: 40px;
+  padding-top: 26px;
+}
+.vw-sigs > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.vw-sigs i {
+  display: block;
+  width: 280px;
+  height: 1px;
+  background: #0b1f17;
+}
+.vw-sigs b {
+  font-size: 10px;
+  font-weight: 600;
+  color: #69716c;
+}
+.vw-sigs span {
+  font-size: 10px;
+  color: #69716c;
+}
+.vw-clause {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.vw-clause b {
+  font-size: 13px;
+}
+.vw-clause p {
+  font-size: 12px;
+  color: #69716c;
+}

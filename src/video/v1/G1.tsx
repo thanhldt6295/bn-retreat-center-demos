@@ -1,5 +1,7 @@
 import { ActionButton } from '../../components/shared/ActionButton'
 import { useTypedFields } from '../../components/shared/typing'
+import { useState } from 'react'
+import { DatePicker } from '../../components/shared/DatePicker'
 import { PublicShell } from '../../components/guest/Guest'
 import { group, organizer } from '../../data/demo'
 import { asset } from '../../lib/asset'
@@ -26,18 +28,29 @@ const HIGHLIGHTS = [
   ['ic-user.svg', ['Planning help', 'from our team']],
 ] as const
 
-type FieldProps = { label: string; req?: boolean; value: string; active: boolean; icon?: string; area?: boolean }
-function Field({ label, req, value, active, icon, area }: FieldProps) {
+type FieldProps = { label: string; req?: boolean; value: string; active: boolean; icon?: string; area?: boolean; onPick?: (v: string) => void; min?: string }
+function Field({ label, req, value, active, icon, area, onPick, min }: FieldProps) {
   return (
     <div className="g1f">
       <label>
         {label}
         {req && <span className="req"> *</span>}
       </label>
-      <div className={`g1f-input ${area ? 'area' : ''} ${active ? 'focus' : ''}`}>
-        <span className={`g1f-val ${active ? 'caret' : ''}`}>{value}</span>
-        {icon && <img src={asset(`img/${icon}`)} width={12} height={12} alt="" />}
-      </div>
+      {onPick ? (
+        <DatePicker value={value} onChange={onPick} min={min}>
+          {(open) => (
+            <div className={`g1f-input ${open || active ? 'focus' : ''}`}>
+              <span className={`g1f-val ${active ? 'caret' : ''}`}>{value}</span>
+              {icon && <img src={asset(`img/${icon}`)} width={12} height={12} alt="" />}
+            </div>
+          )}
+        </DatePicker>
+      ) : (
+        <div className={`g1f-input ${area ? 'area' : ''} ${active ? 'focus' : ''}`}>
+          <span className={`g1f-val ${active ? 'caret' : ''}`}>{value}</span>
+          {icon && <img src={asset(`img/${icon}`)} width={12} height={12} alt="" />}
+        </div>
+      )}
     </div>
   )
 }
@@ -61,6 +74,8 @@ export function G1({ next }: SceneProps) {
   const { values: v, done } = useTypedFields(texts, { speed: 22, startDelay: 700 })
   const cur = v.findIndex((x, i) => x.length < texts[i].length)
   const a = (i: number) => !done && cur === i
+  const [picked, setPicked] = useState<Record<number, string>>({})
+  const pick = (i: number) => (x: string) => setPicked((p) => ({ ...p, [i]: x }))
 
   return (
     <PublicShell>
@@ -97,8 +112,8 @@ export function G1({ next }: SceneProps) {
           <h2>Request a Group Quote</h2>
           <Field label="Retreat / Group Name" value={v[0]} active={a(0)} />
           <div className="g1-row">
-            <Field label="Start Date" req value={v[1]} active={a(1)} icon="ic-calendar.svg" />
-            <Field label="End Date" req value={v[2]} active={a(2)} icon="ic-calendar.svg" />
+            <Field label="Start Date" req value={picked[1] ?? v[1]} active={a(1)} icon="ic-calendar.svg" onPick={pick(1)} />
+            <Field label="End Date" req value={picked[2] ?? v[2]} active={a(2)} icon="ic-calendar.svg" onPick={pick(2)} min={picked[1] ?? v[1]} />
           </div>
           <Field label="Group Type" req value={v[3]} active={a(3)} icon="ic-chevron-down.svg" />
           <div className="g1-row">
