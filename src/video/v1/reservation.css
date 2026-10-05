@@ -1,0 +1,212 @@
+/* Reservation page · sizes from Figma 235:13410 (page padding 16, cards 1408 wide) */
+.rv-page {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.rv-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  min-height: 86px;
+  box-sizing: border-box;
+}
+.rv-t1 {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 13px;
+  color: #2e2e2e;
+}
+.rv-num {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 400;
+}
+.rv-t2 {
+  display: flex;
+  gap: 8px;
+  font-size: 13px;
+  color: #5c5c5c;
+  margin-top: 4px;
+}
+.rv-head-a {
+  display: flex;
+  gap: 8px;
+}
+.rv-path {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  text-align: center;
+  align-items: center;
+  height: 49px;
+  font-size: 13px;
+  font-weight: 590;
+  color: #2e2e2e;
+}
+.rv-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.rv-icard {
+  padding: 16px;
+}
+.rv-icard h2 {
+  margin: 0 0 12px;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 400;
+  color: #03234d;
+}
+.rv-inner {
+  border: 1px solid #c9c9c9;
+  border-radius: 12px;
+  padding: 17px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.rv-dates {
+  display: flex;
+  gap: 16px;
+}
+.rv-dates .slds-form-element {
+  width: 170px;
+}
+.rv-meta {
+  display: flex;
+  gap: 24px;
+  font-size: 13px;
+  line-height: 19px;
+  color: #2e2e2e;
+}
+.rv-contact {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+.rv-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #e5e5e5;
+  padding-top: 16px;
+}
+.rv-btns {
+  display: flex;
+  gap: 8px;
+}
+.rv-total {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+}
+.rv-total span {
+  font-size: 12px;
+  line-height: 18px;
+  color: #5c5c5c;
+}
+.rv-total b {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 400;
+  color: #03234d;
+}
+.rv-details {
+  padding: 8px 24px 24px;
+}
+.rv-details .slds-tabs_default {
+  margin-bottom: 20px;
+}
+.rv-sec {
+  margin: 20px 0 10px;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 700;
+  color: #03234d;
+}
+.rv-sec small {
+  font-size: 13px;
+  font-weight: 400;
+  color: #5c5c5c;
+}
+.rv-tbl {
+  border: 1px solid #c9c9c9;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.rv-tbl .slds-table th {
+  height: 36px;
+  padding-left: 12px;
+}
+.rv-tbl .slds-table td {
+  padding: 0 0 0 12px;
+  white-space: nowrap;
+  border-top: 1px solid #e5e5e5;
+  font-size: 13px;
+  color: #5c5c5c;
+}
+.rv-amt {
+  display: flex;
+  flex-direction: column;
+}
+.rv-amt b {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 700;
+  color: #03234d;
+}
+.rv-amt span {
+  font-size: 12px;
+  line-height: 17px;
+  color: #5c5c5c;
+}
+.rv-room {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.rv-room img {
+  border-radius: 8px;
+  object-fit: cover;
+  background: #f3f3f3;
+  flex: none;
+}
+.rv-room > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.rv-room b {
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 700;
+  color: #03234d;
+}
+.rv-room .from {
+  white-space: nowrap;
+  font-size: 12px;
+  line-height: 17px;
+  color: #5c5c5c;
+}
+.rv-room.item .ph {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: #f3f3f3;
+}
+.rv-showing {
+  padding: 12px;
+  font-size: 12px;
+  color: #2e2e2e;
+  border-top: 1px solid #e5e5e5;
+}
+.rv-add {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 0;
+}

@@ -1,0 +1,222 @@
+/* Group Block record · sizes from Figma 183:7523 */
+.bgo-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 22px 24px;
+  min-height: 132px;
+  box-sizing: border-box;
+}
+.bgo-title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.bgo-row1 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.bgo-row1 h1 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 35px;
+  font-weight: 400;
+  color: #03234d;
+}
+.bgo-sub {
+  font-size: 14px;
+  line-height: 19px;
+  color: #5c5c5c;
+}
+.bgo-sub i {
+  font-style: normal;
+  margin: 0 4px;
+}
+.bgo-actions {
+  display: flex;
+  gap: 8px;
+}
+.bgo-body {
+  display: flex;
+  gap: 16px;
+  padding: 0 24px 24px;
+  align-items: flex-start;
+}
+.bgo-left {
+  width: 444px;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.bgo-right {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.bgo-card {
+  overflow: hidden;
+  position: relative;
+}
+.bgo-card-h {
+  display: flex;
+  align-items: center;
+  padding: 14px 20px 14px 20px;
+  min-height: 56px;
+  box-sizing: border-box;
+}
+.bgo-card-h h2 {
+  margin: 0;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 590;
+  color: #03234d;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.bgo-card-h small {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+  color: #5c5c5c;
+}
+.bgo-card-h .push {
+  margin-left: auto;
+}
+.bgo-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px 20px 20px;
+}
+.bgo-f {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+.bgo-sum {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 4px 20px 20px;
+}
+.bgo-sum > div {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  line-height: 19px;
+  color: #2e2e2e;
+}
+.bgo-sum b {
+  font-weight: 590;
+  font-size: 14px;
+}
+.bgo-sum .blue {
+  color: #0250d9;
+}
+.bgo-table {
+  width: 100%;
+}
+.bgo-table th {
+  padding-left: 12px;
+  height: 36px;
+}
+.bgo-table td {
+  padding: 0 12px;
+  border-top: 1px solid #e5e5e5;
+  font-size: 13px;
+  color: #2e2e2e;
+}
+.bgo-status-col {
+  display: none;
+}
+.bgo-contract {
+  padding: 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.bgo-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.bgo-info > div,
+.bgo-terms,
+.bgo-sig {
+  background: #f3f3f3;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+.bgo-terms p {
+  margin: 4px 0 0;
+  font-size: 12px;
+  line-height: 18px;
+  color: #5c5c5c;
+}
+.bgo-sigs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.bgo-sig {
+  min-height: 151px;
+  display: flex;
+  flex-direction: column;
+}
+.bgo-sig b {
+  font-size: 13px;
+  color: #2e2e2e;
+}
+.bgo-sig .name {
+  font-size: 22px;
+  min-height: 36px;
+  margin-top: 6px;
+  color: #2e2e2e;
+}
+.bgo-sig small {
+  font-size: 11px;
+  font-weight: 600;
+}
+.bgo-sig .line {
+  margin-top: auto;
+  border-top: 1px solid #999;
+}
+.bgo-sig .foot {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.bgo-listrow {
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  padding: 0 20px;
+  border-top: 1px solid #e5e5e5;
+  box-sizing: border-box;
+}
+.bgo-listrow b {
+  display: block;
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 700;
+  color: #03234d;
+}
+.bgo-listrow span {
+  font-size: 12px;
+  color: #5c5c5c;
+}
+.bgo-listrow .r {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}

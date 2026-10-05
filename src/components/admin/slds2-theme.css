@@ -1,93 +1,137 @@
-/* "SLDS 2" look from the Figma file, applied to the official SLDS components through their styling hooks.
-   The npm package ships SLDS 1 markup/CSS; the Figma kit (LDS2) uses the same classes with rounder, softer tokens. */
+/* "SLDS 2" look from the Figma file, applied to the official SLDS components.
+   Tokens below are read from the Figma design context (SF Pro, accent #0250d9, brand button #066afe, cards radius 20…).
+   The npm package ships SLDS 1 markup; these overrides give it the Lightning 2 appearance. */
 .slds-scope {
-  --slds-g-font-family: 'Salesforce Sans', -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --slds-g-color-surface-2: #f3f3f3;
-  color: #181818;
-  font-size: 0.8125rem;
-  line-height: 1.5;
-  font-family: var(--slds-g-font-family);
+  --lds-accent: #0250d9;
+  --lds-brand: #066afe;
+  --lds-title: #03234d;
+  --lds-muted: #5c5c5c;
+  --lds-text: #2e2e2e;
+  --lds-border: #c9c9c9;
+  --lds-font: 'SF Pro Text', 'SF Pro', -apple-system, BlinkMacSystemFont, Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --slds-g-font-family: var(--lds-font);
+  color: var(--lds-text);
+  font-size: 13px;
+  line-height: 18px;
+  font-family: var(--lds-font);
+  font-weight: 400;
   background: #f3f3f3;
   min-height: 100vh;
   min-width: 1180px;
   padding-bottom: 60px;
+  -webkit-font-smoothing: antialiased;
+}
+.slds-scope b,
+.slds-scope strong {
+  font-weight: 590;
 }
 
-/* buttons: pill shaped, Lightning blue */
+/* buttons: pill, 32px, 14px text */
 .slds-scope .slds-button {
-  --slds-c-button-radius-border: 1rem;
-  --slds-c-button-neutral-color-border: #c9c9c9;
-  --slds-c-button-text-color: #0250d9;
-  --slds-c-button-brand-color-background: #0b5cff;
-  --slds-c-button-brand-color-border: #0b5cff;
-  --slds-c-button-brand-color-background-hover: #0348d6;
-  --slds-c-button-brand-color-border-hover: #0348d6;
-  border-radius: 1rem;
-  line-height: 1.875rem;
-  min-height: 2rem;
+  border-radius: 9999px;
+  min-height: 32px;
+  padding: 1px 16px;
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 400;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 .slds-scope .slds-button_neutral {
-  color: #0250d9;
-  border-color: #c9c9c9;
+  background: #fff;
+  color: var(--lds-accent);
+  border: 1px solid var(--lds-muted);
 }
 .slds-scope .slds-button_neutral:hover:not(:disabled) {
   background: #f3f3f3;
+  color: var(--lds-accent);
 }
 .slds-scope .slds-button_neutral[disabled] {
-  color: #a8b7d9;
-  border-color: #cfd7e8;
+  opacity: 0.5;
+  color: var(--lds-accent);
   background: #fff;
+  border-color: var(--lds-muted);
 }
 .slds-scope .slds-button_brand {
-  background: #0b5cff;
-  border-color: #0b5cff;
+  background: var(--lds-brand);
+  border: 1px solid var(--lds-brand);
   color: #fff;
 }
 .slds-scope .slds-button_brand:hover:not(:disabled) {
-  background: #0348d6;
-  border-color: #0348d6;
+  background: #0b5cd5;
+  border-color: #0b5cd5;
+  color: #fff;
 }
 .slds-scope .slds-button_brand[disabled] {
-  background: #9dbaf5;
-  border-color: #9dbaf5;
+  background: var(--lds-brand);
+  border-color: var(--lds-brand);
+  opacity: 0.5;
   color: #fff;
+}
+.slds-scope .slds-button_stretch {
+  width: 100%;
+  margin: 0;
+}
+.slds-scope .slds-button__icon {
+  fill: currentColor;
 }
 .slds-scope .slds-button_icon-border-filled,
 .slds-scope .slds-button_icon-border {
   border-radius: 50%;
   min-height: 0;
+  width: 24px;
+  height: 24px;
+  padding: 0;
   line-height: 1;
+  border: 1px solid var(--lds-muted);
+  background: #fff;
 }
 
-/* badges: Figma Warning / Success / neutral */
+/* badges */
 .slds-scope .slds-badge {
   font-weight: 400;
-  font-size: 0.75rem;
-  border-radius: 0.1875rem;
-  padding: 0.125rem 0.5rem;
-  line-height: 1.125rem;
+  font-size: 12px;
+  border-radius: 4px;
+  padding: 4px 8px;
+  line-height: 17px;
+  min-height: 25px;
   color: #444;
   background: #e5e5e5;
+  border: 0;
   transition: background-color 0.4s, color 0.4s;
 }
 .slds-scope .slds-badge.slds-theme_warning {
-  background: #fcdaa5;
-  color: #6b3d00;
+  background: #f9e3b6;
+  color: #8c4b02;
 }
 .slds-scope .slds-badge.slds-theme_success {
-  background: #c6f0e4;
-  color: #0b5a48;
+  background: #acf3e4;
+  color: #056764;
 }
-.slds-scope .slds-badge.slds-badge_inverse {
-  background: #5c5c5c;
-  color: #fff;
+.slds-scope .slds-badge.lds-badge-info {
+  background: #d8e6fe;
+  color: #0b4fb3;
 }
 
-/* cards: Lightning 2 rounded surfaces */
+/* links */
+.slds-scope .slds-text-link,
+.slds-scope a.slds-text-link {
+  color: var(--lds-accent);
+  text-decoration: none;
+  cursor: pointer;
+}
+.slds-scope .slds-text-link:hover {
+  text-decoration: underline;
+  color: var(--lds-accent);
+}
+
+/* cards and modals: Lightning 2 rounded surfaces */
 .slds-scope .slds-card {
-  border: 1px solid #dddbda;
-  border-radius: 0.75rem;
+  border: 1px solid var(--lds-border);
+  border-radius: 20px;
   box-shadow: none;
   margin: 0;
   background: #fff;
@@ -109,7 +153,16 @@
 }
 .slds-scope .slds-modal__header {
   background: #fff;
-  border-radius: 1rem 1rem 0 0;
+  border-radius: 20px 20px 0 0;
+  border-bottom: 1px solid var(--lds-border);
+  padding: 16px;
+}
+.slds-scope .slds-modal__content.slds-p-around_medium {
+  padding: 16px;
+}
+.slds-scope .slds-checkbox_faux {
+  border-radius: 4px;
+  border-color: var(--lds-muted);
 }
 .slds-scope .slds-modal__content {
   background: #fff;
@@ -119,60 +172,87 @@
 }
 .slds-scope .slds-modal__footer {
   background: #fff;
-  border-radius: 0 0 1rem 1rem;
+  border-radius: 0 0 20px 20px;
+  border-top: 1px solid var(--lds-border);
+  padding: 16px 12px;
+  min-height: 64px;
+  box-sizing: border-box;
+}
+.slds-scope .slds-modal__footer .slds-button + .slds-button {
+  margin-left: 8px;
 }
 .slds-scope .slds-modal__title {
-  font-size: 1.25rem;
+  font-size: 20px;
+  line-height: 28px;
   font-weight: 400;
-  color: #032d60;
-}
-.slds-scope .slds-modal__header {
-  border-bottom: 1px solid #dddbda;
-  padding: 1rem 1.5rem;
-}
-.slds-scope .slds-modal__footer {
-  border-top: 1px solid #dddbda;
-  background: #fff;
+  color: var(--lds-title);
 }
 .slds-scope .slds-modal__close {
-  top: -0.75rem;
-  right: -0.75rem;
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 24px;
+  height: 24px;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  display: grid;
+  place-items: center;
 }
 
 /* inputs */
 .slds-scope .slds-input,
 .slds-scope .slds-select,
 .slds-scope .slds-textarea {
-  border-radius: 0.25rem;
-  border-color: #747474;
-  font-size: 0.8125rem;
+  border-radius: 8px;
+  border: 1px solid var(--lds-muted);
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--lds-text);
   background: #fff;
+  min-height: 32px;
+  box-shadow: none;
 }
 .slds-scope .slds-input[disabled],
-.slds-scope .slds-input[readonly].is-disabled {
+.slds-scope .slds-select[disabled] {
   background: #f3f3f3;
   border-color: #dddbda;
   color: #a0a0a0;
 }
 .slds-scope .slds-form-element__label {
-  font-size: 0.75rem;
-  color: #5c5c5c;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 17px;
+  color: var(--lds-muted);
 }
 
-/* tables */
+/* tables: header band + airy rows (Figma data table) */
+.slds-scope .slds-table {
+  font-size: 13px;
+  color: var(--lds-muted);
+}
 .slds-scope .slds-table th {
   background: #f3f3f3;
   color: #444;
-  font-size: 0.75rem;
+  font-size: 12px;
+  font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+}
+.slds-scope .slds-table td {
+  white-space: normal;
+  color: var(--lds-text);
 }
 .slds-scope .slds-table.slds-table_bordered {
   border-top: 0;
 }
-.slds-scope .slds-table td,
-.slds-scope .slds-table th {
-  white-space: normal;
+.slds-scope .slds-table.slds-table_cell-buffer tbody tr > td,
+.slds-scope .slds-table.slds-table_cell-buffer tbody tr > th {
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 /* nav bar */
@@ -182,21 +262,29 @@
   box-shadow: none;
 }
 .slds-scope .slds-context-bar__label-action {
-  color: #03234d;
-  font-weight: 600;
-  font-size: 0.875rem;
+  color: var(--lds-title);
+  font-weight: 590;
+  font-size: 14px;
 }
 .slds-scope .slds-context-bar__app-name .slds-context-bar__label-action {
-  font-size: 1.25rem;
+  font-size: 20px;
   font-weight: 400;
 }
-
-/* toast */
-.slds-scope .slds-notify_toast {
-  border-radius: 0.25rem;
+.slds-scope .slds-context-bar__item.slds-is-active {
+  background: transparent;
+  animation: none;
+}
+.slds-scope .slds-context-bar__item.slds-is-active::before {
+  top: auto;
+  bottom: 0;
+  height: 3px;
+  background: var(--lds-brand);
+}
+.slds-scope .slds-context-bar__item.slds-is-active .slds-context-bar__label-action {
+  color: var(--lds-title);
 }
 
-/* Lightning 2: chevron-down selects (SLDS 1 draws up/down arrows) */
+/* chevron-down selects (SLDS 1 draws up/down arrows) */
 .slds-scope .slds-select_container::before,
 .slds-scope .slds-select_container::after {
   display: none;
@@ -213,19 +301,10 @@
   margin-left: 0.5rem;
   vertical-align: middle;
   color: #181818;
-  font-size: 0.8125rem;
+  font-size: 13px;
 }
 
-/* context bar: blue underline on the active tab (Figma) */
-.slds-scope .slds-context-bar__item.slds-is-active {
-  background: transparent;
-}
-.slds-scope .slds-context-bar__item.slds-is-active::before {
-  top: auto;
-  bottom: 0;
-  height: 3px;
-  background: #0b5cff;
-}
-.slds-scope .slds-context-bar__item.slds-is-active .slds-context-bar__label-action {
-  color: #0250d9;
+/* toast */
+.slds-scope .slds-notify_toast {
+  border-radius: 4px;
 }

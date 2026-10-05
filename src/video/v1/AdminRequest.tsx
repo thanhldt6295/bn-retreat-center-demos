@@ -96,7 +96,7 @@ export function RequestList({ next }: SceneProps) {
   )
 }
 
-/* ---------------- shared record body (1.2 / 1.3 and wizard background) ---------------- */
+/* ---------------- shared record body (1.2 / 1.3 and wizard background) — values from Figma 207:36548 / 207:36560 ---------------- */
 export function RecordPage({
   confirmed,
   loading,
@@ -115,57 +115,61 @@ export function RecordPage({
   return (
     <AdminPage>
       <GlobalNav />
-      <div className="lds-page">
-        <div className="lds-head" style={{ paddingBottom: 26 }}>
+      <div className="lds-record-head">
+        <div className="lds-record-title">
           <ObjectIcon size={48} />
-          <div>
-            <div className="lds-crumb">
-              <a className="slds-text-link">Group Block Requests</a> ›
+          <div className="tx">
+            <div className="lds-bc">
+              <a className="slds-text-link">Group Block Requests</a>
+              <Icon name="chevronright" size="xx-small" color="#5c5c5c" style={{ width: 10, height: 10 }} />
             </div>
-            <h1 className="lds-h1">{group.name}</h1>
-            <div className="lds-sub">
+            <h1>{group.name}</h1>
+            <div style={{ color: '#5c5c5c' }}>
               {group.code} · Created {timeline.request}
             </div>
           </div>
-          <div className="lds-head-right">
-            Request status <Badge tone={confirmed ? 'mint' : 'warn'}>{confirmed ? 'Confirmed' : 'Pending'}</Badge>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, lineHeight: '17px', color: '#5c5c5c' }}>
+          Request status <Badge tone={confirmed ? 'mint' : 'warn'}>{confirmed ? 'Confirmed' : 'Pending'}</Badge>
+        </div>
+      </div>
+      <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start', padding: '16px 24px' }}>
+        <div className="slds-card" style={{ flex: 1, overflow: 'hidden', alignSelf: 'stretch' }}>
+          <div style={{ display: 'flex', padding: '20px 24px' }}>
+            <Stat label="Stay dates" value="Nov 12 – Nov 15, 2026" sub="3 nights" first />
+            <Stat label="Rooms requested" value="22 rooms" sub="12 single bed · 10 double bed" />
+            <Stat label="Group type" value="Leadership retreat" />
+          </div>
+          <div style={{ height: 1, background: '#c9c9c9' }} />
+          <div style={{ display: 'flex', gap: 32, padding: 24 }}>
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <div className="lds-h-sm">Organizer</div>
+              <Info label="Contact" value={<a className="slds-text-link" style={{ fontWeight: 590 }}>{organizer.name}</a>} />
+              <Info label="Organization" value={organizer.org} />
+              <Info label="Email" value={organizer.email} />
+              <Info label="Address" value={organizer.address} />
+            </div>
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <div className="lds-h-sm">Special request</div>
+              <div style={{ background: '#f3f3f3', borderRadius: 8, padding: 16, fontSize: 14, lineHeight: '19px', color: '#2e2e2e' }}>{group.special}</div>
+            </div>
           </div>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 480px', gap: 20 }}>
-          <div className="slds-card" style={{ borderRadius: 18 }}>
-            <div style={{ display: 'flex', borderBottom: '1px solid #dddbda', padding: '20px 24px' }}>
-              <Stat label="Stay dates" value="Nov 12 – Nov 15, 2026" sub="3 nights" />
-              <Stat label="Rooms requested" value="22 rooms" sub="12 single bed · 10 double bed" divider />
-              <Stat label="Group type" value="Leadership retreat" divider />
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, padding: '24px', minHeight: 300 }}>
-              <div>
-                <div style={{ fontWeight: 700, color: '#032d60', fontSize: 15, marginBottom: 14 }}>Organizer</div>
-                <Info label="Contact" value={<a className="slds-text-link">{organizer.name}</a>} />
-                <Info label="Organization" value={organizer.org} />
-                <Info label="Email" value={organizer.email} />
-                <Info label="Address" value={organizer.address} />
-              </div>
-              <div>
-                <div style={{ fontWeight: 700, color: '#032d60', fontSize: 15, marginBottom: 14 }}>Special request</div>
-                <div style={{ background: '#f3f3f3', borderRadius: 8, padding: '14px 16px', fontSize: 14 }}>{group.special}</div>
-              </div>
-            </div>
-          </div>
-          <div className="slds-card" style={{ borderRadius: 18, padding: 24, alignSelf: 'start' }}>
-            <div style={{ fontSize: 22, color: '#032d60', marginBottom: 28 }}>Next step</div>
+        <div className="slds-card" style={{ width: 480, flex: 'none', overflow: 'hidden' }}>
+          <div style={{ padding: '20px 24px 16px', fontSize: 20, lineHeight: '28px', fontWeight: 590, color: '#03234d' }}>Next step</div>
+          <div style={{ padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: 16 }}>
             <Num n={1} title="Review the request" body="Dates, rooms and special request." />
             <Num n={2} title="Check availability" body="Rooms and the Meeting Hall for Nov 12 – 14.">
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 6 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 4 }}>
                 <Badge tone="mint">Available</Badge>
-                <a className="slds-text-link" style={{ fontSize: 13 }} onClick={onOpenGrid}>
+                <a className="slds-text-link" onClick={onOpenGrid}>
                   Open availability grid
                 </a>
               </div>
             </Num>
             <Num n={3} title="Confirm the request" body={confirmed ? 'Status is Confirmed.' : 'Set the status to Confirmed.'} />
             {confirmed ? (
-              <button className="slds-button slds-button_brand slds-button_stretch ab" style={{ marginTop: 14 }} onClick={onConvert}>
+              <button className="slds-button slds-button_brand slds-button_stretch ab" onClick={onConvert}>
                 Convert To Group Block Code
               </button>
             ) : (
@@ -173,13 +177,15 @@ export function RecordPage({
                 Confirm request
               </ActionButton>
             )}
-            {!confirmed && (
-              <button className="slds-button slds-button_neutral slds-button_stretch" style={{ marginTop: 14, marginLeft: 0 }} disabled>
-                Convert To Group Block Code
-              </button>
-            )}
-            <div style={{ textAlign: 'center', fontSize: 12, color: '#555', marginTop: 14 }}>
-              {confirmed ? 'Opens the New Group Booking wizard.' : 'Available after the request is confirmed.'}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'center' }}>
+              {!confirmed && (
+                <button className="slds-button slds-button_neutral slds-button_stretch" disabled>
+                  Convert To Group Block Code
+                </button>
+              )}
+              <div style={{ fontSize: 12, lineHeight: '17px', color: '#5c5c5c' }}>
+                {confirmed ? 'Opens the New Group Booking wizard.' : 'Available after the request is confirmed.'}
+              </div>
             </div>
           </div>
         </div>
@@ -189,54 +195,53 @@ export function RecordPage({
   )
 }
 
-function Stat({ label, value, sub, divider }: { label: string; value: string; sub?: string; divider?: boolean }) {
+function Stat({ label, value, sub, first }: { label: string; value: string; sub?: string; first?: boolean }) {
   return (
-    <div style={{ flex: 1, paddingLeft: divider ? 24 : 0, borderLeft: divider ? '1px solid #dddbda' : undefined }}>
-      <div style={{ fontSize: 12, color: '#555' }}>{label}</div>
-      <div style={{ fontSize: 18, color: '#032d60', fontWeight: 500, margin: '4px 0' }}>{value}</div>
-      {sub && <div style={{ fontSize: 13, color: '#555' }}>{sub}</div>}
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 4, padding: first ? '0 24px 0 0' : '0 24px', borderLeft: first ? undefined : '1px solid #c9c9c9' }}>
+      <div className="lds-lbl">{label}</div>
+      <div style={{ fontSize: 16, lineHeight: '22px', fontWeight: 590, color: '#03234d' }}>{value}</div>
+      {sub && <div style={{ fontSize: 13, lineHeight: '18px', color: '#5c5c5c' }}>{sub}</div>}
     </div>
   )
 }
 
 function Info({ label, value }: { label: string; value: ReactNode }) {
   return (
-    <div style={{ marginBottom: 14 }}>
-      <div style={{ fontSize: 12, color: '#555' }}>{label}</div>
-      <div style={{ fontSize: 15, fontWeight: 500, marginTop: 3 }}>{value}</div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+      <div className="lds-lbl">{label}</div>
+      <div className="lds-val">{value}</div>
     </div>
   )
 }
 
 function Num({ n, title, body, children }: { n: number; title: string; body: string; children?: ReactNode }) {
   return (
-    <div style={{ display: 'flex', gap: 14, marginBottom: 18 }}>
+    <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
       <span
         style={{
           width: 24,
           height: 24,
-          borderRadius: '50%',
-          background: '#0b5cff',
+          borderRadius: 12,
+          background: '#0250d9',
           color: '#fff',
           display: 'grid',
           placeItems: 'center',
           fontSize: 12,
+          lineHeight: '17px',
           fontWeight: 700,
           flex: 'none',
-          marginTop: 1,
         }}
       >
         {n}
       </span>
-      <div>
-        <div style={{ fontWeight: 700, color: '#032d60', fontSize: 14 }}>{title}</div>
-        <div style={{ color: '#555', fontSize: 13, marginTop: 4 }}>{body}</div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 4, flex: 1, minWidth: 0 }}>
+        <div className="lds-h-sm">{title}</div>
+        <div style={{ color: '#5c5c5c', fontSize: 13, lineHeight: '18px' }}>{body}</div>
         {children}
       </div>
     </div>
   )
 }
-
 /* ---------------- 1.2 / 1.3 ---------------- */
 export function RequestRecord({ step, from, next, goto }: SceneProps) {
   const { toast } = usePlayer()

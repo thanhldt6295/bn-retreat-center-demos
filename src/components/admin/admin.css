@@ -92,14 +92,14 @@
   gap: 6px;
 }
 .lds-steps .dot {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   display: grid;
   place-items: center;
   font-size: 12px;
-  border: 1px solid #747474;
-  color: #444;
+  border: 1px solid #c9c9c9;
+  color: #5c5c5c;
   background: #fff;
   transition: background-color 0.3s, color 0.3s;
 }
@@ -114,26 +114,93 @@
   color: #032d60;
 }
 .lds-steps .bar {
-  width: 34px;
-  height: 1px;
-  background: #b0adab;
-  margin-left: 2px;
+  width: 36px;
+  height: 2px;
+  background: #c9c9c9;
+  margin: 0 4px 0 4px;
 }
 .lds-section {
   background: #f3f3f3;
-  border-radius: 6px;
-  padding: 8px 10px;
+  border-radius: 8px;
+  padding: 8px 12px;
   font-weight: 700;
-  color: #032d60;
-  font-size: 13px;
-  margin: 10px 0;
+  color: #03234d;
+  font-size: 14px;
+  line-height: 19px;
+  margin: 0;
+}
+.lds-wiz .slds-table td {
+  height: 44px;
+  padding: 0 0 0 12px;
+  border: 0;
+}
+.lds-wiz .slds-table th {
+  padding-left: 12px;
 }
 .lds-stepbody {
   animation: lds-slide 0.3s ease-out both;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 4px;
 }
 @keyframes lds-slide {
   from {
     opacity: 0;
     transform: translateX(16px);
   }
+}
+
+/* Figma typography tokens (SF Pro scale) */
+.lds-lbl {
+  font-size: 12px;
+  line-height: 17px;
+  font-weight: 590;
+  color: #5c5c5c;
+}
+.lds-val {
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 590;
+  color: #2e2e2e;
+}
+.lds-h-sm {
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 700;
+  color: #03234d;
+}
+.lds-record-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 24px 16px;
+}
+.lds-record-title {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.lds-record-title h1 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 590;
+  color: #03234d;
+}
+.lds-record-title .tx {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.lds-bc {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.lds-wiz > .slds-button {
+  align-self: flex-start;
 }

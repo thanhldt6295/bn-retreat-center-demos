@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from 'react'
 import { DatePicker } from '../shared/DatePicker'
-import { AdminPage, Badge, Check, GlobalNav, Select } from './Admin'
+import { AdminPage, Badge, Check, GlobalNav } from './Admin'
 import { Icon } from './Icon'
 import './grid.css'
 
@@ -156,12 +156,12 @@ export function AvailabilityPage(props: Props) {
                   {(open) => (
                     <div className={`slds-input-has-icon slds-input-has-icon_right ${open ? 'slds-has-focus' : ''}`}>
                       <Icon name="date_input" className="slds-input__icon slds-input__icon_right" color="#0b5cff" />
-                      <input className="slds-input" readOnly value={dates[l]} aria-label={l} style={{ borderRadius: 6, cursor: 'pointer' }} />
+                      <input className="slds-input" readOnly value={dates[l]} aria-label={l} style={{ cursor: 'pointer' }} />
                     </div>
                   )}
                 </DatePicker>
               ) : (
-                <Select value={v} style={{ borderRadius: 6 }} />
+                <input className="slds-input" readOnly value={v} aria-label={l} />
               )}
             </div>
           ))}
@@ -207,7 +207,7 @@ export function AvailabilityGrid({ bookings, forced, requestedHover, legendReque
         </button>
         <span style={{ color: '#444', marginLeft: 8 }}>Sort by</span>
         <div style={{ width: 170 }}>
-          <Select value="Property" style={{ borderRadius: 6 }} />
+          <input className="slds-input" readOnly value="Property" aria-label="Sort by" />
         </div>
         <button className="slds-button slds-button_icon slds-button_icon-border-filled ag-circ dark" title="Sort ascending">
           <Icon name="arrowup" color="#181818" />

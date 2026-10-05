@@ -84,7 +84,7 @@ export const toneFor = (status: string): Tone => {
 /** SLDS badge (Warning / Success / neutral). */
 export function Badge({ children, tone, className = '' }: { children: ReactNode; tone?: Tone; className?: string }) {
   const t = tone ?? (typeof children === 'string' ? toneFor(children) : '')
-  const theme = t === 'warn' ? 'slds-theme_warning' : t === 'ok' || t === 'mint' ? 'slds-theme_success' : t === 'blue' ? 'slds-badge_inverse' : ''
+  const theme = t === 'warn' ? 'slds-theme_warning' : t === 'ok' || t === 'mint' ? 'slds-theme_success' : t === 'blue' ? 'slds-badge_lightest lds-badge-info' : ''
   return <span className={`slds-badge ${theme} ${className}`}>{children}</span>
 }
 

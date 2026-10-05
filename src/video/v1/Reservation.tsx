@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { ActionButton } from '../../components/shared/ActionButton'
+import './reservation.css'
 import { DatePicker } from '../../components/shared/DatePicker'
 import { AdminPage, Badge, Field, GlobalNav, Input, Modal, Select, TextArea } from '../../components/admin/Admin'
 import { Icon } from '../../components/admin/Icon'
@@ -12,7 +13,7 @@ const th = { fontSize: 11.5, textTransform: 'uppercase', letterSpacing: '.04em',
 const DateBox = ({ value, onChange, min }: { value: string; onChange: (v: string) => void; min?: string }) => (
   <DatePicker theme="lds" value={value} onChange={onChange} min={min}>
     {(open) => (
-      <div className={`slds-input-has-icon slds-input-has-icon_right ${open ? 'slds-has-focus' : ''}`} style={{ width: 150 }}>
+      <div className={`slds-input-has-icon slds-input-has-icon_right ${open ? 'slds-has-focus' : ''}`} style={{ width: '100%' }}>
         <Icon name="date_input" className="slds-input__icon slds-input__icon_right" color="#0b5cff" />
         <input className="slds-input" readOnly value={value} aria-label="Date" style={{ cursor: 'pointer' }} />
       </div>
@@ -45,177 +46,260 @@ export function Reservation({ step, from, goto }: SceneProps) {
 
   const modalOpen = step === '4.4' && invoiceOpen
 
+  const st = confirmed ? 'Confirmed' : 'Pending'
+  const rooms = groupReservation.roomsShown
+  const headRow = (cols: [string, number][]) => (
+    <>
+      <colgroup>
+        {cols.map(([, w], i) => (
+          <col key={i} style={{ width: w || undefined }} />
+        ))}
+      </colgroup>
+      <thead>
+        <tr>
+          {cols.map(([h], i) => (
+            <th key={i} scope="col">
+              <div className="slds-truncate">{h}</div>
+            </th>
+          ))}
+        </tr>
+      </thead>
+    </>
+  )
+  const amount = (a: number, tax: number) => (
+    <div className="rv-amt">
+      <b>{money(a)}</b>
+      <span>+Tax {money(tax)}</span>
+    </div>
+  )
+
   return (
     <AdminPage>
       <GlobalNav active="Reservations" />
-      <div className="lds-page" style={{ paddingTop: 12 }}>
-        <div className="slds-card" style={{ borderRadius: 8, padding: '14px 12px', display: 'flex', alignItems: 'center' }}>
-          <div>
-            <div style={{ fontSize: 12, color: '#444' }}>
-              Reservation <b style={{ color: '#0b5cff', fontSize: 22, marginLeft: 6, fontWeight: 500 }}>{groupReservation.number}</b>
+      <div className="rv-page">
+        <section className="slds-card rv-head">
+          <div className="rv-head-t">
+            <div className="rv-t1">
+              <span>Reservation</span>
+              <a className="slds-text-link rv-num">{groupReservation.number}</a>
             </div>
-            <div style={{ fontSize: 12, color: '#444', marginTop: 4 }}>
-              Group Block <a className="slds-text-link" style={{ marginLeft: 6 }}>{group.code}</a>
+            <div className="rv-t2">
+              <span>Group Block</span>
+              <a className="slds-text-link">{group.code}</a>
             </div>
           </div>
-          <div style={{ marginLeft: 'auto', display: 'flex', gap: 8 }}>
-            <button className="slds-button slds-button_neutral" disabled={!confirmed}>Check-In</button>
-            <button className="slds-button slds-button_neutral" disabled={!confirmed}>Check-Out</button>
+          <div className="rv-head-a">
+            <button className="slds-button slds-button_neutral" disabled={!confirmed}>
+              Check-In
+            </button>
+            <button className="slds-button slds-button_neutral" disabled={!confirmed}>
+              Check-Out
+            </button>
             {!confirmed && (
-              <ActionButton
-                className="slds-button slds-button_brand"
-                primary={step === '4.4' && !modalOpen}
-                loadingMs={1000}
-                onDone={() => goto('4.3b')}
-              >
+              <ActionButton className="slds-button slds-button_brand" primary={step === '4.4' && !modalOpen} loadingMs={1000} onDone={() => goto('4.3b')}>
                 Confirm Reservation
               </ActionButton>
             )}
           </div>
-        </div>
+        </section>
 
-        <div className="slds-card" style={{ borderRadius: 8, margin: '12px 0', display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', textAlign: 'center', padding: '10px 0', fontSize: 12, fontWeight: 700 }}>
+        <section className="slds-card rv-path">
           <span>Cancelled</span>
           <span>{confirmed ? 'Pending Approval' : <Badge tone="warn">Pending Approval</Badge>}</span>
           <span>{confirmed ? <Badge tone="mint">Confirmed</Badge> : 'Confirmed'}</span>
-        </div>
+        </section>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-          <div className="slds-card" style={{ borderRadius: 8, padding: 12, minHeight: 210 }}>
-            <div style={{ fontSize: 20, color: '#032d60', margin: '6px 0 12px' }}>Reservation Info</div>
-            <div className="slds-card" style={{ borderRadius: 6, padding: 12, boxShadow: 'none' }}>
-              <div style={{ display: 'flex', gap: 12 }}>
-                <Field label="Start Date"><DateBox value={start} onChange={setStart} /></Field>
-                <Field label="End Date"><DateBox value={end} onChange={setEnd} min={start} /></Field>
+        <div className="rv-info">
+          <section className="slds-card rv-icard">
+            <h2>Reservation Info</h2>
+            <div className="rv-inner">
+              <div className="rv-dates">
+                <Field label="Start Date">
+                  <DateBox value={start} onChange={setStart} />
+                </Field>
+                <Field label="End Date">
+                  <DateBox value={end} onChange={setEnd} min={start} />
+                </Field>
               </div>
-              <div style={{ display: 'flex', gap: 22, margin: '12px 0', fontSize: 12 }}>
-                <div><div style={{ color: '#555' }}>Booked by</div><div style={{ marginTop: 3 }}>{organizer.name}</div></div>
-                <div><div style={{ color: '#555' }}>Taxes enabled</div><b style={{ display: 'block', marginTop: 3 }}>True</b></div>
-                <div><div style={{ color: '#555' }}>Taxes</div><div style={{ marginTop: 3 }}>{money(quote.tax)}</div></div>
+              <div className="rv-meta">
+                <div>
+                  <div className="lds-lbl">Booked by</div>
+                  <div>{organizer.name}</div>
+                </div>
+                <div>
+                  <div className="lds-lbl">Taxes enabled</div>
+                  <b>True</b>
+                </div>
+                <div>
+                  <div className="lds-lbl">Taxes</div>
+                  <div>{money(quote.tax)}</div>
+                </div>
               </div>
-              <div style={{ display: 'flex', alignItems: 'flex-end' }}>
-                <button className="slds-button slds-button_neutral" style={{ marginRight: 8 }}>Add room</button>
-                <button className="slds-button slds-button_neutral">Add item</button>
-                <div style={{ marginLeft: 'auto', textAlign: 'right' }}>
-                  <div style={{ fontSize: 11, color: '#555' }}>Grand Total</div>
-                  <div style={{ fontSize: 24, color: '#032d60', fontWeight: 500 }}>{money(quote.total)}</div>
+              <div className="rv-foot">
+                <div className="rv-btns">
+                  <button className="slds-button slds-button_neutral">Add room</button>
+                  <button className="slds-button slds-button_neutral">Add item</button>
+                </div>
+                <div className="rv-total">
+                  <span>Grand Total</span>
+                  <b>{money(quote.total)}</b>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="slds-card" style={{ borderRadius: 8, padding: 12 }}>
-            <div style={{ fontSize: 20, color: '#032d60', margin: '6px 0 12px' }}>Billing Info</div>
-            <div className="slds-card" style={{ borderRadius: 6, padding: 12, boxShadow: 'none' }}>
-              <div style={{ fontSize: 11.5, color: '#555' }}>Contact Name</div>
-              <div style={{ display: 'flex', gap: 8, margin: '4px 0 12px' }}>
-                <div style={{ flex: 1 }}><Input value={organizer.name} /></div>
+          </section>
+          <section className="slds-card rv-icard">
+            <h2>Billing Info</h2>
+            <div className="rv-inner">
+              <div className="rv-contact">
+                <Field label="Contact Name" style={{ flex: 1 }}>
+                  <Input value={organizer.name} />
+                </Field>
                 <button className="slds-button slds-button_neutral">Change</button>
               </div>
-              <div style={{ display: 'flex', gap: 30, fontSize: 12, paddingBottom: 12, borderBottom: '1px solid #ddd' }}>
-                <div><div style={{ color: '#555' }}>Email</div><div style={{ marginTop: 3 }}>{organizer.email}</div></div>
-                <div><div style={{ color: '#555' }}>Invoice</div><a className="slds-text-link ab" style={{ display: 'block', marginTop: 3 }} onClick={() => goto('4.4')}>{groupReservation.invoice}</a></div>
+              <div className="rv-meta">
+                <div>
+                  <div className="lds-lbl">Email</div>
+                  <div>{organizer.email}</div>
+                </div>
+                <div>
+                  <div className="lds-lbl">Invoice</div>
+                  <a className="slds-text-link ab" onClick={() => goto('4.4')}>
+                    {groupReservation.invoice}
+                  </a>
+                </div>
               </div>
-              <div style={{ display: 'flex', alignItems: 'flex-end', marginTop: 10 }}>
-                <button className="slds-button slds-button_neutral ab" style={{ marginRight: 8 }} onClick={() => goto('4.4')}>Invoice</button>
-                <button className="slds-button slds-button_neutral">Payments</button>
-                <div style={{ marginLeft: 'auto', textAlign: 'right' }}>
-                  <div style={{ fontSize: 11, color: '#555' }}>Balance Due</div>
-                  <div style={{ fontSize: 24, color: '#032d60', fontWeight: 500 }}>{money(quote.balance)}</div>
+              <div className="rv-foot">
+                <div className="rv-btns">
+                  <button className="slds-button slds-button_neutral ab" onClick={() => goto('4.4')}>
+                    Invoice
+                  </button>
+                  <button className="slds-button slds-button_neutral">Payments</button>
+                </div>
+                <div className="rv-total">
+                  <span>Balance Due</span>
+                  <b>{money(quote.balance)}</b>
                 </div>
               </div>
             </div>
-          </div>
+          </section>
         </div>
 
-        <div className="slds-card" style={{ borderRadius: 8, marginTop: 12, padding: '16px 24px 24px' }}>
-          <div style={{ display: 'flex', gap: 22, fontSize: 13, borderBottom: '1px solid #ddd', paddingBottom: 8 }}>
-            <b style={{ color: '#0b5cff', borderBottom: '2px solid #0b5cff', paddingBottom: 8 }}>Details</b>
-            <span>Payments</span>
-            <span>Files</span>
-            <span>Activities</span>
+        <section className="slds-card rv-details">
+          <div className="slds-tabs_default">
+            <ul className="slds-tabs_default__nav" role="tablist">
+              {['Details', 'Payments', 'Files', 'Activities'].map((n, i) => (
+                <li key={n} className={`slds-tabs_default__item ${i === 0 ? 'slds-is-active' : ''}`} role="presentation">
+                  <a className="slds-tabs_default__link" role="tab">
+                    {n}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
-          <div style={{ fontSize: 15, fontWeight: 700, color: '#032d60', margin: '22px 0 10px' }}>Space <small style={{ fontWeight: 400, color: '#555' }}>1</small></div>
-          <div className="slds-card" style={{ borderRadius: 6, overflow: 'hidden' }}>
-            <table className="slds-table slds-table_bordered slds-table_cell-buffer" style={{ fontSize: 12 }}>
-              <thead>
-                <tr>{['Space', 'Description', 'Start date', 'End date', 'Time', 'Days', 'Status', 'Amount'].map((h) => <th key={h} style={th}>{h}</th>)}</tr>
-              </thead>
+
+          <h3 className="rv-sec">
+            Space <small>1</small>
+          </h3>
+          <div className="rv-tbl">
+            <table className="slds-table slds-table_fixed-layout">
+              {headRow([['Space', 260], ['Description', 360], ['Start date', 110], ['End date', 110], ['Time', 150], ['Days', 70], ['Status', 150], ['Amount', 150]])}
               <tbody>
-                <tr>
-                  <td style={{ height: 48 }}>Meeting Hall</td>
+                <tr style={{ height: 64 }}>
+                  <td>Meeting Hall</td>
                   <td>Venue for workshops and leadership sessions</td>
                   <td>Nov 12, 2026</td>
                   <td>Nov 14, 2026</td>
                   <td>9:00 AM – 5:00 PM</td>
                   <td>3</td>
-                  <td><Badge tone={confirmed ? 'mint' : 'warn'}>{confirmed ? 'Confirmed' : 'Pending'}</Badge></td>
-                  <td><b>{money(quote.meeting.total)}</b><div style={{ color: '#666' }}>+Tax {money(quote.meeting.total / 10)}</div></td>
+                  <td>
+                    <Badge tone={confirmed ? 'mint' : 'warn'}>{st}</Badge>
+                  </td>
+                  <td>{amount(quote.meeting.total, quote.meeting.total / 10)}</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <div style={{ fontSize: 15, fontWeight: 700, color: '#032d60', margin: '22px 0 10px' }}>
-            Reservation Rooms <small style={{ fontWeight: 400, color: '#555' }}>(22/22)</small>
-          </div>
-          <div className="slds-card" style={{ borderRadius: 6, overflow: 'hidden' }}>
-            <table className="slds-table slds-table_bordered slds-table_cell-buffer" style={{ fontSize: 12 }}>
-              <thead>
-                <tr>{['Room', 'Guest', 'Start date', 'End date', 'Guests', 'Status', 'Length', 'Room only', 'Total', 'Actions'].map((h) => <th key={h} style={th}>{h}</th>)}</tr>
-              </thead>
+
+          <h3 className="rv-sec">
+            Reservation Rooms <small>(22/22)</small>
+          </h3>
+          <div className="rv-tbl">
+            <table className="slds-table slds-table_fixed-layout">
+              {headRow([['Room', 360], ['Guest', 190], ['Start date', 100], ['End date', 100], ['Guests', 90], ['Status', 150], ['Length', 80], ['Room only', 100], ['Total', 100], ['Actions', 88]])}
               <tbody>
-                {groupReservation.roomsShown.map((r, i) => (
-                  <tr key={i} style={{ borderTop: '1px solid #e5e5e5' }}>
-                    <td style={{ height: 80 }}>
-                      <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                        <img src={asset(ROOM_IMG[r.type])} width={64} height={64} alt="" style={{ borderRadius: 8, objectFit: 'cover', background: '#f3f3f3', flex: 'none' }} />
+                {rooms.map((r, i) => (
+                  <tr key={i} style={{ height: 80 }}>
+                    <td>
+                      <div className="rv-room">
+                        <img src={asset(ROOM_IMG[r.type])} width={64} height={64} alt="" />
                         <div>
-                          <div style={{ fontSize: 10.5, color: '#555' }}>From Cedar Valley Retreat &amp; Conference Center</div>
-                          <b style={{ color: '#032d60', fontSize: 12.5 }}>{r.type}</b>
-                          <div><a className="slds-text-link">Assign Room</a></div>
+                          <div className="from">From Cedar Valley Retreat &amp; Conference Center</div>
+                          <b>{r.type}</b>
+                          <a className="slds-text-link">Assign Room</a>
                         </div>
                       </div>
                     </td>
-                    <td><b>{organizer.name}</b></td>
+                    <td>
+                      <b>{organizer.name}</b>
+                    </td>
                     <td>Nov 12, 2026</td>
                     <td>Nov 15, 2026</td>
                     <td>1 / 0</td>
                     <td>Pending Approval</td>
                     <td>3 nights</td>
-                    <td><b>{money(r.amount)}</b><div style={{ color: '#666' }}>+Tax {money(r.tax)}</div></td>
-                    <td><b>{money(r.amount)}</b><div style={{ color: '#666' }}>+Tax {money(r.tax)}</div></td>
-                    <td><span style={{ width: 24, height: 24, border: '1px solid #5c5c5c', borderRadius: '50%', display: 'inline-grid', placeItems: 'center', background: '#fff' }}><img src={asset('img/ic-row-action.svg')} width={14} height={14} alt="" /></span></td>
+                    <td>{amount(r.amount, r.tax)}</td>
+                    <td>{amount(r.amount, r.tax)}</td>
+                    <td>
+                      <button className="slds-button slds-button_icon slds-button_icon-border-filled" title="Show actions">
+                        <Icon name="chevrondown" size="x-small" />
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-            <div style={{ padding: '10px 12px', fontSize: 12 }}>Showing 7 of 22 rooms · <a className="slds-text-link">View all</a></div>
+            <div className="rv-showing">
+              Showing 7 of 22 rooms · <a className="slds-text-link">View all</a>
+            </div>
           </div>
-          <div style={{ textAlign: 'center', margin: '16px 0' }}>
+          <div className="rv-add">
             <button className="slds-button slds-button_neutral">Add</button>
           </div>
-          <div style={{ fontSize: 15, fontWeight: 700, color: '#032d60', margin: '8px 0 10px' }}>Items <small style={{ fontWeight: 400, color: '#555' }}>(1)</small></div>
-          <div className="slds-card" style={{ borderRadius: 6, overflow: 'hidden' }}>
-            <table className="slds-table slds-table_bordered slds-table_cell-buffer" style={{ fontSize: 12 }}>
-              <thead>
-                <tr>{['Item', 'Start date', 'End date', 'Calculation rule', 'Qty', 'Status', 'Amount', ''].map((h) => <th key={h} style={th}>{h}</th>)}</tr>
-              </thead>
+
+          <h3 className="rv-sec">
+            Items <small>(1)</small>
+          </h3>
+          <div className="rv-tbl">
+            <table className="slds-table slds-table_fixed-layout">
+              {headRow([['Item', 460], ['Start date', 110], ['End date', 110], ['Calculation rule', 150], ['Qty', 70], ['Status', 150], ['Amount', 150], ['', 158]])}
               <tbody>
-                <tr>
-                  <td style={{ height: 54 }}><b style={{ color: '#032d60' }}>{quote.catering.name}</b><div style={{ color: '#666' }}>Three daily meals for the group</div></td>
+                <tr style={{ height: 72 }}>
+                  <td>
+                    <div className="rv-room item">
+                      <span className="ph" />
+                      <div>
+                        <b>{quote.catering.name}</b>
+                        <div className="from">Three daily meals for the group</div>
+                      </div>
+                    </div>
+                  </td>
                   <td>Nov 12, 2026</td>
                   <td>Nov 14, 2026</td>
                   <td>Per Person</td>
                   <td>{quote.catering.qty}</td>
-                  <td><Badge tone={confirmed ? 'mint' : 'warn'}>{confirmed ? 'Confirmed' : 'Pending'}</Badge></td>
-                  <td><b>{money(quote.catering.total)}</b><div style={{ color: '#666' }}>+Tax {money(quote.catering.total / 10)}</div></td>
-                  <td><a className="slds-text-link">Remove</a></td>
+                  <td>
+                    <Badge tone={confirmed ? 'mint' : 'warn'}>{st}</Badge>
+                  </td>
+                  <td>{amount(quote.catering.total, quote.catering.total / 10)}</td>
+                  <td>
+                    <a className="slds-text-link">Remove</a>
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
-        </div>
+        </section>
       </div>
-
       {modalOpen && (
         <Modal
           title="Reservation Invoice"

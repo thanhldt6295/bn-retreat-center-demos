@@ -21,7 +21,7 @@ const Th = ({ children }: { children?: ReactNode }) => (
     <div className="slds-truncate">{children}</div>
   </th>
 )
-const tableClass = 'slds-table slds-table_bordered slds-table_cell-buffer'
+const tableClass = 'slds-table'
 
 /** 2.1 – 2.5 (+ 2.2b room types, 2.3 add-on picker) */
 export function Wizard({ step, next, prev, goto }: SceneProps) {
@@ -62,8 +62,8 @@ export function Wizard({ step, next, prev, goto }: SceneProps) {
     <RecordPage confirmed>
       <Modal title={`New Group Booking for ${group.code}`} footer={footer}>
         <Stepper steps={STEPS} current={n} />
-        <div style={{ fontSize: 13, color: '#555', margin: '4px 0 6px' }}>{step === '2.1' ? SUB0 : SUB}</div>
-        <div className="lds-stepbody" key={n}>
+        <div style={{ fontSize: 13, color: '#5c5c5c' }}>{step === '2.1' ? SUB0 : SUB}</div>
+        <div className="lds-stepbody lds-wiz" key={n}>
           {n === 1 && <StepOne />}
           {n === 2 && <StepTwo onPick={() => goto('2.2b')} onAddOn={() => goto('2.3')} />}
           {n === 3 && <StepThree />}
@@ -80,7 +80,7 @@ function StepOne() {
   return (
     <>
       <Section>Group Block Info</Section>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px 12px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
         <Field label="Code">
           <Input value={group.code} />
         </Field>
@@ -100,10 +100,10 @@ function StepOne() {
           <Input value={group.name} />
         </Field>
       </div>
-      <Field label="Pricing Type" style={{ marginTop: 14 }}>
+      <Field label="Pricing Type">
         <Select value="Nightly" />
       </Field>
-      <Field label="Special Request" style={{ marginTop: 14 }}>
+      <Field label="Special Request">
         <TextArea value={group.special} rows={2} />
       </Field>
     </>
@@ -114,7 +114,7 @@ function StepTwo({ onPick, onAddOn }: { onPick: () => void; onAddOn: () => void 
   return (
     <>
       <Section>Space</Section>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
         <Field label="Space">
           <Select value="Meeting Hall" />
         </Field>
@@ -122,7 +122,7 @@ function StepTwo({ onPick, onAddOn }: { onPick: () => void; onAddOn: () => void 
           <Select value="Classroom" />
         </Field>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12, marginTop: 12 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16 }}>
         <Field label="Dates">
           <Input value="Nov 12 – Nov 14, 2026" />
         </Field>
@@ -133,7 +133,7 @@ function StepTwo({ onPick, onAddOn }: { onPick: () => void; onAddOn: () => void 
           <Input value={String(group.guests)} />
         </Field>
       </div>
-      <div style={{ display: 'flex', gap: 10, alignItems: 'center', margin: '12px 0', fontSize: 13 }}>
+      <div style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 13 }}>
         <Badge tone="mint">Available</Badge> Capacity 60 · $600.00 per day · free Nov 12 – 14
       </div>
       <Check on label="Overnight stay: add rooms for this group" />
@@ -147,7 +147,7 @@ function StepTwo({ onPick, onAddOn }: { onPick: () => void; onAddOn: () => void 
           <Check label="Allow overbooking" />
         </span>
       </div>
-      <table className={tableClass} style={{ marginTop: 14 }}>
+      <table className={tableClass}>
         <thead>
           <tr className="slds-line-height_reset">
             {['Room type', 'Bed type', 'Rooms', 'Available', 'Rate / night', ''].map((h) => (
@@ -157,7 +157,7 @@ function StepTwo({ onPick, onAddOn }: { onPick: () => void; onAddOn: () => void 
         </thead>
         <tbody>
           {roomTypes.map((r) => (
-            <tr key={r.key} className="slds-hint-parent" style={{ height: 36 }}>
+            <tr key={r.key} className="slds-hint-parent">
               <td>{r.name}</td>
               <td>{r.bed}</td>
               <td>{r.qty}</td>
@@ -170,14 +170,14 @@ function StepTwo({ onPick, onAddOn }: { onPick: () => void; onAddOn: () => void 
           ))}
         </tbody>
       </table>
-      <div style={{ display: 'flex', gap: 10, alignItems: 'center', margin: '12px 0', fontSize: 13 }}>
+      <div style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 13 }}>
         <Badge tone="mint">Matches request</Badge> 22 of 22 rooms · Single bed 12/12 · Double bed 10/10
       </div>
       <Section>Add-ons</Section>
       <Neutral onClick={onAddOn} className="ab">
         Add add-on
       </Neutral>
-      <table className={tableClass} style={{ marginTop: 12 }}>
+      <table className={tableClass}>
         <thead>
           <tr className="slds-line-height_reset">
             {['Add-on', 'Qty', 'Rate', 'Total', ''].map((h) => (
@@ -186,7 +186,7 @@ function StepTwo({ onPick, onAddOn }: { onPick: () => void; onAddOn: () => void 
           </tr>
         </thead>
         <tbody>
-          <tr className="slds-hint-parent" style={{ height: 36 }}>
+          <tr className="slds-hint-parent">
             <td>{quote.catering.name}</td>
             <td>{quote.catering.qty}</td>
             <td>{money(quote.catering.rate)}</td>
@@ -260,7 +260,7 @@ function RoomTypes({ onApply }: { onApply: () => void }) {
         </div>
         <Badge tone="mint">Selected 22 of 22</Badge>
       </div>
-      <table className={tableClass} style={{ marginTop: 14 }}>
+      <table className={tableClass}>
         <thead>
           <tr className="slds-line-height_reset">
             {['', 'Room type', 'Bed type', 'Rooms', 'Avail', 'Max occ', 'Rate'].map((h) => (
@@ -270,7 +270,7 @@ function RoomTypes({ onApply }: { onApply: () => void }) {
         </thead>
         <tbody>
           {rows.map((r) => (
-            <tr key={r.key} className="slds-hint-parent" style={{ height: 40 }}>
+            <tr key={r.key} className="slds-hint-parent">
               <td>
                 <Check on={r.on} />
               </td>
@@ -327,7 +327,7 @@ function AddOns({ onApply }: { onApply: () => void }) {
         </thead>
         <tbody>
           {addOnCatalog.map((a) => (
-            <tr key={a.name} className="slds-hint-parent" style={{ height: 36 }}>
+            <tr key={a.name} className="slds-hint-parent">
               <td>
                 <Check on={'checked' in a && a.checked} />
               </td>
