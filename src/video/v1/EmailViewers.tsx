@@ -95,11 +95,13 @@ function Viewer({
   file,
   meta,
   back,
+  backLabel = 'Back to review',
   cta,
   children,
 }: {
   file: string
   meta: string
+  backLabel?: string
   back: () => void
   cta?: { label: string; onDone: () => void }
   children: ReactNode
@@ -109,7 +111,7 @@ function Viewer({
       <div className="vw-bar">
         <div className="l">
           <span className="back" onClick={back}>
-            ← Back to review
+            ← {backLabel}
           </span>
           <i />
           <b>{file}</b>
@@ -201,7 +203,7 @@ function Table({ head, rows, widths, last }: { head: string[]; rows: (string | n
 }
 
 export const G4b = ({ goto }: SceneProps) => (
-  <Viewer file="BEO_GBR-008.pdf" meta="Version 2 · Sep 12, 2026" back={() => goto('G4')}>
+  <Viewer file="BEO_GBR-008.pdf" meta="Version 2 · Sep 12, 2026" backLabel="Back to overview" back={() => goto('G4')}>
     <DocHead kind="BANQUET EVENT ORDER" />
     <Meta
       items={[

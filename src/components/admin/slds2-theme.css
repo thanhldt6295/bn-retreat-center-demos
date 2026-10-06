@@ -312,3 +312,9 @@
 .slds-scope .slds-notify_toast {
   border-radius: 4px;
 }
+
+/* modal backdrop: Figma dims the page to ~#565656 (black at 66.7%) */
+.slds-scope .slds-backdrop.slds-backdrop_open {
+  opacity: 1;
+  background: rgba(8, 7, 7, 0.667);
+}

@@ -272,7 +272,7 @@ function RoomTypes({ onApply }: { onApply: () => void }) {
         </thead>
         <tbody>
           {rows.map((r) => (
-            <tr key={r.key} className="slds-hint-parent">
+            <tr key={r.key} className="slds-hint-parent" style={{ height: 48 }}>
               <td>
                 <Check on={r.on} />
               </td>

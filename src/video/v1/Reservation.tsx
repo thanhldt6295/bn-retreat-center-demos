@@ -303,7 +303,7 @@ export function Reservation({ step, from, goto }: SceneProps) {
       {modalOpen && (
         <Modal
           title="Reservation Invoice"
-          width={800}
+          width={880}
           footer={
             <>
               <ActionButton className="slds-button slds-button_neutral" primary loadingMs={600} onDone={() => setInvoiceOpen(false)}>Close</ActionButton>
@@ -321,7 +321,7 @@ export function Reservation({ step, from, goto }: SceneProps) {
           <Field label="Notes" style={{ marginTop: 12 }}>
             <TextArea rows={2} value={`Annual Leadership Retreat · ${group.code} · Deposit invoice ${money(quote.deposit, 0)} paid Sep 22. Remaining balance ${money(quote.balance, 0)} due Nov 05.`} />
           </Field>
-          <table className="slds-table slds-table_bordered slds-table_cell-buffer" style={{ marginTop: 14, fontSize: 12.5 }}>
+          <table className="slds-table slds-table_bordered slds-table_cell-buffer" style={{ marginTop: 20, fontSize: 13 }}>
             <thead>
               <tr>{['Date', 'Code', 'Description', 'Qty', 'Measure', 'Rate', 'Total'].map((h) => <th key={h} style={{ ...th, fontSize: 12 }}>{h}</th>)}</tr>
             </thead>
@@ -334,7 +334,7 @@ export function Reservation({ step, from, goto }: SceneProps) {
                 ['21020', 'Add-on: Group Catering', quote.catering.qty, 'Guest-day', quote.catering.rate, quote.catering.total],
               ].map(([code, d, qty, m, rate, tot]) => (
                 <tr key={d as string}>
-                  <td style={{ height: 36 }}>11/12/2026</td>
+                  <td style={{ height: 40 }}>11/12/2026</td>
                   <td>{code}</td>
                   <td>{d}</td>
                   <td>{qty}</td>
@@ -345,7 +345,7 @@ export function Reservation({ step, from, goto }: SceneProps) {
               ))}
             </tbody>
           </table>
-          <div className="slds-card" style={{ borderRadius: 8, padding: 14, marginTop: 12, fontSize: 13 }}>
+          <div className="slds-card" style={{ borderRadius: 8, padding: '16px 16px 12px', marginTop: 16, fontSize: 13 }}>
             {[
               ['Subtotal', money(quote.subtotal)],
               ['Tax', money(quote.tax)],

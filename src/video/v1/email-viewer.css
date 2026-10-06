@@ -390,3 +390,8 @@
   font-size: 12px;
   color: #69716c;
 }
+
+.vw-table .h,
+.vw-table .r {
+  line-height: 13px;
+}

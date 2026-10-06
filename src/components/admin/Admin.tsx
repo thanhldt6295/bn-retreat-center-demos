@@ -133,7 +133,7 @@ export function Modal({
           {footer && <div className="slds-modal__footer">{footer}</div>}
         </div>
       </section>
-      <div className="slds-backdrop slds-backdrop_open" style={stacked ? { background: 'rgba(8,7,7,0.35)', zIndex: 9100 } : undefined} />
+      <div className="slds-backdrop slds-backdrop_open" style={stacked ? { background: 'rgba(8,7,7,0.41)', zIndex: 9100 } : undefined} />
     </>
   )
 }
