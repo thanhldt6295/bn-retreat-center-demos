@@ -218,9 +218,13 @@
 }
 .slds-scope .slds-input[disabled],
 .slds-scope .slds-select[disabled] {
-  background: #f3f3f3;
+  background: #fff;
   border-color: #dddbda;
-  color: #a0a0a0;
+  color: #a8a8a8;
+  -webkit-text-fill-color: #a8a8a8;
+}
+.slds-scope .slds-textarea {
+  min-height: 64px;
 }
 .slds-scope .slds-form-element__label {
   font-size: 12px;

@@ -166,7 +166,7 @@
   gap: 12px;
 }
 .bgo-sig {
-  min-height: 151px;
+  min-height: 160px;
   display: flex;
   flex-direction: column;
 }
@@ -219,4 +219,14 @@
   display: flex;
   align-items: center;
   gap: 14px;
+}
+.bgo-info > div {
+  min-height: 78px;
+}
+.bgo-terms {
+  min-height: 97px;
+}
+.bgo-sig .name {
+  font-size: 24px;
+  font-weight: 300;
 }

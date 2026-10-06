@@ -64,10 +64,10 @@ export function GlobalNav({ active }: { active?: string }) {
 }
 
 /** Standard object icon (SLDS standard sprite: macros) as in the Figma record headers. */
-export const ObjectIcon = ({ size = 40 }: { size?: number }) => (
+export const ObjectIcon = ({ size = 40, color, round }: { size?: number; color?: string; round?: boolean }) => (
   <span
     className="slds-icon_container slds-icon-standard-macros"
-    style={{ width: size, height: size, borderRadius: 4, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flex: 'none' }}
+    style={{ width: size, height: size, borderRadius: round ? '50%' : 4, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flex: 'none', background: color }}
   >
     <Icon name="macros" sprite="standard" size="large" style={{ width: size * 0.62, height: size * 0.62 }} />
   </span>
@@ -122,7 +122,7 @@ export function Modal({
       <section role="dialog" tabIndex={-1} aria-modal="true" aria-label={title} className="slds-modal slds-fade-in-open" style={stacked ? { zIndex: 9101 } : undefined}>
         <div className="slds-modal__container" style={{ width: width ?? 760, maxWidth: 'calc(100vw - 48px)', margin: '0 auto' }}>
           <button className="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" style={{ background: '#fff', borderRadius: '50%' }}>
-            <Icon name="close" size="small" color="#0b5cff" />
+            <Icon name="close" size="x-small" color="#0250d9" />
           </button>
           <div className="slds-modal__header slds-text-align_center">
             <h1 className="slds-modal__title">{title}</h1>
@@ -187,7 +187,7 @@ export function Input({
   if (!icon) return input
   return (
     <div className="slds-input-has-icon slds-input-has-icon_right">
-      <Icon name={icon} size="x-small" className="slds-input__icon slds-input__icon_right" color="#0b5cff" />
+      <Icon name={icon} size="x-small" className="slds-input__icon slds-input__icon_right" color={disabled ? "#a8a8a8" : "#0250d9"} />
       {input}
     </div>
   )

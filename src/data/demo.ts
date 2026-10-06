@@ -107,12 +107,14 @@ export const agenda = [
 ]
 
 export const gbrList = [
-  { code: 'GBR-008', contact: 'Maya Thompson', name: group.name, type: 'Leadership retreat', dates: 'Nov 12 – Nov 15, 2026', rooms: 22, rate: '$140 – $190', status: 'Pending' },
-  { code: 'GBR-009', contact: 'Ethan Brooks', name: 'Brightmoor Leadership Offsite', type: 'Corporate offsite', dates: 'Dec 03 – Dec 06, 2026', rooms: 18, rate: '$140 – $190', status: 'Pending' },
-  { code: 'GBR-010', contact: 'Elise Park', name: 'Riverstone Wellness Weekend', type: 'Wellness retreat', dates: 'Dec 10 – Dec 13, 2026', rooms: 14, rate: '$140 – $210', status: 'Confirmed' },
-  { code: 'GBR-011', contact: 'Nora Quinn', name: 'Calderwood Yoga Retreat', type: 'Yoga retreat', dates: 'Jan 14 – Jan 17, 2027', rooms: 16, rate: '$140 – $190', status: 'Converted' },
-  { code: 'GBR-012', contact: 'Samir Khan', name: 'Summit Family Reunion', type: 'Family reunion', dates: 'Feb 11 – Feb 14, 2027', rooms: 22, rate: '$140 – $190', status: 'Converted' },
-  { code: 'GBR-013', contact: 'Chloe Martin', name: 'Pinecrest Faculty Retreat', type: 'Education program', dates: 'Mar 04 – Mar 07, 2027', rooms: 12, rate: '$140 – $190', status: 'Confirmed' },
+  { code: 'GBR-008', contact: 'Maya Thompson', start: '11/12/2026', end: '11/15/2026', created: '09/08/2026', type: 'Leadership retreat', max: 190, min: 140, rooms: 22, status: 'Pending' },
+  { code: 'GBR-007', contact: 'Diego Alvarez', start: '10/16/2026', end: '10/18/2026', created: '08/25/2026', type: 'Conference', max: 190, min: 140, rooms: 26, status: 'Converted' },
+  { code: 'GBR-006', contact: 'Ruth Okoye', start: '10/02/2026', end: '10/04/2026', created: '08/12/2026', type: 'Day of reflection', max: 165, min: 95, rooms: 10, status: 'Converted' },
+  { code: 'GBR-005', contact: 'Paul Dubois', start: '09/18/2026', end: '09/20/2026', created: '07/29/2026', type: 'Retreat', max: 190, min: 140, rooms: 12, status: 'Converted' },
+  { code: 'GBR-004', contact: 'Mina Sato', start: '09/04/2026', end: '09/06/2026', created: '07/15/2026', type: 'Family Day', max: 150, min: 100, rooms: 22, status: 'Converted' },
+  { code: 'GBR-003', contact: 'Victor Hale', start: '08/27/2026', end: '08/29/2026', created: '07/01/2026', type: 'Youth camp', max: 150, min: 110, rooms: 9, status: 'Converted' },
+  { code: 'GBR-002', contact: 'Hannah Cole', start: '08/13/2026', end: '08/15/2026', created: '06/18/2026', type: 'Wellness retreat', max: 210, min: 140, rooms: 14, status: 'Confirmed' },
+  { code: 'GBR-001', contact: 'Lena Fischer', start: '07/24/2026', end: '07/26/2026', created: '06/03/2026', type: 'Team retreat', max: 210, min: 150, rooms: 18, status: 'Converted' },
 ] as const
 
 export const groupReservation = {

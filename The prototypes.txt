@@ -1,0 +1,41 @@
+Hello mấy anh, I’ve finished wiring the main prototype flows for the demo videos. Here are the Figma prototypes in the order I’m planning to use them:
+
+V1 – Group Block
+
+1. Guest submits a group request  
+https://www.figma.com/proto/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?page-id=192%3A7773&node-id=192-7523&starting-point-node-id=192%3A7523
+
+2. Admin reviews and processes the Group Block  
+https://www.figma.com/proto/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?page-id=178%3A7523&node-id=178-7525&starting-point-node-id=178%3A7525
+
+3. Convert the Group Block into a Reservation  
+https://www.figma.com/proto/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?page-id=178%3A7523&node-id=202-18255&starting-point-node-id=202%3A18255
+
+V2 – Reservations & Room Changes
+
+4. Room changes and room assignment  
+https://www.figma.com/proto/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?page-id=239%3A14352&node-id=239-13379&starting-point-node-id=239%3A13379
+
+V1 + V2 – Shared clip
+
+5. Availability Grid features  
+https://www.figma.com/proto/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?page-id=625%3A28804&node-id=625-28805&starting-point-node-id=625%3A28805
+
+For V3, I also built a working AI prototype based on the same Retreat Center flows:  
+https://thanhldt6295.github.io/retreat-center-demo/
+
+Some parts of this version feel more like a real product interaction, so I may use a few sections from it in the recordings where it looks more natural.
+
+V4 – QR Check-in → POS → Connected Record
+
+6. QR Check-in  
+https://www.figma.com/proto/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?page-id=264%3A270&node-id=264-272&starting-point-node-id=264%3A272
+
+7. QR error case  
+https://www.figma.com/proto/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?page-id=264%3A270&node-id=461-1057&starting-point-node-id=461%3A1057
+
+8. POS ordering + charge to room  
+https://www.figma.com/proto/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?page-id=251%3A270&node-id=469-820&starting-point-node-id=469%3A820
+
+9. Connected guest record  
+https://www.figma.com/proto/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?page-id=259%3A2728&node-id=547-3946&starting-point-node-id=547%3A3946

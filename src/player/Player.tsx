@@ -9,7 +9,7 @@ import {
   type ComponentType,
   type ReactNode,
 } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { Icon } from '../components/admin/Icon'
 import '../components/admin/slds.css'
 import './player.css'
@@ -55,12 +55,17 @@ type Props = {
   views: Record<string, ComponentType<SceneProps>>
   /** wrapper providing route-wide shared state (optional) */
   Provider?: ComponentType<{ children: ReactNode }>
+  /** route to open after the last step (chains the videos so the flow never stops) */
+  nextRoute?: string
+  /** route to open when going back from the first step */
+  prevRoute?: string
 }
 
 const HIDE_KEY = 'bn-helper-hidden'
 const Passthrough = ({ children }: { children: ReactNode }) => <>{children}</>
 
-export function Player({ title, steps, views, Provider }: Props) {
+export function Player({ title, steps, views, Provider, nextRoute, prevRoute }: Props) {
+  const navigate = useNavigate()
   const [params, setParams] = useSearchParams()
   const idFromUrl = params.get('step')
   const index = Math.max(0, steps.findIndex((s) => s.id === idFromUrl))
@@ -98,10 +103,13 @@ export function Player({ title, steps, views, Provider }: Props) {
 
   const go = useCallback(
     (delta: number) => {
+      const rec = params.get('rec') === '1' ? '?rec=1' : ''
+      if (delta > 0 && index === steps.length - 1 && nextRoute) return navigate(nextRoute + rec)
+      if (delta < 0 && index === 0 && prevRoute) return navigate(prevRoute + rec)
       const t = steps[Math.min(steps.length - 1, Math.max(0, index + delta))]
       if (t.id !== step.id) goto(t.id)
     },
-    [steps, index, step.id, goto],
+    [steps, index, step.id, goto, navigate, nextRoute, prevRoute, params],
   )
 
   const toast = useCallback((text: string, kind: Toast['kind'] = 'admin', ms = 3600) => {

@@ -1,0 +1,27 @@
+Bugs on prototype:
+
+1. Check prototype chỗ này so với design này https://www.figma.com/design/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?node-id=273-272&t=OUcLPr1W5FaTe8AC-4
+đang còn bị bug layout
+sẵn review hết design xem trên prototype khác gì thì update https://www.figma.com/design/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?node-id=273-271&t=OUcLPr1W5FaTe8AC-4
+
+2. https://www.figma.com/design/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?node-id=280-819&t=OUcLPr1W5FaTe8AC-4
+trên prototype đang dư button Confirm Room tại sao?
+
+3. Review lại toàn bộ design, mình có thêm đủ hình ảnh rồi, bạn coi chỗ nào còn đang để placeholder thì thay hình vào.
+Và cũng review các button trong hệ thống thêm state hovering, press đồ giúp mình để cảm giác được là có bấm được ko?
+
+4. Check kỹ design này https://www.figma.com/design/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?node-id=272-270
+trên prototype cũng có từng bug nhỏ nhỏ
+
+5. Sau khi assign phòng xong thì khách nên nhận được email check-in như design này https://www.figma.com/design/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?node-id=263-272&t=OUcLPr1W5FaTe8AC-4
+
+
+================================================================
+Check lại các email gửi cho người liên quan xem có đúng với design chưa và update phù hợp
+
+Đây là nội dung email mà Organizer nhận được sau khi admin confirm request https://www.figma.com/design/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?node-id=280-346&t=KQ0Ovron6fgkyFY3-4
+Những email tiếp theo cũng nhất quán như vậy nhưng có thể thay content phù hợp, button cũng bấm đi vào link phù hợp
+
+Đây là nội dung email mà Guest được mời chọn phòng https://www.figma.com/design/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?node-id=267-274&t=KQ0Ovron6fgkyFY3-4
+
+Đây là nội dung email cuối cùng mà Guest nhận được sau khi đã được assign phòng https://www.figma.com/design/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?node-id=280-784&t=KQ0Ovron6fgkyFY3-4

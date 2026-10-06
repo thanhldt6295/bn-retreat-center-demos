@@ -2,95 +2,111 @@ import { useEffect, type ReactNode } from 'react'
 import { ActionButton } from '../../components/shared/ActionButton'
 import { AdminPage, Badge, GlobalNav, ObjectIcon } from '../../components/admin/Admin'
 import { Icon } from '../../components/admin/Icon'
-import { group, gbrList, organizer, timeline } from '../../data/demo'
+import { group, gbrList, money, organizer, timeline } from '../../data/demo'
 import { usePlayer, type SceneProps } from '../../player/Player'
 
-/* ---------------- 1.1 list ---------------- */
+/* ---------------- 1.1 list view (Figma 178:7525: 8 items, sortable columns, checkboxes) ---------------- */
+const LIST_COLS: [string, number][] = [
+  ['', 44], ['', 40], ['Name', 100], ['Contact', 163], ['Start Date', 120], ['End Date', 120], ['Created Date', 160],
+  ['Group Type', 163], ['Maximu…', 110], ['Minimu…', 110], ['Number…', 110], ['Status', 100], ['', 50],
+]
+const TOOLS = ['settings', 'table', 'refresh', 'sort', 'edit', 'chart', 'filterList']
+
 export function RequestList({ next }: SceneProps) {
-  const cols = [110, 150, 338, 150, 200, 70, 130, 120, 116]
   return (
     <AdminPage>
       <GlobalNav />
-      <div className="lds-page">
-        <div className="lds-head" style={{ paddingBottom: 6 }}>
-          <ObjectIcon />
-          <div>
-            <div className="lds-crumb">Group Block Requests</div>
-            <h1 className="lds-h1" style={{ fontWeight: 600 }}>
-              All requests
-            </h1>
-          </div>
-          <div className="lds-head-right">
-            <button className="slds-button slds-button_neutral">New</button>
-          </div>
-        </div>
-        <div className="lds-sub" style={{ margin: '0 0 12px' }}>
-          6 items · Sorted by Start Date · Updated a few seconds ago
-        </div>
-        <div className="slds-card" style={{ borderRadius: 6, overflow: 'hidden' }}>
-          <div style={{ padding: '14px 20px', display: 'flex', alignItems: 'flex-end' }}>
-            <div className="slds-form-element" style={{ width: 320 }}>
-              <label className="slds-form-element__label" style={{ fontSize: 13, color: '#333' }} htmlFor="req-search">
-                Search
-              </label>
-              <div className="slds-form-element__control slds-input-has-icon slds-input-has-icon_left">
-                <Icon name="search" className="slds-input__icon slds-input__icon_left" color="#5c5c5c" />
-                <input id="req-search" className="slds-input" placeholder="Search this list..." style={{ borderRadius: 8 }} />
-              </div>
+      <div className="lds-list-head">
+        <div className="lds-record-title">
+          <ObjectIcon size={40} color="#a25ee8" round />
+          <div className="tx">
+            <div style={{ fontSize: 13, color: '#5c5c5c' }}>Group Block Requests</div>
+            <div className="lds-view">
+              <h1>All Requests</h1>
+              <Icon name="chevrondown" size="x-small" color="#5c5c5c" />
+              <button className="slds-button slds-button_icon slds-button_icon-border-filled lds-pin" title="Pin this list view">
+                <Icon name="pinned" size="x-small" color="#0250d9" />
+              </button>
             </div>
-            <button className="slds-button slds-button_neutral" style={{ marginLeft: 'auto' }}>
-              Assign Label
-            </button>
           </div>
-          <table className="slds-table slds-table_bordered slds-table_cell-buffer slds-table_fixed-layout">
-            <colgroup>
-              {cols.map((w, i) => (
-                <col key={i} style={{ width: w }} />
-              ))}
-            </colgroup>
-            <thead>
-              <tr className="slds-line-height_reset">
-                {['Request', 'Contact', 'Group name', 'Group type', 'Dates', 'Rooms', 'Rate range', 'Status', 'Next step'].map((h) => (
-                  <th key={h} scope="col">
-                    <div className="slds-truncate">{h}</div>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {gbrList.map((r) => {
-                const live = r.code === group.code
-                const act = r.status === 'Pending' ? 'Review' : r.status === 'Confirmed' ? 'Convert' : 'View'
-                return (
-                  <tr
-                    key={r.code}
-                    className="slds-hint-parent"
-                    style={{ cursor: live ? 'pointer' : 'default', background: live ? '#eaf1fe' : undefined, height: 48 }}
-                    onClick={live ? next : undefined}
-                  >
-                    <th scope="row" style={{ textTransform: 'none', letterSpacing: 0, fontWeight: 400, background: 'transparent' }}>
-                      <a className="slds-text-link">{r.code}</a>
-                    </th>
-                    <td>{r.contact}</td>
-                    <td>
-                      <div className="slds-truncate">{r.name}</div>
-                    </td>
-                    <td>{r.type}</td>
-                    <td>{r.dates}</td>
-                    <td>{r.rooms}</td>
-                    <td>{r.rate}</td>
-                    <td>
-                      <Badge>{r.status}</Badge>
-                    </td>
-                    <td>
-                      <a className="slds-text-link">{act}</a>
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
         </div>
+        <div className="slds-button-group" role="group">
+          <button className="slds-button slds-button_neutral">New</button>
+          <button className="slds-button slds-button_neutral">Assign Label</button>
+        </div>
+      </div>
+      <div className="lds-list-meta">8 items · Sorted by Created Date · Updated a few seconds ago</div>
+      <div className="slds-card lds-list-card">
+        <div className="lds-list-tools">
+          <div className="slds-form-element__control slds-input-has-icon slds-input-has-icon_left" style={{ width: 300 }}>
+            <Icon name="search" className="slds-input__icon slds-input__icon_left" color="#5c5c5c" />
+            <input className="slds-input" placeholder="Search this list..." aria-label="Search this list" style={{ height: 36 }} />
+          </div>
+          {TOOLS.map((t, i) => (
+            <button key={t} className="slds-button slds-button_icon slds-button_icon-border-filled lds-tool" title={t}>
+              <Icon name={t} size="x-small" color="#0250d9" />
+              {i < 2 && <Icon name="down" size="xx-small" color="#0250d9" style={{ marginLeft: 2 }} />}
+            </button>
+          ))}
+        </div>
+        <table className="slds-table slds-table_fixed-layout lds-list-table">
+          <colgroup>
+            {LIST_COLS.map(([, w], i) => (
+              <col key={i} style={{ width: w }} />
+            ))}
+          </colgroup>
+          <thead>
+            <tr>
+              {LIST_COLS.map(([h], i) => (
+                <th key={i} scope="col">
+                  {i === 1 ? (
+                    <span className="lds-cb" />
+                  ) : (
+                    h && (
+                      <div className="lds-th">
+                        <span className="slds-truncate">{h}</span>
+                        {h === 'Created Date' && <Icon name="arrowdown" size="xx-small" color="#2e2e2e" />}
+                        <Icon name="chevrondown" size="xx-small" color="#2e2e2e" className="cv" />
+                      </div>
+                    )
+                  )}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {gbrList.map((r, i) => {
+              const live = r.code === group.code
+              return (
+                <tr key={r.code} className={live ? 'sel' : ''} onClick={live ? next : undefined} style={{ cursor: live ? 'pointer' : 'default' }}>
+                  <td className="num">{i + 1}</td>
+                  <td>
+                    <span className="lds-cb" />
+                  </td>
+                  <td>
+                    <a className="slds-text-link" style={{ fontWeight: live ? 590 : 400 }}>
+                      {r.code}
+                    </a>
+                  </td>
+                  <td>
+                    <a className="slds-text-link">{r.contact}</a>
+                  </td>
+                  <td>{r.start}</td>
+                  <td>{r.end}</td>
+                  <td>{r.created}</td>
+                  <td>{r.type}</td>
+                  <td>{money(r.max)}</td>
+                  <td>{money(r.min)}</td>
+                  <td>{r.rooms}</td>
+                  <td>{r.status}</td>
+                  <td>
+                    <span className="lds-rowact"><Icon name="chevrondown" size="xx-small" color="#0250d9" /></span>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
       </div>
     </AdminPage>
   )

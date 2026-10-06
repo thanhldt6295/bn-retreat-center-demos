@@ -56,7 +56,7 @@ const Title = () => (
     sub="From request to quote, e-signature and payment — all in one connected flow."
   />
 )
-const End = ({ goto }: SceneProps) => <EndCard line="Next: One Group. Every Guest. Every Room." onCta={() => goto('T0')} />
+const End = ({ next }: SceneProps) => <EndCard line="Next: One Group. Every Guest. Every Room." onCta={next} />
 
 const views = {
   title: Title,
@@ -82,5 +82,5 @@ const views = {
 }
 
 export default function V1() {
-  return <Player title="V1 · Group Block" steps={steps} views={views} />
+  return <Player title="V1 · Group Block" steps={steps} views={views} nextRoute="/v2" />
 }

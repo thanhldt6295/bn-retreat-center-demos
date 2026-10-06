@@ -61,13 +61,15 @@ export function Wizard({ step, next, prev, goto }: SceneProps) {
   return (
     <RecordPage confirmed>
       <Modal title={`New Group Booking for ${group.code}`} footer={footer}>
+        <div className="lds-wizcol">
         <Stepper steps={STEPS} current={n} />
-        <div style={{ fontSize: 13, color: '#5c5c5c' }}>{step === '2.1' ? SUB0 : SUB}</div>
+        <div style={{ fontSize: 13, lineHeight: "18px", color: "#5c5c5c" }}>{step === '2.1' ? SUB0 : SUB}</div>
         <div className="lds-stepbody lds-wiz" key={n}>
           {n === 1 && <StepOne />}
           {n === 2 && <StepTwo onPick={() => goto('2.2b')} onAddOn={() => goto('2.3')} />}
           {n === 3 && <StepThree />}
           {n === 4 && <StepFour />}
+        </div>
         </div>
       </Modal>
       {step === '2.2b' && <RoomTypes onApply={next} />}

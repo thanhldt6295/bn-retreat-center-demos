@@ -136,13 +136,22 @@
 }
 .lds-wiz .slds-table th {
   padding-left: 12px;
+  height: 36px;
 }
 .lds-stepbody {
   animation: lds-slide 0.3s ease-out both;
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+.lds-wizcol {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   padding-top: 4px;
+}
+.lds-wizcol .lds-steps {
+  margin: 0;
 }
 @keyframes lds-slide {
   from {
@@ -203,4 +212,116 @@
 
 .lds-wiz > .slds-button {
   align-self: flex-start;
+}
+
+/* 1.1 list view (Figma 178:7525) */
+.lds-list-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 24px 0;
+  min-height: 86px;
+  box-sizing: border-box;
+}
+.lds-view {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.lds-view h1 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 590;
+  color: #03234d;
+}
+.lds-pin {
+  width: 32px !important;
+  height: 32px !important;
+  margin-left: 4px;
+}
+.lds-list-meta {
+  padding: 0 24px 8px;
+  font-size: 13px;
+  line-height: 17px;
+  color: #5c5c5c;
+}
+.lds-list-card {
+  margin: 8px 24px 0;
+  overflow: hidden;
+  border-radius: 12px !important;
+}
+.lds-list-tools {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  height: 60px;
+  padding: 0 20px;
+}
+.lds-tool {
+  width: 32px !important;
+  min-width: 32px;
+  height: 32px !important;
+  border-radius: 16px !important;
+  border-color: #0250d9 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+}
+.lds-tool:nth-child(-n + 3) {
+  width: 40px !important;
+}
+.lds-list-table th {
+  background: #f3f3f3;
+  height: 36px;
+  padding: 0 0 0 12px;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  font-size: 13px !important;
+  font-weight: 590 !important;
+  color: #2e2e2e !important;
+}
+.lds-th {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-right: 12px;
+}
+.lds-th .cv {
+  margin-left: auto;
+}
+.lds-list-table td {
+  height: 36px;
+  padding: 0 0 0 12px;
+  font-size: 13px;
+  color: #5c5c5c;
+  border-top: 1px solid #e5e5e5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.lds-list-table td.num {
+  text-align: center;
+  padding: 0;
+}
+.lds-list-table tr.sel td {
+  background: #d8e6fe;
+}
+.lds-cb {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #5c5c5c;
+  border-radius: 4px;
+  background: #fff;
+  vertical-align: middle;
+}
+.lds-rowact {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #0250d9;
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
 }

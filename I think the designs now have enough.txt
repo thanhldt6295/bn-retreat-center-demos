@@ -1,0 +1,69 @@
+I think the designs now have enough UI and workflow coverage for us to record all 4 videos.
+
+Could you review the designs in this order?
+
+1. Video 1: Group Block Request → Confirmed Group Booking
+
+Flow: Guest submits a Public Block Request → staff reviews the request → converts it to a Group Block → selects/auto-selects room inventory, rates, discounts and tax → prepares quote/BEO/contract → sends the quote by email → payment link → e-sign + deposit/payment → group booking confirmed.
+
+I made a few UI/UX updates, so please review it against the current production flow.
+
+Guest / Public Block Request:
+https://www.figma.com/design/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?node-id=192-7773
+
+Admin / Review Block Request → Group Block → Quote & Confirmation flow:
+https://www.figma.com/design/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?node-id=178-7523
+
+
+2. Video 2: Group Rooms → Individual Guest Reservations
+
+Flow: Start from the confirmed group → organizer assigns guests to blocked rooms OR guests use the group code/link to select a room and pay individually → individual reservations appear in PMS → staff can manage room changes and availability.
+
+Organizer / Assign Rooms:
+https://www.figma.com/design/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?node-id=238-270
+
+Guest / Room Invitation → Confirm & Pay:
+https://www.figma.com/design/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?node-id=267-272
+
+Guest / Group Code Booking:
+https://www.figma.com/design/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?node-id=237-270
+
+Admin / Reservations & Room Changes:
+https://www.figma.com/design/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?node-id=239-14352
+
+
+3. Video 3: Organizer & Guest Portal
+
+Flow: Organizer manages rooms, invoices, BEO/contract, schedule and meals → switch to guest view → guest sees their stay, room, schedule, documents and charges → guest can add activities/services during the stay → staff is notified.
+
+Organizer Portal:
+https://www.figma.com/design/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?node-id=272-270
+
+Organizer Portal (on Mobile):
+https://www.figma.com/design/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?node-id=306-2879
+
+Guest Portal:
+https://www.figma.com/design/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?node-id=273-270
+
+Guest Portal (on Mobile):
+https://www.figma.com/design/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?node-id=292-489
+
+Admin / Guest Service Requests:
+https://www.figma.com/design/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?node-id=275-270
+
+
+4. Video 4: POS → Connected Guest/Reservation Record
+
+Flow: Guest purchases food, drinks or extras → staff charges them through POS to the guest/stay → admin opens the Reservation/Contact record and sees accommodation, payments, POS orders, services, signatures and history connected in one place.
+
+Guest / QR Check-in Pass:
+https://www.figma.com/design/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?node-id=263-270
+
+Staff / POS QR Check-in (on Tablet):
+https://www.figma.com/design/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?node-id=264-270
+
+Staff / POS Ordering & Charge to Guest Stay (on Tablet):
+https://www.figma.com/design/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?node-id=251-270
+
+Admin / Connected Reservation Record:
+https://www.figma.com/design/cmbum4z8hKBsaWVRVyaMpB/for-Retreat-Center-Video-demo?node-id=259-2728
