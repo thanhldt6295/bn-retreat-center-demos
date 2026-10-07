@@ -527,3 +527,11 @@
   line-height: 18px;
   padding: 8px 12px;
 }
+
+/* list views (Figma 178:7525, 239:13379): light row rules */
+.slds-scope .lds-list-table td {
+  border-bottom-color: #e5e5e5;
+}
+.slds-scope .lds-list-table th {
+  border-bottom-color: #e5e5e5;
+}

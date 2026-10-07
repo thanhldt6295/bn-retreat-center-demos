@@ -29,7 +29,7 @@ function Tbl({ cols, rows, className = '' }: { cols: [string, number][]; rows: R
         </thead>
         <tbody>
           {rows.map((r, ri) => (
-            <tr key={ri} style={{ height: 56 }}>
+            <tr key={ri} style={{ height: 52 }}>
               {r.map((c, i) => (
                 <td key={i}>{c}</td>
               ))}

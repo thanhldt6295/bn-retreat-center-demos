@@ -100,7 +100,7 @@ export function RequestList({ next }: SceneProps) {
                   <td>{r.rooms}</td>
                   <td>{r.status}</td>
                   <td>
-                    <span className="lds-rowact"><Icon name="chevrondown" size="xx-small" color="#0250d9" /></span>
+                    <span className="lds-rowact"><Icon name="down" size="xx-small" color="#0250d9" /></span>
                   </td>
                 </tr>
               )

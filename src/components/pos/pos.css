@@ -563,3 +563,40 @@
   align-items: center;
   padding-top: 0;
 }
+
+/* ---- Bottom nav · Figma 508:1501 (bg #2b2f4d, 101px, tabs px20 py12 gap 8, 22px medium, 24px icons) ---- */
+.pos-nav {
+  background: #2b2f4d;
+  padding: 0 24px;
+  justify-content: space-between;
+}
+.pos-nav button {
+  gap: 8px;
+  padding: 12px 20px;
+  font-size: 22px;
+  font-weight: 500;
+}
+.pos-ic {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background: currentColor;
+  -webkit-mask: var(--m) center / contain no-repeat;
+  mask: var(--m) center / contain no-repeat;
+}
+
+/* chips · Figma POS / Chip (px14 py6, 14px semibold) */
+.pos-pill {
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: normal;
+}
+.pos-pill.green {
+  background: #dcf5e5;
+  color: #16a34a;
+}
+.pos-pill.blue {
+  background: #e9f1ff;
+  color: #0b66ff;
+}

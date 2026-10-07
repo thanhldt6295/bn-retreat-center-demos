@@ -3,6 +3,7 @@ import { ActionButton } from '../../components/shared/ActionButton'
 import { Icon } from '../../components/admin/Icon'
 import { PosBar, PosPill, PosShell } from '../../components/pos/Pos'
 import { money, pos } from '../../data/demo'
+import { asset } from '../../lib/asset'
 import { usePrimary, type SceneProps } from '../../player/Player'
 import './v4.css'
 import './pos-order.css'
@@ -156,9 +157,10 @@ export function P2({ step, goto }: SceneProps) {
             ))}
           </div>
           <div className="po-items">
-            {ITEMS.map((n) => (
+            {ITEMS.map((n, i) => (
               <button key={n} onClick={() => n === 'Grilled Beef Steak' && goto('P3a')}>
-                {n}
+                <img src={asset(`img/food-${i + 1}.png`)} alt="" />
+                <span>{n}</span>
               </button>
             ))}
           </div>
@@ -169,8 +171,8 @@ export function P2({ step, goto }: SceneProps) {
             <button className="pos-btn ghost" style={{ color: '#0b66ff' }}>
               Save
             </button>
-            <ActionButton className="pos-btn" primary={false} disabled={!steak} loadingMs={700} onDone={() => goto('P4')}>
-              Checkout →
+            <ActionButton className="pos-btn" primary={false} loadingMs={700} onDone={() => goto('P4')}>
+              Checkout&nbsp; →
             </ActionButton>
           </div>
         </section>

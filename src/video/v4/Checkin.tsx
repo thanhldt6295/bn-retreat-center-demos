@@ -9,6 +9,7 @@ import { usePrimary, type SceneProps } from '../../player/Player'
 import { Qr } from '../v3/ui'
 import '../v1/email-viewer.css'
 import '../v1/g4.css'
+import '../v1/guest-pay.css'
 import '../v2/guest-flow.css'
 import './v4.css'
 
@@ -109,17 +110,17 @@ export function Q2({ next }: SceneProps) {
           </div>
           <div className="g-card" style={{ width: 556, flex: 'none' }}>
             <div className="g-card-h">How it works</div>
-            <div className="gp-steps">
+            <div className="q2-steps">
               {how.map(([a, b], i) => (
-                <div className="gp-step" key={a}>
+                <div className="q2-step" key={a}>
                   <span>{i + 1}</span>
                   <div>
-                    <b style={{ fontSize: 14 }}>{a}</b>
-                    <p style={{ margin: '2px 0 0', fontSize: 12, color: '#69716c' }}>{b}</p>
+                    <b>{a}</b>
+                    <p>{b}</p>
                   </div>
                 </div>
               ))}
-              <div className="gf-save" style={{ marginTop: 6 }}>
+              <div className="gf-save" style={{ marginTop: 0 }}>
                 <b>Reservation #00032 · Group Horizon Foundation</b>
                 <span style={{ fontSize: 12 }}>Check-in opens Thu, Nov 12 at 3:00 PM</span>
               </div>
@@ -450,7 +451,7 @@ export function K3({ step, goto }: SceneProps) {
           ) : (
             <>
               <div className="pos-okbig">
-                <Icon name="check" size="large" />
+                <Icon name="check" size="large" color="#fff" />
               </div>
               <h2 style={{ fontSize: 34, marginTop: 14 }}>Checked in</h2>
               <p style={{ margin: '6px 0 26px' }}>Priya Nair is checked in to {pos.room}</p>
@@ -473,7 +474,7 @@ export function K3({ step, goto }: SceneProps) {
                 </div>
               </div>
               <div className="pos-info">Reservation #00032 now shows Checked in for the whole team.</div>
-              <div style={{ display: 'flex', gap: 20, marginTop: 'auto', width: 560 }}>
+              <div className="k3-acts">
                 <button className="pos-btn out" style={{ flex: 1 }} onClick={() => goto('K1')}>
                   Check in another guest
                 </button>

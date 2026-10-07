@@ -506,3 +506,338 @@
 .po-cols {
   padding-top: 16px;
 }
+
+/* ===== POS order screen · Figma 508:1399 (exact values) ===== */
+.po-split {
+  align-items: stretch;
+}
+.po-order {
+  width: 447px;
+  flex: none;
+  padding: 24px;
+  gap: 24px;
+  border-right: 1px solid #e4e6ec;
+}
+.po-who b {
+  font-size: 20px;
+  font-weight: 500;
+  color: #1f2340;
+}
+.po-who span {
+  font-size: 16px;
+  color: #6b7080;
+}
+.po-who {
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.po-who > div {
+  display: contents;
+}
+.po-who > div b {
+  order: 1;
+}
+.po-who > .pos-pill {
+  order: 2;
+  margin-left: auto;
+  padding: 6px 14px;
+  font-size: 14px;
+  background: #e9f1ff;
+  color: #0b66ff;
+  font-weight: 600;
+}
+.po-who > div span {
+  order: 3;
+  flex-basis: 100%;
+}
+.po-tabs {
+  margin: 0;
+  gap: 0;
+  border-bottom: 0;
+}
+.po-tabs span {
+  padding: 10px 16px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #6b7080;
+}
+.po-tabs .on {
+  color: #1f2340;
+  border-bottom: 2px solid #1f2340;
+  margin-bottom: 0;
+}
+.po-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.po-lines .ln {
+  border-bottom: 0;
+  padding: 0;
+  font-size: 16px;
+  color: #1f2340;
+  position: relative;
+  padding-bottom: 16px;
+}
+.po-lines .ln::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: #e4e6ec;
+}
+.po-lines .ln b {
+  font-weight: 500;
+}
+.po-lines .ln > b:last-child {
+  font-weight: 600;
+}
+.po-lines .ln small {
+  font-size: 14px;
+  color: #6b7080;
+  margin-top: 2px;
+}
+.po-lines .ln div b::before {
+  content: none;
+}
+.po-tot {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.po-tot > div {
+  font-size: 15px;
+  color: #6b7080;
+  margin: 0;
+}
+.po-tot > div span:last-child {
+  color: #1f2340;
+}
+.po-tot .t {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2340;
+}
+.po-tot .t span:last-child {
+  font-size: 20px;
+  font-weight: 700;
+}
+.po-tot .bt {
+  display: flex;
+  gap: 8px;
+  margin-top: 0;
+}
+.po-tot .bt button {
+  height: 62px;
+  background: #f4f5f8;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+}
+.po-menu {
+  padding: 16px 24px 24px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.po-menu-h {
+  margin-bottom: 16px;
+}
+.po-menu-h h2 {
+  font-size: 24px;
+  font-weight: 500;
+  color: #1f2340;
+}
+.po-sq {
+  width: 48px;
+  height: 48px;
+  background: #e9f1ff;
+  border-radius: 10px;
+}
+.po-sq .slds-icon {
+  width: 24px;
+  height: 24px;
+  fill: #747474;
+}
+.po-cats {
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.po-cats button {
+  height: 92px;
+  font-size: 20px;
+  font-weight: 500;
+  border-radius: 8px;
+}
+.po-cats button.sel {
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 3px #12a8e0;
+}
+.po-items {
+  gap: 8px;
+}
+.po-items button {
+  position: relative;
+  overflow: hidden;
+  height: 110px;
+  border-radius: 8px;
+  background: #2a2d3a;
+  padding: 0 12px 10px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  align-items: flex-end;
+  justify-content: flex-start;
+  text-align: left;
+}
+.po-items button img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.po-items button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(42, 45, 58, 0.6);
+  z-index: 1;
+}
+.po-items button span {
+  position: relative;
+  z-index: 2;
+}
+.po-acts {
+  gap: 12px;
+}
+.po-acts .pos-btn {
+  height: 78px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+.po-acts .pos-btn.red {
+  background: #ffe3e8;
+  color: #e5365a;
+}
+.po-acts .pos-btn.ghost {
+  background: #f4f5f8;
+  color: #0b66ff;
+}
+.pos-bar {
+  height: 57px;
+  background: #d9d9d9;
+}
+.pos-bar b {
+  font-size: 22px;
+  font-weight: 500;
+  color: #1f2340;
+}
+
+/* ===== POS reservations list · Figma 469:820 ===== */
+.po-list {
+  padding: 44px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.po-list h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1f2340;
+}
+.po-list > p {
+  margin: -24px 0 0;
+  font-size: 15px;
+  color: #6b7080;
+}
+.po-tools {
+  margin: 0;
+}
+.po-list .pos-search {
+  width: 420px;
+  height: 48px;
+  background: #f4f5f8;
+  margin: 0;
+  font-size: 16px;
+  color: #6b7080;
+}
+.po-list .pos-search .slds-icon {
+  width: 24px;
+  height: 24px;
+  fill: #6b7080;
+}
+.po-sort {
+  font-size: 16px;
+  color: #6b7080;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.po-sort b {
+  margin: 0;
+  padding: 10px 14px;
+  background: #f4f5f8;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #1f2340;
+}
+.po-tbl {
+  width: 100%;
+}
+.po-tbl .r {
+  display: grid;
+  grid-template-columns: 150px 250px 200px 280px 150px 110px minmax(178px, 1fr);
+  padding: 0;
+  font-size: 18px;
+  color: #1f2340;
+  align-items: center;
+}
+.po-tbl .r > span {
+  padding-left: 16px;
+  white-space: nowrap;
+  min-width: 0;
+}
+.po-tbl .r.h {
+  height: 36px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7080;
+}
+.po-tbl .r.h > span {
+  padding-left: 8px;
+}
+.po-tbl .r:not(.h) {
+  height: 88px;
+  border-bottom: 1px solid #e4e6ec;
+}
+.po-tbl .r.hl {
+  background: #e9f1ff;
+}
+.po-tbl .gu b {
+  font-size: 18px;
+  font-weight: 600;
+}
+.po-tbl .gu small {
+  font-size: 13px;
+  color: #6b7080;
+}
+.po-tbl .pos-btn {
+  height: auto !important;
+  width: auto !important;
+  padding: 10px 20px !important;
+  border-radius: 10px;
+  font-size: 16px !important;
+  font-weight: 600;
+}
+.po-tot .bt {
+  margin-top: 18px;
+}
+.po-items button img {
+  z-index: 0;
+}

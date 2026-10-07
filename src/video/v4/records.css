@@ -137,3 +137,44 @@
 .rc-side {
   width: 400px;
 }
+
+/* ---- Contact / invoice records: no overlapping text, uppercase headers, 24px titles ---- */
+.slds-scope .rc-page .rv-tbl .slds-table th,
+.slds-scope .rc-page .rv-tbl .slds-table td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.slds-scope .rc-page .rv-tbl .slds-table th {
+  text-transform: uppercase;
+}
+.slds-scope .rc-page .rv-tbl .slds-table th .slds-truncate {
+  max-width: 100%;
+}
+.rc-head .t .slds-text-link {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 590;
+}
+.rc-main h2,
+.rc-c h2 {
+  font-weight: 590;
+  color: #5c5c5c;
+}
+.rc-rcol .rc-c h2 {
+  font-size: 15px;
+  line-height: 22px;
+}
+.rc-c .doc {
+  align-items: flex-start;
+}
+.rc-c .doc .slds-badge {
+  align-self: flex-start;
+  flex: none;
+}
+.rc-av {
+  border-radius: 8px;
+  background: #f3f3f3;
+  width: 44px;
+  height: 44px;
+}

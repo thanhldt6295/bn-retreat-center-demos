@@ -252,3 +252,65 @@
   font-size: 1cqw;
   opacity: 0.8;
 }
+
+/* K3 · Figma 264:402 */
+.k3-acts {
+  display: flex;
+  gap: 20px;
+  margin-top: auto;
+  width: 560px;
+}
+.k3-acts .pos-btn {
+  flex: 1;
+  white-space: nowrap;
+  padding: 0 12px;
+}
+.pos-okbig {
+  width: 128px;
+  height: 128px;
+  border-radius: 64px;
+}
+.pos-okbig .slds-icon {
+  width: 60px;
+  height: 60px;
+  fill: #fff;
+}
+.pos-info {
+  margin-top: 72px;
+}
+
+/* Q2 · Figma 263:307 (How it works: dots 30, title 16, text 13, gap 20) */
+.q2-steps {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.q2-step {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.q2-step > span {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background: #06503f;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex: none;
+}
+.q2-step b {
+  display: block;
+  font-size: 16px;
+  line-height: 19px;
+}
+.q2-step p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 17px;
+  color: #69716c;
+}

@@ -1,14 +1,15 @@
 import type { ReactNode } from 'react'
 import { Icon } from '../admin/Icon'
+import { asset } from '../../lib/asset'
 import './pos.css'
 
 /* Tablet POS style (Figma 264:270, 251:270): Inter, navy bottom navigation, 1366 × 1024 canvas. */
 export const POS_NAV: [string, string][] = [
-  ['Availability Grid', 'event'],
-  ['Reservations', 'identity'],
-  ['Completed', 'task'],
-  ['Invoices', 'currency'],
-  ['Check-in', 'scan'],
+  ['Availability Grid', 'calendar'],
+  ['Reservations', 'reservations'],
+  ['Completed', 'completed'],
+  ['Invoices', 'invoices'],
+  ['Check-in', 'checkin'],
   ['Settings', 'settings'],
 ]
 
@@ -19,7 +20,7 @@ export function PosShell({ active, onNav, children }: { active: string; onNav?: 
       <nav className="pos-nav">
         {POS_NAV.map(([n, ic]) => (
           <button key={n} className={n === active ? 'on' : ''} onClick={() => onNav?.(n)}>
-            <Icon name={ic} size="small" />
+            <i className="pos-ic" style={{ ['--m' as string]: `url(${asset(`img/pos-nav-${ic}.svg`)})` }} />
             {n}
           </button>
         ))}
