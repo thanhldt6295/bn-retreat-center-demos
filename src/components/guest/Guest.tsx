@@ -15,7 +15,22 @@ export function Logo({ light }: { light?: boolean }) {
   )
 }
 
-export const PORTAL_TABS = ['Overview', 'Rooms', 'Guests', 'Documents', 'Invoices', 'Schedule & meals', 'Invite guests']
+export const GUEST_TABS = ['My stay', 'Room', 'Payment', 'Schedule', 'Documents', 'Charges', 'Add-ons']
+
+/** Booking pages: logo header (no tabs) + footer. */
+export function PlainShell({ children }: { children: ReactNode }) {
+  return (
+    <div className="g">
+      <div className="g-pub-head">
+        <Logo />
+      </div>
+      <div className="g-main">{children}</div>
+      <div className="g-footer">© 2026 Cedar Valley Retreat &amp; Conference Center. Powered by Booking Ninjas.</div>
+    </div>
+  )
+}
+
+export const PORTAL_TABS =['Overview', 'Rooms', 'Guests', 'Documents', 'Invoices', 'Schedule & meals', 'Invite guests']
 
 /** Public venue page: logo header + footer. */
 export function PublicShell({ children }: { children: ReactNode }) {
@@ -45,11 +60,13 @@ export function PortalShell({
   children,
   user = organizer.name,
   initials = organizer.initials,
+  tabs = PORTAL_TABS,
 }: {
   active: string
   children: ReactNode
   user?: string
   initials?: string
+  tabs?: string[]
 }) {
   return (
     <div className="g">
@@ -59,7 +76,7 @@ export function PortalShell({
         </div>
         <div className="g-portal-bar">
           <nav>
-            {PORTAL_TABS.map((t) => (
+            {tabs.map((t) => (
               <a key={t} className={t === active ? 'on' : ''}>
                 {t}
               </a>

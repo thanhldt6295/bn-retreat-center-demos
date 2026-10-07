@@ -53,7 +53,7 @@ export const steps: Step[] = [
 const Title = () => (
   <TitleCard
     title="Turn Retreat Requests Into Confirmed Bookings"
-    sub="From request to quote, e-signature and payment — all in one connected flow."
+    sub="From a group retreat inquiry to a confirmed booking — all in one connected flow."
   />
 )
 const End = ({ next }: SceneProps) => <EndCard line="Next: One Group. Every Guest. Every Room." onCta={next} />

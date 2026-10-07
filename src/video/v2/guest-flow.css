@@ -1,0 +1,210 @@
+/* V2 guest pages · values from Figma 267:274 (I1), 267:309 (I2), 281:626 (I3), 281:727 (I4), 237:272..543 (B1–B4) */
+.gf-narrow {
+  padding: 40px 170px 56px;
+}
+.gf-narrow .gp-cols {
+  gap: 24px;
+}
+.gf-body {
+  padding: 20px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.gf-body.col {
+  gap: 12px;
+  padding: 18px 24px 22px;
+}
+.gf-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 24px;
+}
+.gf-stay {
+  width: 640px;
+  flex: none;
+  align-self: flex-start;
+}
+.gf-side {
+  width: 400px;
+  flex: none;
+}
+.gf-next {
+  width: 400px;
+  flex: none;
+  align-self: stretch;
+}
+.gf-3 {
+  display: flex;
+  gap: 24px;
+  padding: 18px 24px;
+}
+.gf-3 > * {
+  flex: 1;
+}
+.gf-hold {
+  background: #fbe7b3;
+  color: #6b4a00;
+  border-radius: 12px;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+}
+.gf-hold b {
+  font-weight: 700;
+}
+.gf-hold.flat {
+  padding: 14px 18px;
+  font-size: 13px;
+}
+.gf-save {
+  background: var(--mint);
+  color: var(--green);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+}
+.gf-save b {
+  font-weight: 700;
+}
+.gf-save span {
+  font-size: 13px;
+}
+.gp-input .ph {
+  color: #a7aca9;
+}
+.gf-applied {
+  background: var(--mint);
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--green);
+}
+.gf-applied > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+.gf-applied .n {
+  font-size: 13px;
+  color: var(--ink);
+}
+.gf-applied > span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* rooms (B2) */
+.gf-room {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 20px 16px 16px;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.gf-room:hover {
+  box-shadow: 0 4px 16px rgba(11, 31, 23, 0.08);
+}
+.gf-room.on {
+  border: 2px solid var(--green);
+  padding: 15px 19px 15px 15px;
+}
+.gf-room img {
+  width: 150px;
+  height: 110px;
+  border-radius: 12px;
+  object-fit: cover;
+  flex: none;
+}
+.gf-room .tx {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.gf-room .tx b {
+  font-size: 18px;
+}
+.gf-room .tx > span {
+  font-size: 13px;
+  color: var(--muted);
+}
+.gf-room .tx > div {
+  display: flex;
+  gap: 6px;
+}
+.gf-room .pr {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+.gf-room .pr > div {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  white-space: nowrap;
+}
+.gf-room s {
+  color: var(--muted);
+  font-size: 13px;
+}
+.gf-room strong {
+  font-size: 24px;
+  font-weight: 700;
+}
+.gf-room em {
+  font-style: normal;
+  font-size: 12px;
+  color: var(--muted);
+}
+.gf-bk {
+  width: 376px;
+  flex: none;
+  align-self: flex-start;
+}
+
+/* I1 email body */
+.gf-email {
+  margin-top: 0;
+}
+.gf-ebody {
+  padding: 28px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.gf-ebody h2 {
+  margin: 0;
+  font-size: 20px;
+}
+.gf-ebody .lead {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 17px;
+}
+.gf-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 24px;
+}
+.gf-act {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+.gf-act .g-btn {
+  height: 44px;
+  padding: 0 24px;
+}
