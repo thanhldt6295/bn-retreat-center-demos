@@ -535,3 +535,29 @@
 .slds-scope .lds-list-table th {
   border-bottom-color: #e5e5e5;
 }
+
+/* list toolbar buttons (Figma 178:7525): 32px rings, #5c5c5c border, blue glyph; first two are 40px with a caret */
+.slds-scope .lds-tool {
+  border-color: #5c5c5c !important;
+  padding: 0 !important;
+  gap: 2px;
+}
+.slds-scope .lds-tool .slds-icon {
+  width: 14px;
+  height: 14px;
+}
+.slds-scope .lds-tool .slds-icon_xx-small {
+  width: 8px;
+  height: 8px;
+  margin-left: 0 !important;
+}
+.slds-scope .lds-list-tools .slds-input-has-icon .slds-input {
+  color: #2e2e2e;
+}
+.slds-scope .lds-list-tools .slds-input::placeholder {
+  color: #2e2e2e;
+  opacity: 1;
+}
+.slds-scope .lds-list-tools .slds-input__icon {
+  fill: #2e2e2e !important;
+}
