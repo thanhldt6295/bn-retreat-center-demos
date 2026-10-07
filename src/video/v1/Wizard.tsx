@@ -307,14 +307,11 @@ function AddOns({ onApply }: { onApply: () => void }) {
         </>
       }
     >
-      <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div className="slds-form-element" style={{ width: 350 }}>
-          <label className="slds-form-element__label" style={{ fontSize: 13 }} htmlFor="addon-search">
-            Search
-          </label>
           <div className="slds-form-element__control slds-input-has-icon slds-input-has-icon_left">
             <Icon name="search" className="slds-input__icon slds-input__icon_left" color="#5c5c5c" />
-            <input id="addon-search" className="slds-input" placeholder="Search for Add-ons" style={{ borderRadius: 8 }} />
+            <input id="addon-search" className="slds-input" placeholder="Search for Add-ons" aria-label="Search for Add-ons" />
           </div>
         </div>
         <Neutral>Create New</Neutral>

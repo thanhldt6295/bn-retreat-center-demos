@@ -7,6 +7,7 @@ import {
   type Unit,
 } from '../../components/admin/AvailabilityGrid'
 import { AdminPage, Badge, Check, Field, GlobalNav, Input, Modal, ObjectIcon, Select, TextArea } from '../../components/admin/Admin'
+import { Icon } from '../../components/admin/Icon'
 import { ReservationRecord, type RvRoom } from '../../components/admin/ReservationRecord'
 import { ActionButton } from '../../components/shared/ActionButton'
 import { afterGuestBookings, group, money, organizer, v2Reservations } from '../../data/demo'
@@ -55,11 +56,9 @@ export function ResList({ goto }: SceneProps) {
       </div>
       <div className="lds-list-meta">{listRows.length} items · Sorted by Reservation # · Updated a few seconds ago</div>
       <div className="slds-card lds-list-card">
-        <div className="lds-list-tools" style={{ alignItems: 'flex-end' }}>
-          <div className="slds-form-element" style={{ width: 228 }}>
-            <label className="slds-form-element__label" style={{ display: 'block' }}>
-              Search
-            </label>
+        <div className="lds-list-tools">
+          <div className="slds-form-element__control slds-input-has-icon slds-input-has-icon_left" style={{ width: 300 }}>
+            <Icon name="search" className="slds-input__icon slds-input__icon_left" color="#5c5c5c" />
             <input className="slds-input" placeholder="Search this list..." aria-label="Search this list" />
           </div>
           <button className="slds-button slds-button_neutral" style={{ marginLeft: 'auto' }}>

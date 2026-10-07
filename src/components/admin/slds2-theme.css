@@ -416,3 +416,16 @@
 .slds-scope:has(.stacked-modal) .slds-backdrop:not(.stk) {
   background: transparent;
 }
+
+/* Modal close: white 24px circle with a blue X, straddling the top-right corner */
+.slds-scope .slds-modal__close {
+  top: -30px;
+  right: -2px;
+  width: 24px;
+  height: 24px;
+}
+.slds-scope .slds-modal__close .slds-icon {
+  width: 12px;
+  height: 12px;
+  fill: #0250d9;
+}
