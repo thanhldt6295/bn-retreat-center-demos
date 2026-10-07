@@ -61,12 +61,17 @@ export function PortalShell({
   user = organizer.name,
   initials = organizer.initials,
   tabs = PORTAL_TABS,
+  wide,
+  onTab,
 }: {
   active: string
   children: ReactNode
   user?: string
   initials?: string
   tabs?: string[]
+  /** nav aligned to the 1200 px column (padding 120) */
+  wide?: boolean
+  onTab?: (tab: string) => void
 }) {
   return (
     <div className="g">
@@ -74,10 +79,10 @@ export function PortalShell({
         <div className="g-portal-top">
           <Logo />
         </div>
-        <div className="g-portal-bar">
+        <div className={`g-portal-bar ${wide ? "wide" : ""}`}>
           <nav>
             {tabs.map((t) => (
-              <a key={t} className={t === active ? 'on' : ''}>
+              <a key={t} className={t === active ? 'on' : ''} onClick={() => onTab?.(t)} style={onTab ? { cursor: 'pointer' } : undefined}>
                 {t}
               </a>
             ))}

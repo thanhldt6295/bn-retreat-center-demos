@@ -329,3 +329,7 @@
   font-weight: 600;
   font-size: 14px;
 }
+
+.g-portal-bar.wide {
+  padding: 0 120px;
+}

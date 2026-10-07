@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { ActionButton } from '../../components/shared/ActionButton'
 import { GToast } from '../../components/guest/GToast'
 import { PortalShell } from '../../components/guest/Guest'
+import { ORG_TAB, tabNav } from '../v3/Organizer'
 import { group } from '../../data/demo'
 import type { SceneProps } from '../../player/Player'
 import './assign.css'
@@ -9,7 +10,7 @@ import './assign.css'
 type Pill = 'mint' | 'cream' | 'amber'
 type Row = { room: string; name?: string; email?: string; pays?: string; pill: [string, Pill]; action: string; hl?: boolean }
 
-const base = (phase: 'before' | 'sent' | 'booked', hl: boolean): Row[] => {
+const base = (phase: 'before' | 'sent' | 'booked', hl: boolean, flashBooked = true): Row[] => {
   const invited: [string, Pill] = phase === 'before' ? ['Not invited', 'cream'] : ['Invited', 'amber']
   const act = phase === 'before' ? 'Invite' : 'Resend'
   const booked = phase === 'booked'
@@ -23,13 +24,13 @@ const base = (phase: 'before' | 'sent' | 'booked', hl: boolean): Row[] => {
       pays: 'Guest',
       pill: booked ? ['Paid', 'mint'] : invited,
       action: booked ? 'View' : act,
-      hl: booked || (phase === 'sent' && hl),
+      hl: (booked && flashBooked) || (phase === 'sent' && hl),
     },
     { room: 'Standard Single Room', pill: ['Open', 'cream'], action: 'Add guest' },
     { room: 'Standard Double Room', name: 'Grace Liu', email: 'grace.liu@horizon.example', pays: 'Guest', pill: ['Paid', 'mint'], action: 'View' },
     { room: 'Standard Double Room', name: 'Omar Haddad', email: 'omar.haddad@horizon.example', pays: 'Organizer', pill: ['Assigned', 'mint'], action: 'Change' },
     booked
-      ? { room: 'Standard Double Room', name: 'Priya Nair', email: 'priya@horizon.example', pays: 'Guest', pill: ['Paid', 'mint'], action: 'View', hl: true }
+      ? { room: 'Standard Double Room', name: 'Priya Nair', email: 'priya@horizon.example', pays: 'Guest', pill: ['Paid', 'mint'], action: 'View', hl: flashBooked }
       : { room: 'Standard Double Room', pill: ['Open', 'cream'], action: 'Add guest' },
     { room: 'Cabin', name: 'Marcus Webb', email: 'marcus.webb@horizon.example', pays: 'Guest', pill: invited, action: act, hl: phase === 'sent' && hl },
   ]
@@ -39,8 +40,9 @@ const Pill = ({ t, tone }: { t: string; tone: Pill }) => <span className={`g-pil
 
 /* A1a / A2 / A1 / A1d / A1e: organizer "Assign your rooms" */
 export function Assign({ step, goto }: SceneProps) {
-  const phase = step === 'A1a' || step === 'A2' ? 'before' : step === 'A1e' ? 'booked' : 'sent'
-  const rows = base(phase, step === 'A1')
+  const portal = step === 'O2'
+  const phase = step === 'A1a' || step === 'A2' ? 'before' : step === 'A1e' || portal ? 'booked' : 'sent'
+  const rows = base(phase, step === 'A1', !portal)
   const [toast, setToast] = useState<{ t: string; s: string; k: number } | null>(null)
 
   useEffect(() => {
@@ -69,13 +71,13 @@ export function Assign({ step, goto }: SceneProps) {
   ] as const
 
   return (
-    <PortalShell active="Rooms">
+    <PortalShell active="Rooms" wide={portal} onTab={portal ? tabNav(ORG_TAB, goto) : undefined}>
       <div className="as">
         <div className="as-title">
           <div>
             <h1 className="g-h1">Assign your rooms</h1>
             <p>
-              {group.name} · Nov 12 – Nov 15, 2026 · Unassigned rooms are released on Oct 30, 2026
+              {group.name} · Nov 12 – Nov 15, 2026{portal ? '' : ' · Unassigned rooms are released on Oct 30, 2026'}
             </p>
           </div>
           <div className="as-btns">

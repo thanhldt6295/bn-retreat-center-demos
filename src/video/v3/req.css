@@ -1,0 +1,170 @@
+/* Request Manager (Figma 275:272, 275:1185, 275:1448, 294:1823) */
+.rq-page {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.rq-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 54px;
+}
+.rq-head .s,
+.rq-rec .s,
+.rq-c .s {
+  font-size: 13px;
+  color: #5c5c5c;
+}
+.rq-head h1 {
+  margin: 4px 0 0;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 400;
+  color: #03234d;
+}
+.rq-act {
+  display: flex;
+  gap: 8px;
+}
+.rq-list {
+  padding: 0;
+  overflow: hidden;
+}
+.rq-list tr.rq-new td {
+  background: #dcf5ee;
+}
+.rq-rec {
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 108px;
+}
+.rq-rec .t {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 4px 0;
+  font-size: 24px;
+  line-height: 32px;
+}
+.rq-cols {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.rq-main {
+  width: 956px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.rq-side {
+  width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.rq-c {
+  padding: 16px 20px 20px;
+}
+.rq-c h2 {
+  margin: 0 0 12px;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 400;
+  color: #5c5c5c;
+}
+.rq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 24px;
+  font-size: 13px;
+  line-height: 19px;
+  color: #2e2e2e;
+}
+.rq-grid .k {
+  font-size: 12px;
+  color: #444;
+}
+.rq-tl {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.rq-tl li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.rq-tl i {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background: #0250d9;
+  margin-top: 6px;
+  flex: none;
+}
+.rq-tl b {
+  display: block;
+  font-size: 13px;
+  color: #03234d;
+}
+.rq-tl span {
+  font-size: 12px;
+  color: #5c5c5c;
+}
+.rq-btns {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 14px;
+}
+.rq-cap {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+  color: #03234d;
+  margin-top: 6px;
+  animation: rq-bump 0.6s ease;
+}
+@keyframes rq-bump {
+  40% {
+    transform: scale(1.06);
+    transform-origin: left;
+    color: #0250d9;
+  }
+}
+.rq-sum {
+  display: flex;
+  gap: 16px;
+}
+.rq-sum .slds-card {
+  flex: 1;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 106px;
+}
+.rq-sum span {
+  font-size: 12px;
+  font-weight: 700;
+  color: #2e2e2e;
+}
+.rq-sum strong {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 400;
+  color: #03234d;
+}
+.rq-sum small {
+  font-size: 12px;
+  color: #444;
+}
