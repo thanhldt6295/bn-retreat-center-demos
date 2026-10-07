@@ -1,31 +1,11 @@
 import { useEffect, useState } from 'react'
 import { ActionButton } from '../../components/shared/ActionButton'
-import './reservation.css'
-import { DatePicker } from '../../components/shared/DatePicker'
-import { AdminPage, Badge, Field, GlobalNav, Input, Modal, Select, TextArea } from '../../components/admin/Admin'
-import { Icon } from '../../components/admin/Icon'
-import { asset } from '../../lib/asset'
+import { Badge, Field, Input, Modal, Select, TextArea } from '../../components/admin/Admin'
+import { ReservationRecord } from '../../components/admin/ReservationRecord'
 import { group, groupReservation, money, organizer, quote, timeline } from '../../data/demo'
 import { usePlayer, type SceneProps } from '../../player/Player'
 
 const th = { fontSize: 11.5, textTransform: 'uppercase', letterSpacing: '.04em', fontWeight: 700 } as const
-
-const DateBox = ({ value, onChange, min }: { value: string; onChange: (v: string) => void; min?: string }) => (
-  <DatePicker theme="lds" value={value} onChange={onChange} min={min}>
-    {(open) => (
-      <div className={`slds-input-has-icon slds-input-has-icon_right ${open ? 'slds-has-focus' : ''}`} style={{ width: '100%' }}>
-        <Icon name="date_input" className="slds-input__icon slds-input__icon_right" color="#0b5cff" />
-        <input className="slds-input" readOnly value={value} aria-label="Date" style={{ cursor: 'pointer' }} />
-      </div>
-    )}
-  </DatePicker>
-)
-
-const ROOM_IMG: Record<string, string> = {
-  'Standard Single Room': 'img/room-single.png',
-  'Standard Double Room': 'img/room-double.png',
-  Cabin: 'img/room-cabin.png',
-}
 
 /** 4.3 Pending Approval, 4.4 invoice (modal), 4.3b Confirmed */
 export function Reservation({ step, from, goto }: SceneProps) {
@@ -47,259 +27,49 @@ export function Reservation({ step, from, goto }: SceneProps) {
   const modalOpen = step === '4.4' && invoiceOpen
 
   const st = confirmed ? 'Confirmed' : 'Pending'
-  const rooms = groupReservation.roomsShown
-  const headRow = (cols: [string, number][]) => (
-    <>
-      <colgroup>
-        {cols.map(([, w], i) => (
-          <col key={i} style={{ width: w || undefined }} />
-        ))}
-      </colgroup>
-      <thead>
-        <tr>
-          {cols.map(([h], i) => (
-            <th key={i} scope="col">
-              <div className="slds-truncate">{h}</div>
-            </th>
-          ))}
-        </tr>
-      </thead>
-    </>
-  )
-  const amount = (a: number, tax: number) => (
-    <div className="rv-amt">
-      <b>{money(a)}</b>
-      <span>+Tax {money(tax)}</span>
-    </div>
-  )
+  const badge = <Badge tone={confirmed ? 'mint' : 'warn'}>{st}</Badge>
 
   return (
-    <AdminPage>
-      <GlobalNav active="Reservations" />
-      <div className="rv-page">
-        <section className="slds-card rv-head">
-          <div className="rv-head-t">
-            <div className="rv-t1">
-              <span>Reservation</span>
-              <a className="slds-text-link rv-num">{groupReservation.number}</a>
-            </div>
-            <div className="rv-t2">
-              <span>Group Block</span>
-              <a className="slds-text-link">{group.code}</a>
-            </div>
-          </div>
-          <div className="rv-head-a">
-            <button className="slds-button slds-button_neutral" disabled={!confirmed}>
-              Check-In
-            </button>
-            <button className="slds-button slds-button_neutral" disabled={!confirmed}>
-              Check-Out
-            </button>
-            {!confirmed && (
-              <ActionButton className="slds-button slds-button_brand" primary={step === '4.4' && !modalOpen} loadingMs={1000} onDone={() => goto('4.3b')}>
-                Confirm Reservation
-              </ActionButton>
-            )}
-          </div>
-        </section>
-
-        <section className="slds-card rv-path">
-          <span>Cancelled</span>
-          <span>{confirmed ? 'Pending Approval' : <Badge tone="warn">Pending Approval</Badge>}</span>
-          <span>{confirmed ? <Badge tone="mint">Confirmed</Badge> : 'Confirmed'}</span>
-        </section>
-
-        <div className="rv-info">
-          <section className="slds-card rv-icard">
-            <h2>Reservation Info</h2>
-            <div className="rv-inner">
-              <div className="rv-dates">
-                <Field label="Start Date">
-                  <DateBox value={start} onChange={setStart} />
-                </Field>
-                <Field label="End Date">
-                  <DateBox value={end} onChange={setEnd} min={start} />
-                </Field>
-              </div>
-              <div className="rv-meta">
-                <div>
-                  <div className="lds-lbl">Booked by</div>
-                  <div>{organizer.name}</div>
-                </div>
-                <div>
-                  <div className="lds-lbl">Taxes enabled</div>
-                  <b>True</b>
-                </div>
-                <div>
-                  <div className="lds-lbl">Taxes</div>
-                  <div>{money(quote.tax)}</div>
-                </div>
-              </div>
-              <div className="rv-foot">
-                <div className="rv-btns">
-                  <button className="slds-button slds-button_neutral">Add room</button>
-                  <button className="slds-button slds-button_neutral">Add item</button>
-                </div>
-                <div className="rv-total">
-                  <span>Grand Total</span>
-                  <b>{money(quote.total)}</b>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section className="slds-card rv-icard">
-            <h2>Billing Info</h2>
-            <div className="rv-inner">
-              <div className="rv-contact">
-                <Field label="Contact Name" style={{ flex: 1 }}>
-                  <Input value={organizer.name} />
-                </Field>
-                <button className="slds-button slds-button_neutral">Change</button>
-              </div>
-              <div className="rv-meta">
-                <div>
-                  <div className="lds-lbl">Email</div>
-                  <div>{organizer.email}</div>
-                </div>
-                <div>
-                  <div className="lds-lbl">Invoice</div>
-                  <a className="slds-text-link ab" onClick={() => goto('4.4')}>
-                    {groupReservation.invoice}
-                  </a>
-                </div>
-              </div>
-              <div className="rv-foot">
-                <div className="rv-btns">
-                  <button className="slds-button slds-button_neutral ab" onClick={() => goto('4.4')}>
-                    Invoice
-                  </button>
-                  <button className="slds-button slds-button_neutral">Payments</button>
-                </div>
-                <div className="rv-total">
-                  <span>Balance Due</span>
-                  <b>{money(quote.balance)}</b>
-                </div>
-              </div>
-            </div>
-          </section>
+    <ReservationRecord
+      number={groupReservation.number}
+      groupBlock={group.code}
+      confirmed={confirmed}
+      headActions={
+        !confirmed && (
+          <ActionButton className="slds-button slds-button_brand" primary={step === '4.4' && !modalOpen} loadingMs={1000} onDone={() => goto('4.3b')}>
+            Confirm Reservation
+          </ActionButton>
+        )
+      }
+      start={start}
+      end={end}
+      onStart={setStart}
+      onEnd={setEnd}
+      bookedBy={organizer.name}
+      tax={quote.tax}
+      grandTotal={quote.total}
+      contact={organizer.name}
+      email={organizer.email}
+      invoice={groupReservation.invoice}
+      balance={quote.balance}
+      onInvoice={() => goto('4.4')}
+      space={{ amount: quote.meeting.total, tax: quote.meeting.total / 10, status: badge }}
+      roomsTitle="(22/22)"
+      rooms={groupReservation.roomsShown.map((r) => ({
+        type: r.type,
+        guest: organizer.name,
+        amount: r.amount,
+        tax: r.tax,
+        status: 'Pending Approval',
+        link: 'Assign Room',
+      }))}
+      roomsFooter={
+        <div className="rv-showing">
+          Showing 7 of 22 rooms · <a className="slds-text-link">View all</a>
         </div>
-
-        <section className="slds-card rv-details">
-          <div className="slds-tabs_default">
-            <ul className="slds-tabs_default__nav" role="tablist">
-              {['Details', 'Payments', 'Files', 'Activities'].map((n, i) => (
-                <li key={n} className={`slds-tabs_default__item ${i === 0 ? 'slds-is-active' : ''}`} role="presentation">
-                  <a className="slds-tabs_default__link" role="tab">
-                    {n}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <h3 className="rv-sec">
-            Space <small>1</small>
-          </h3>
-          <div className="rv-tbl">
-            <table className="slds-table slds-table_fixed-layout">
-              {headRow([['Space', 260], ['Description', 360], ['Start date', 110], ['End date', 110], ['Time', 150], ['Days', 70], ['Status', 150], ['Amount', 150]])}
-              <tbody>
-                <tr style={{ height: 64 }}>
-                  <td>Meeting Hall</td>
-                  <td>Venue for workshops and leadership sessions</td>
-                  <td>Nov 12, 2026</td>
-                  <td>Nov 14, 2026</td>
-                  <td>9:00 AM – 5:00 PM</td>
-                  <td>3</td>
-                  <td>
-                    <Badge tone={confirmed ? 'mint' : 'warn'}>{st}</Badge>
-                  </td>
-                  <td>{amount(quote.meeting.total, quote.meeting.total / 10)}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <h3 className="rv-sec">
-            Reservation Rooms <small>(22/22)</small>
-          </h3>
-          <div className="rv-tbl">
-            <table className="slds-table slds-table_fixed-layout">
-              {headRow([['Room', 360], ['Guest', 190], ['Start date', 100], ['End date', 100], ['Guests', 90], ['Status', 150], ['Length', 80], ['Room only', 100], ['Total', 100], ['Actions', 88]])}
-              <tbody>
-                {rooms.map((r, i) => (
-                  <tr key={i} style={{ height: 80 }}>
-                    <td>
-                      <div className="rv-room">
-                        <img src={asset(ROOM_IMG[r.type])} width={64} height={64} alt="" />
-                        <div>
-                          <div className="from">From Cedar Valley Retreat &amp; Conference Center</div>
-                          <b>{r.type}</b>
-                          <a className="slds-text-link">Assign Room</a>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <b>{organizer.name}</b>
-                    </td>
-                    <td>Nov 12, 2026</td>
-                    <td>Nov 15, 2026</td>
-                    <td>1 / 0</td>
-                    <td>Pending Approval</td>
-                    <td>3 nights</td>
-                    <td>{amount(r.amount, r.tax)}</td>
-                    <td>{amount(r.amount, r.tax)}</td>
-                    <td>
-                      <button className="slds-button slds-button_icon slds-button_icon-border-filled" title="Show actions">
-                        <Icon name="chevrondown" size="x-small" />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <div className="rv-showing">
-              Showing 7 of 22 rooms · <a className="slds-text-link">View all</a>
-            </div>
-          </div>
-          <div className="rv-add">
-            <button className="slds-button slds-button_neutral">Add</button>
-          </div>
-
-          <h3 className="rv-sec">
-            Items <small>(1)</small>
-          </h3>
-          <div className="rv-tbl">
-            <table className="slds-table slds-table_fixed-layout">
-              {headRow([['Item', 460], ['Start date', 110], ['End date', 110], ['Calculation rule', 150], ['Qty', 70], ['Status', 150], ['Amount', 150], ['', 158]])}
-              <tbody>
-                <tr style={{ height: 72 }}>
-                  <td>
-                    <div className="rv-room item">
-                      <span className="ph" />
-                      <div>
-                        <b>{quote.catering.name}</b>
-                        <div className="from">Three daily meals for the group</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>Nov 12, 2026</td>
-                  <td>Nov 14, 2026</td>
-                  <td>Per Person</td>
-                  <td>{quote.catering.qty}</td>
-                  <td>
-                    <Badge tone={confirmed ? 'mint' : 'warn'}>{st}</Badge>
-                  </td>
-                  <td>{amount(quote.catering.total, quote.catering.total / 10)}</td>
-                  <td>
-                    <a className="slds-text-link">Remove</a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-      </div>
+      }
+      items={{ name: quote.catering.name, sub: 'Three daily meals for the group', qty: quote.catering.qty, amount: quote.catering.total, tax: quote.catering.total / 10, status: badge }}
+    >
       {modalOpen && (
         <Modal
           title="Reservation Invoice"
@@ -364,6 +134,6 @@ export function Reservation({ step, from, goto }: SceneProps) {
           </div>
         </Modal>
       )}
-    </AdminPage>
+    </ReservationRecord>
   )
 }

@@ -164,3 +164,20 @@
   font-weight: 500;
   color: #0b4a35;
 }
+
+.toast-layer .toast-admin .toast-sub {
+  margin: 2px 0 0;
+  font-size: 0.8125rem;
+  color: #0b4a35;
+}
+.toast-layer .toast-admin .toast-link {
+  margin-left: 2rem;
+  font-size: 0.8125rem;
+  color: #0250d9;
+  cursor: pointer;
+  white-space: nowrap;
+  pointer-events: auto;
+}
+.toast-layer .toast-admin.slds-notify_toast {
+  min-width: 27rem;
+}

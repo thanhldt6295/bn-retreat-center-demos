@@ -26,11 +26,12 @@ export type SceneProps = {
   goto: (id: string) => void
 }
 
-type Toast = { id: number; text: string; kind: 'admin' | 'guest' }
+type ToastExtra = { sub?: string; link?: string; onLink?: () => void }
+type Toast = { id: number; text: string; kind: 'admin' | 'guest' } & ToastExtra
 
 type PlayerCtx = {
   setPrimary: (fn: (() => void) | null) => void
-  toast: (text: string, kind?: Toast['kind'], ms?: number) => void
+  toast: (text: string, kind?: Toast['kind'], ms?: number, extra?: ToastExtra) => void
 }
 
 const Ctx = createContext<PlayerCtx>({ setPrimary: () => {}, toast: () => {} })
@@ -112,9 +113,9 @@ export function Player({ title, steps, views, Provider, nextRoute, prevRoute }: 
     [steps, index, step.id, goto, navigate, nextRoute, prevRoute, params],
   )
 
-  const toast = useCallback((text: string, kind: Toast['kind'] = 'admin', ms = 3600) => {
+  const toast = useCallback((text: string, kind: Toast['kind'] = 'admin', ms = 3600, extra: ToastExtra = {}) => {
     const id = ++toastId.current
-    setToasts((t) => [...t, { id, text, kind }])
+    setToasts((t) => [...t, { id, text, kind, ...extra }])
     window.setTimeout(() => setToasts((t) => t.filter((x) => x.id !== id)), ms)
   }, [])
 
@@ -195,7 +196,13 @@ export function Player({ title, steps, views, Provider, nextRoute, prevRoute }: 
                 </span>
                 <div className="slds-notify__content">
                   <h2 className="slds-text-heading_small">{t.text}</h2>
+                  {t.sub && <p className="toast-sub">{t.sub}</p>}
                 </div>
+                {t.link && (
+                  <a className="slds-text-link toast-link" onClick={t.onLink}>
+                    {t.link}
+                  </a>
+                )}
                 <Icon name="close" size="x-small" color="#0b4a35" className="slds-m-left_medium" />
               </div>
             ) : (

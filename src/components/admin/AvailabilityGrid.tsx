@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { DatePicker } from '../shared/DatePicker'
 import { AdminPage, Badge, Check, GlobalNav } from './Admin'
 import { Icon } from './Icon'
@@ -6,7 +6,7 @@ import './grid.css'
 
 /* Availability grid used by V1 (1.4, 4.5) and V2 (C4, C7, C8). */
 
-export type Kind = 'confirmed' | 'pending' | 'ooo'
+export type Kind = 'confirmed' | 'pending' | 'ooo' | 'held'
 export type Booking = {
   row: number
   start: number // day index (0 = Mon Nov 9)
@@ -19,6 +19,7 @@ export type Booking = {
   group?: string
   total?: string
   sub?: string
+  selected?: boolean
 }
 
 export type HoverKey = { type: 'requested'; row: number } | { type: 'booking'; index: number } | null
@@ -31,7 +32,8 @@ export const DAYS = Array.from({ length: 16 }, (_, i) => {
 const REQUESTED = [3, 4, 5]
 const WEEKEND = [5, 6, 12, 13]
 
-export const UNITS = [
+export type Unit = { type: string; label: string; dot: string }
+export const UNITS: Unit[] = [
   { type: 'Standard Single Room', label: '101', dot: 'room' },
   { type: 'Standard Single Room', label: '102', dot: 'room' },
   { type: 'Standard Single Room', label: '103', dot: 'room' },
@@ -124,7 +126,23 @@ type Props = {
   /** preselected cells (row, from, to) with the context menu open */
   presetSelect?: { row: number; a: number; b: number } | null
   onOpenReservation?: () => void
+  /** rows to show (default: the V1 list) */
+  units?: Unit[]
+  /** colour the requested-stay columns in the header (V1 only) */
+  requestedHead?: boolean
+  legendPending?: string
+  /** drag a booking to another unit */
+  onMove?: (index: number, row: number) => void
+  /** drag the right edge of a booking to change its length */
+  onResize?: (index: number, len: number) => void
+  /** text for the tooltip shown while resizing */
+  resizeTip?: (index: number, len: number) => string
+  /** scripted drag (the → key plays it) */
+  demo?: Demo | null
+  onDemoDone?: () => void
 }
+export type Demo = { kind: 'move'; index: number; toRow: number } | { kind: 'resize'; index: number; toLen: number }
+type Drag = { index: number; mode: 'move' | 'resize'; row: number; len: number }
 
 export function AvailabilityPage(props: Props) {
   const [dates, setDates] = useState<Record<string, string>>({ 'Start Date': 'Nov 12, 2026', 'End Date': 'Nov 15, 2026' })
@@ -183,8 +201,100 @@ export function AvailabilityPage(props: Props) {
   )
 }
 
-export function AvailabilityGrid({ bookings, forced, requestedHover, legendRequested = true, presetSelect, onOpenReservation }: Props) {
+export function AvailabilityGrid({
+  bookings,
+  forced,
+  requestedHover,
+  legendRequested = true,
+  presetSelect,
+  onOpenReservation,
+  units = UNITS,
+  requestedHead = true,
+  legendPending = 'Pending Approval',
+  onMove,
+  onResize,
+  resizeTip,
+  demo,
+  onDemoDone,
+}: Props) {
   const [hover, setHover] = useState<HoverKey>(null)
+  const [drag, setDrag] = useState<Drag | null>(null)
+  const tableRef = useRef<HTMLDivElement>(null)
+  const dragRef = useRef<Drag | null>(null)
+  dragRef.current = drag
+  const geom = useCallback(() => {
+    const t = tableRef.current
+    if (!t) return null
+    const rows = Array.from(t.querySelectorAll<HTMLElement>('.ag-row'))
+    const cells = t.querySelector<HTMLElement>('.ag-cells')
+    if (!cells || !rows.length) return null
+    return { rowTops: rows.map((r) => r.offsetTop), left: cells.offsetLeft, cellW: cells.offsetWidth / 16, rowH: rows[0].offsetHeight }
+  }, [])
+
+  const begin = (e: React.MouseEvent, index: number, mode: 'move' | 'resize') => {
+    if ((mode === 'move' && !onMove) || (mode === 'resize' && !onResize)) return
+    e.preventDefault()
+    e.stopPropagation()
+    const b = bookings[index]
+    setHover(null)
+    setDrag({ index, mode, row: b.row, len: b.len })
+    const move = (ev: MouseEvent) => {
+      const g = geom()
+      const t = tableRef.current
+      if (!g || !t) return
+      const rect = t.getBoundingClientRect()
+      const cur = dragRef.current
+      if (!cur) return
+      if (mode === 'move') {
+        const y = ev.clientY - rect.top
+        let row = g.rowTops.findIndex((top) => y >= top && y < top + g.rowH)
+        if (row < 0) row = cur.row
+        setDrag({ ...cur, row })
+      } else {
+        const x = ev.clientX - rect.left - g.left
+        const len = Math.max(1, Math.min(16 - b.start, Math.round(x / g.cellW) - b.start))
+        setDrag({ ...cur, len })
+      }
+    }
+    const up = () => {
+      window.removeEventListener('mousemove', move)
+      window.removeEventListener('mouseup', up)
+      const cur = dragRef.current
+      setDrag(null)
+      if (!cur) return
+      if (cur.mode === 'move' && cur.row !== b.row) onMove?.(cur.index, cur.row)
+      if (cur.mode === 'resize' && cur.len !== b.len) onResize?.(cur.index, cur.len)
+    }
+    window.addEventListener('mousemove', move)
+    window.addEventListener('mouseup', up)
+  }
+
+  // scripted drag for the → key
+  useEffect(() => {
+    if (!demo) return
+    const b = bookings[demo.index]
+    const timers: number[] = []
+    setHover(null)
+    setDrag({ index: demo.index, mode: demo.kind, row: b.row, len: b.len })
+    if (demo.kind === 'move') {
+      timers.push(window.setTimeout(() => setDrag({ index: demo.index, mode: 'move', row: demo.toRow, len: b.len }), 450))
+    } else {
+      for (let n = b.len + 1; n <= demo.toLen; n++) {
+        timers.push(window.setTimeout(() => setDrag({ index: demo.index, mode: 'resize', row: b.row, len: n }), 450 + (n - b.len) * 450))
+      }
+    }
+    const end = 450 + (demo.kind === 'move' ? 700 : (demo.toLen - b.len) * 450 + 500)
+    timers.push(
+      window.setTimeout(() => {
+        setDrag(null)
+        if (demo.kind === 'move') onMove?.(demo.index, demo.toRow)
+        else onResize?.(demo.index, demo.toLen)
+        onDemoDone?.()
+      }, end),
+    )
+    return () => timers.forEach((t) => window.clearTimeout(t))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [demo])
   const [sel, setSel] = useState<{ row: number; a: number; b: number; done: boolean } | null>(
     presetSelect ? { ...presetSelect, done: true } : null,
   )
@@ -217,7 +327,7 @@ export function AvailabilityGrid({ bookings, forced, requestedHover, legendReque
         </button>
       </div>
       <div className="ag-bar" />
-      <div className="ag-table">
+      <div className={`ag-table ${drag ? 'dragging' : ''}`} ref={tableRef}>
         <div className="ag-head">
           <div className="ag-lefthead">
             <span style={{ width: 91 }}>Property</span>
@@ -228,7 +338,7 @@ export function AvailabilityGrid({ bookings, forced, requestedHover, legendReque
             <div className="ag-month">Nov 2026</div>
             <div className="ag-dayrow">
               {DAYS.map((d, i) => (
-                <div key={i} className={`ag-dh ${REQUESTED.includes(i) ? 'req' : WEEKEND.includes(i) ? 'wk' : ''}`}>
+                <div key={i} className={`ag-dh ${REQUESTED.includes(i) && requestedHead ? 'req' : WEEKEND.includes(i) ? 'wk' : ''}`}>
                   {d.dow}
                   <br />
                   {d.date}
@@ -237,7 +347,7 @@ export function AvailabilityGrid({ bookings, forced, requestedHover, legendReque
             </div>
           </div>
         </div>
-        {UNITS.map((u, r) => (
+        {units.map((u, r) => (
           <div className="ag-row" key={r}>
             <div className="ag-left">
               <span style={{ width: 91 }}>Cedar Valley</span>
@@ -268,12 +378,20 @@ export function AvailabilityGrid({ bookings, forced, requestedHover, legendReque
                 return (
                   <div
                     key={bi}
-                    className={`ag-bk ${b.kind} ${active && active.type === 'booking' && active.index === bi ? 'hot' : ''}`}
+                    className={`ag-bk ${b.kind} ${(active && active.type === 'booking' && active.index === bi) || b.selected ? 'hot' : ''} ${drag && drag.index === bi ? 'ghosted' : ''} ${onMove && b.kind !== 'ooo' && b.kind !== 'held' ? 'movable' : ''}`}
                     style={{ left: `calc(${(b.start / 16) * 100}% + 2px)`, width: `calc(${(b.len / 16) * 100}% - 4px)` }}
                     onMouseEnter={() => setHover({ type: 'booking', index: bi })}
+                    onMouseDown={(e) => b.kind !== 'ooo' && b.kind !== 'held' && begin(e, bi, 'move')}
                   >
                     <b>{b.name}</b>
-                    {b.kind !== 'ooo' && <span>{b.kind === 'pending' ? 'Pending Approval' : 'Confirmed'}</span>}
+                    {b.kind !== 'ooo' && <span>{b.sub ?? (b.kind === 'pending' ? 'Pending Approval' : 'Confirmed')}</span>}
+                    {onResize && b.kind === 'confirmed' && (
+                      <i
+                        className="ag-handle"
+                        title="Drag to extend the stay"
+                        onMouseDown={(e) => begin(e, bi, 'resize')}
+                      />
+                    )}
                   </div>
                 )
               })}
@@ -323,16 +441,37 @@ export function AvailabilityGrid({ bookings, forced, requestedHover, legendReque
             </div>
           </div>
         ))}
+        {drag && <DragGhost drag={drag} b={bookings[drag.index]} geom={geom()} tip={drag.mode === 'resize' ? resizeTip?.(drag.index, drag.len) : undefined} />}
       </div>
       <div className="ag-legend">
         <span><i className="lg" /> Available</span>
         <span><i className="lg c" /> Confirmed</span>
-        <span><i className="lg p" /> Pending Approval</span>
+        <span><i className="lg p" /> {legendPending}</span>
         <span><i className="lg o" /> Out of Order</span>
         <span><i className="lg w" /> Weekend</span>
         {legendRequested && <span><i className="lg r" /> Requested stay</span>}
         <span style={{ marginLeft: 'auto' }}>Showing 11 of 44 units</span>
       </div>
     </div>
+  )
+}
+
+function DragGhost({ drag, b, geom, tip }: { drag: Drag; b: Booking; geom: { rowTops: number[]; left: number; cellW: number; rowH: number } | null; tip?: string }) {
+  if (!geom) return null
+  const top = geom.rowTops[drag.row] + 4
+  const left = geom.left + b.start * geom.cellW + 2
+  const width = drag.len * geom.cellW - 4
+  return (
+    <>
+      <div className={`ag-bk ${b.kind} ag-ghost`} style={{ top, left, width, height: geom.rowH - 8, bottom: 'auto' }}>
+        <b>{b.name}</b>
+        <span>{b.sub ?? (b.kind === 'pending' ? 'Pending Approval' : 'Confirmed')}</span>
+      </div>
+      {tip && (
+        <div className="slds-popover slds-popover_tooltip ag-tip" role="tooltip" style={{ top: top - 40, left: left + width - 70, transition: 'left .3s' }}>
+          {tip}
+        </div>
+      )}
+    </>
   )
 }

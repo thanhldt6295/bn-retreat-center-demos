@@ -109,6 +109,7 @@ export function Modal({
   footer,
   width,
   stacked,
+  top,
 }: {
   title: string
   children: ReactNode
@@ -116,11 +117,13 @@ export function Modal({
   width?: number
   /** modal stacked over another modal (higher layer, lighter backdrop) */
   stacked?: boolean
+  /** distance from the top of the page (default: vertically centred) */
+  top?: number
 }) {
   return (
     <>
       <section role="dialog" tabIndex={-1} aria-modal="true" aria-label={title} className="slds-modal slds-fade-in-open" style={stacked ? { zIndex: 9101 } : undefined}>
-        <div className="slds-modal__container" style={{ width: width ?? 760, maxWidth: 'calc(100vw - 48px)', margin: '0 auto' }}>
+        <div className="slds-modal__container" style={{ width: width ?? 760, maxWidth: 'calc(100vw - 48px)', margin: top === undefined ? '0 auto' : `${top}px auto 0`, alignSelf: top === undefined ? undefined : 'flex-start' }}>
           <button className="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" style={{ background: '#fff', borderRadius: '50%' }}>
             <Icon name="close" size="x-small" color="#0250d9" />
           </button>
