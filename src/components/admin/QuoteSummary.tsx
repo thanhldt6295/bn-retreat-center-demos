@@ -1,8 +1,9 @@
 import { money, quote } from '../../data/demo'
 
-const box = { border: '1px solid #c9c9c9', borderRadius: 10, padding: '14px 14px', marginBottom: 12 } as const
-const row = { display: 'flex', justifyContent: 'space-between', padding: '3px 0', fontSize: 13 } as const
-const hd = { fontWeight: 700, color: '#032d60', fontSize: 14, margin: '4px 0 6px' } as const
+/* Figma 184:8547 / 184:8565: boxes with 1px #c9c9c9, radius 8, padding 16, gap 8; headings 14/19 bold #03234d; lines 13/18 #2e2e2e */
+const box = { border: '1px solid #c9c9c9', borderRadius: 8, padding: 16, display: 'flex', flexDirection: 'column', gap: 8 } as const
+const row = { display: 'flex', justifyContent: 'space-between', fontSize: 13, lineHeight: '18px', color: '#2e2e2e' } as const
+const hd = { fontWeight: 700, color: '#03234d', fontSize: 14, lineHeight: '19px' } as const
 
 /** Space / Rooms / Add-ons + totals box (wizard step 4 and New Reservation step 2). */
 export function QuoteSummary({ lineStyle }: { lineStyle: 'at' | 'for' }) {
@@ -42,9 +43,9 @@ export function QuoteSummary({ lineStyle }: { lineStyle: 'at' | 'for' }) {
           <span>Taxes</span>
           <span>{money(quote.tax)}</span>
         </div>
-        <div style={{ ...row, alignItems: 'center' }}>
-          <b style={{ color: '#032d60', fontSize: 14 }}>Grand Total</b>
-          <b style={{ color: '#032d60', fontSize: 22 }}>{money(quote.total)}</b>
+        <div style={{ display: 'flex', justifyContent: 'space-between', color: '#03234d' }}>
+          <b style={{ fontSize: 14, lineHeight: '19px' }}>Grand Total</b>
+          <b style={{ fontSize: 20, lineHeight: '28px', fontWeight: 590 }}>{money(quote.total)}</b>
         </div>
       </div>
     </>

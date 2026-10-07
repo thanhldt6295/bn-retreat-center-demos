@@ -281,21 +281,22 @@ export function BgoConfirmed({ step, next, prev, goto }: SceneProps) {
   return (
     <BgoPage confirmed onConvert={() => goto('4.1')}>
       {n > 0 && (
-        <Modal title="New Reservation" width={650} footer={footer}>
+        <Modal title="New Reservation" width={720} footer={footer}>
+          <div className="lds-wizcol" style={{ paddingBottom: 8 }}>
           <Stepper steps={['Reservation info', 'Review & book']} current={n} />
           <div className="lds-stepbody" key={n}>
             {n === 1 ? (
               <>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                   <Field label="GB Code"><Input value={group.code} /></Field>
                   <Field label="Group Name"><Input value={`Retreat – ${group.name}`} /></Field>
                 </div>
-                <div className="lds-section" style={{ marginTop: 14 }}>Reservation Info</div>
+                <div className="lds-section">Reservation Info</div>
                 <div style={{ display: 'flex', gap: 16, alignItems: 'flex-end' }}>
                   <Field label="Status" style={{ flex: 1 }}><Input value="Pending Approval" disabled /></Field>
-                  <Field label="Color"><div style={{ width: 36, height: 30, background: '#fbd354', borderRadius: 4 }} /></Field>
+                  <Field label="Color"><div style={{ width: 40, height: 32, background: '#fad659', borderRadius: 6 }} /></Field>
                 </div>
-                <Field label="Notes" style={{ marginTop: 12 }}>
+                <Field label="Notes">
                   <TextArea rows={2} value={`Group reservation for ${group.code}. Assign rooms after approval.`} />
                 </Field>
               </>
@@ -310,6 +311,7 @@ export function BgoConfirmed({ step, next, prev, goto }: SceneProps) {
                 </Field>
               </>
             )}
+          </div>
           </div>
         </Modal>
       )}

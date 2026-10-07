@@ -1,0 +1,57 @@
+/* Reservation Invoice modal · Figma 185:15874 */
+.inv-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 4px 0 8px;
+}
+.inv-id {
+  font-size: 16px;
+  line-height: 22px;
+  color: #03234d;
+}
+.inv-row {
+  display: flex;
+  gap: 16px;
+}
+.inv-row > * {
+  flex: 1;
+  min-width: 0;
+}
+.inv-tbl {
+  width: 100%;
+}
+.slds-scope .inv-tbl th {
+  height: 36px;
+}
+.slds-scope .inv-tbl td {
+  height: 40px;
+}
+.inv-tot {
+  border: 1px solid #c9c9c9;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 18px;
+  color: #2e2e2e;
+}
+.inv-tot > div {
+  display: flex;
+  justify-content: space-between;
+}
+.inv-tot .bal {
+  color: #03234d;
+  align-items: flex-start;
+}
+.inv-tot .bal b:first-child {
+  font-size: 14px;
+  line-height: 19px;
+}
+.inv-tot .bal b:last-child {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 590;
+}
