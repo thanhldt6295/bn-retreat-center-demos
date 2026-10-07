@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from 'react'
+import { MailShell } from '../../components/mail/Mail'
 import { ActionButton } from '../../components/shared/ActionButton'
 import { useTypedFields } from '../../components/shared/typing'
 import { GUEST_TABS, PlainShell, PortalShell } from '../../components/guest/Guest'
@@ -61,6 +62,15 @@ const SaveNote = ({ tail }: { tail: string }) => (
 /* ---------- I1 · room invitation email (Figma 267:274) ---------- */
 export function I1({ goto }: SceneProps) {
   return (
+    <MailShell
+      meta={{
+        box: { name: 'Elena Rossi', role: 'Guest', email: 'elena.rossi@horizon.example' },
+        subject: 'Maya Thompson reserved a room for you',
+        from: { name: 'Maya Thompson', email: 'retreats@cedarvalley.example', color: '#0b5d49' },
+        date: 'Sep 26, 2026',
+        snippet: 'Confirm it and pay for your own room at the group rate.',
+      }}
+    >
     <div className="em">
       <div className="em-subject">
         <b>Maya Thompson reserved a room for you</b>
@@ -95,6 +105,7 @@ export function I1({ goto }: SceneProps) {
         </div>
       </div>
     </div>
+    </MailShell>
   )
 }
 

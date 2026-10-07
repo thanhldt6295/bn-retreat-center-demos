@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { ActionButton } from '../../components/shared/ActionButton'
 import { agenda, group, money, organizer, quote, timeline, venue } from '../../data/demo'
 import type { SceneProps } from '../../player/Player'
+import { MailShell } from '../../components/mail/Mail'
 import './email-viewer.css'
 
 /* ---------------- G3 quote email (Figma 192:7775) ---------------- */
@@ -12,6 +13,15 @@ export function G3({ next }: SceneProps) {
     [quote.catering.name, quote.catering.qty, '—', money(quote.catering.rate, 0), money(quote.catering.total, 0)],
   ]
   return (
+    <MailShell
+      meta={{
+        box: { name: organizer.name, role: 'Organizer', email: organizer.email },
+        subject: 'Group Rate Quote · your private link inside',
+        from: { name: venue.name, email: venue.email },
+        date: 'Sep 12, 2026',
+        snippet: 'Your group quote for the Horizon Foundation retreat is ready.',
+      }}
+    >
     <div className="em">
       <div className="em-subject">
         <b>Group Rate Quote · your private link inside</b>
@@ -87,6 +97,7 @@ export function G3({ next }: SceneProps) {
         </div>
       </div>
     </div>
+    </MailShell>
   )
 }
 

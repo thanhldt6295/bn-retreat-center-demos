@@ -331,3 +331,184 @@
 .rv-t1 .slds-badge {
   align-self: center;
 }
+
+/* ---- Info cards · Figma 268:13403 ---- */
+.rv-icard {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.rv-icard h2 {
+  margin: 0;
+  font-weight: 590;
+  color: #5c5c5c;
+}
+.rv-inner {
+  padding: 16px 16px 0;
+  gap: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+.rv-inner > div:first-child,
+.rv-inner > .rv-dates {
+  margin: 0;
+}
+.rv-dates {
+  gap: 16px;
+}
+.rv-dates .slds-form-element {
+  width: auto;
+  flex: 1;
+  min-width: 0;
+}
+.rv-meta {
+  gap: 24px;
+}
+.rv-meta > div {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.rv-meta > div > :first-child {
+  font-size: 12px;
+  line-height: 17px;
+  color: #5c5c5c;
+}
+.rv-meta > div > :nth-child(2) {
+  font-size: 14px;
+  line-height: 19px;
+  color: #2e2e2e;
+}
+.rv-meta b {
+  font-weight: 700;
+  color: #03234d;
+}
+.rv-foot {
+  border-top: 1px solid #c9c9c9;
+  padding: 12px 0 16px;
+}
+.rv-total span {
+  font-size: 13px;
+  line-height: 18px;
+}
+.rv-total b {
+  font-weight: 590;
+}
+.rv-contact {
+  gap: 8px;
+  align-items: flex-end;
+}
+.rv-meta .lds-lbl {
+  font-size: 12px;
+  line-height: 17px;
+  color: #5c5c5c;
+  margin: 0;
+}
+.rv-meta > div > b:nth-child(2) {
+  color: #03234d;
+}
+.rv-meta > div > a:nth-child(2) {
+  color: #0250d9;
+  font-size: 13px;
+  line-height: 18px;
+}
+.rv-meta .lds-lbl {
+  font-weight: 400;
+}
+
+/* ---- Record header · Figma 268:13383 ---- */
+.rv-head {
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+.rv-t1,
+.rv-t2 {
+  gap: 8px;
+  font-size: 13px;
+  line-height: 18px;
+  color: #5c5c5c;
+}
+.rv-t1 {
+  align-items: baseline;
+}
+.rv-t2 {
+  margin-top: 4px;
+  align-items: center;
+}
+.rv-num {
+  font-weight: 590;
+  color: #0250d9;
+}
+.rv-head-a {
+  gap: 8px;
+}
+
+/* ---- Room block usage · Figma 268:16344 ---- */
+.rv-block {
+  padding: 16px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.rv-block-h h2 {
+  font-weight: 590;
+  color: #5c5c5c;
+}
+.rv-block-h span {
+  font-size: 13px;
+  line-height: 18px;
+  color: #5c5c5c;
+}
+.rv-stats {
+  margin-top: 0;
+  gap: 32px;
+}
+.rv-stats > div {
+  gap: 4px;
+}
+.rv-stats > div span {
+  font-size: 12px;
+  line-height: 17px;
+  font-weight: 700;
+  color: #5c5c5c;
+}
+.rv-stats b {
+  font-weight: 590;
+}
+.rv-bars {
+  margin-top: 0;
+  gap: 24px;
+}
+.rv-bars > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.rv-bars .l {
+  line-height: 18px;
+  color: #5c5c5c;
+}
+.rv-bars .l span:first-child {
+  font-weight: 700;
+  color: #2e2e2e;
+}
+.rv-bars .p {
+  margin-top: 0;
+  background: #f3f3f3;
+}
+
+/* ---- Data table container + badge/amount cells · Figma 268:13454 ---- */
+.rv-tbl {
+  border-radius: 12px;
+}
+.rv-amt b {
+  font-size: 14px;
+  line-height: 19px;
+}
+.slds-scope .rv-tbl .slds-table td:has(.slds-badge),
+.slds-scope .rv-tbl .slds-table td:has(.rv-amt) {
+  padding-left: 12px;
+}

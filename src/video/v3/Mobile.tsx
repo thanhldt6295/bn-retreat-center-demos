@@ -67,8 +67,8 @@ const H = ({ t, s }: { t: string; s?: string }) => (
 
 /* ---- organizer ---- */
 export const MO0 = ({ goto }: SceneProps) => (
-  <div className="mb mb-email">
-    <SecureEmail
+  <SecureEmail
+      mail={{ box: { name: 'Maya Thompson', role: 'Organizer', email: 'maya.thompson@horizon.example' }, subject: 'Your event portal is open for rooms and guests', from: { name: 'Cedar Valley Retreat & Conference Center', email: 'retreats@cedarvalley.example' }, date: 'Sep 22', snippet: 'Use the same private link as before to assign rooms.' }}
       subject="Your event portal is open for rooms and guests"
       hi="Hi Maya,"
       lead="Your booking is confirmed. Use the same private link as before to assign rooms, invite guests and see invoices, documents and the schedule. No account or password is needed."
@@ -77,7 +77,6 @@ export const MO0 = ({ goto }: SceneProps) => (
       can={['Group overview', 'Room allocation and guest list', 'BEO and contract', 'Invoices, deposit and balance', 'Schedule and meals', 'Share the group code and invite guests']}
       onOpen={() => goto('MO1')}
     />
-  </div>
 )
 
 export function MOrg({ step, goto, next }: SceneProps) {

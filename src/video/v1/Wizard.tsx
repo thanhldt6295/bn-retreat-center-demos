@@ -329,7 +329,7 @@ function AddOns({ onApply }: { onApply: () => void }) {
         </thead>
         <tbody>
           {addOnCatalog.map((a) => (
-            <tr key={a.name} className="slds-hint-parent">
+            <tr key={a.name} className="slds-hint-parent" style={{ height: 44 }}>
               <td>
                 <Check on={'checked' in a && a.checked} />
               </td>

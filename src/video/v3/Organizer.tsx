@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { MailShell, type MailMeta } from '../../components/mail/Mail'
 import { ActionButton } from '../../components/shared/ActionButton'
 import { PortalShell, GUEST_TABS } from '../../components/guest/Guest'
 import { afterGuestBookings, agenda, group, money, quote, venue } from '../../data/demo'
@@ -45,6 +46,7 @@ export function GuestShell({ active, goto, wide, children }: { active: string; g
 
 /* ---------- email shell (O0 / U0) ---------- */
 export function SecureEmail({
+  mail,
   subject,
   hi,
   lead,
@@ -53,6 +55,7 @@ export function SecureEmail({
   can,
   onOpen,
 }: {
+  mail: MailMeta
   subject: string
   hi: string
   lead: string
@@ -62,6 +65,7 @@ export function SecureEmail({
   onOpen: () => void
 }) {
   return (
+    <MailShell meta={mail}>
     <div className="em">
       <div className="em-subject">
         <b>{subject}</b>
@@ -93,11 +97,13 @@ export function SecureEmail({
         </div>
       </div>
     </div>
+    </MailShell>
   )
 }
 
 export const O0 = ({ goto }: SceneProps) => (
   <SecureEmail
+    mail={{ box: { name: 'Maya Thompson', role: 'Organizer', email: 'maya.thompson@horizon.example' }, subject: 'Your event portal is open for rooms and guests', from: { name: venue.name, email: venue.email }, date: 'Sep 22, 2026', snippet: 'Use the same private link as before to assign rooms and invite guests.' }}
     subject="Your event portal is open for rooms and guests"
     hi="Hi Maya,"
     lead="Your booking is confirmed. Use the same private link as before to assign rooms, invite guests and see invoices, documents and the schedule. No account or password is needed."

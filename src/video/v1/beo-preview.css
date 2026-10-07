@@ -1,0 +1,295 @@
+/* 3.1b BEO preview · Figma 286:13379 */
+.bp-page {
+  padding: 20px 24px;
+}
+.bp-head {
+  display: flex;
+  justify-content: space-between;
+  height: 76px;
+  margin-bottom: 16px;
+}
+.bp-head .s {
+  font-size: 13px;
+  line-height: 18px;
+  color: #2e2e2e;
+}
+.bp-head .t {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 4px 0;
+}
+.bp-head h1 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 400;
+  color: #03234d;
+}
+.bp-act {
+  display: flex;
+  gap: 8px;
+  align-self: flex-start;
+  margin-top: 22px;
+}
+.bp-cols {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.bp-stage-card {
+  width: 956px;
+  height: 828px;
+  position: relative;
+  flex: none;
+}
+.bp-tabs {
+  position: absolute;
+  left: 318px;
+  top: 16px;
+  display: flex;
+  gap: 0;
+  width: 320px;
+}
+.bp-tabs .slds-button {
+  flex: 1;
+  margin: 0;
+  justify-content: center;
+}
+.bp-stage {
+  position: absolute;
+  left: 41px;
+  top: 64px;
+  width: 874px;
+  height: 732px;
+  background: #ededed;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.bp-doc {
+  position: absolute;
+  left: 40px;
+  top: 28px;
+  width: 794px;
+  min-height: 676px;
+  background: #fff;
+  padding: 48px 56px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family: Inter, system-ui, sans-serif;
+  color: #0b1f17;
+}
+.bp-doc p {
+  margin: 0;
+}
+.bp-doc .hd {
+  display: flex;
+  justify-content: space-between;
+}
+.bp-doc .brand {
+  font-weight: 700;
+  font-size: 16px;
+  color: #06503f;
+  margin-bottom: 4px;
+}
+.bp-doc .sub {
+  font-size: 11px;
+  color: #69716c;
+}
+.bp-doc .id {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  font-weight: 700;
+}
+.bp-doc .id p {
+  font-size: 11px;
+  color: #69716c;
+}
+.bp-doc .id b {
+  font-size: 22px;
+}
+.bp-doc .meta {
+  display: flex;
+  gap: 24px;
+  font-weight: 600;
+}
+.bp-doc .meta > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.bp-doc .meta .k {
+  font-size: 10px;
+  color: #69716c;
+}
+.bp-doc .meta .v {
+  font-size: 12px;
+}
+.bp-doc .sec {
+  font-size: 11px;
+  font-weight: 700;
+  color: #06503f;
+}
+.bp-t .h,
+.bp-t .r {
+  display: flex;
+  padding: 8px 0;
+}
+.bp-t .h {
+  border-bottom: 1px solid #0b1f17;
+  font-size: 10px;
+  font-weight: 600;
+  color: #69716c;
+}
+.bp-t .r {
+  border-bottom: 1px solid #d9ddd8;
+  font-size: 11px;
+}
+.bp-t p.w300 {
+  width: 300px;
+}
+.bp-t p.w60 {
+  width: 60px;
+}
+.bp-t p.w120 {
+  width: 120px;
+}
+.bp-t p.w202 {
+  width: 202px;
+}
+.bp-t p.r {
+  text-align: right;
+}
+.bp-doc .tot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  font-size: 12px;
+}
+.bp-doc .tot > div {
+  display: flex;
+  gap: 24px;
+}
+.bp-doc .tot span {
+  color: #69716c;
+}
+.bp-doc .tot b {
+  width: 110px;
+  text-align: right;
+  font-weight: 600;
+}
+.bp-doc .tot .g {
+  color: #0b1f17;
+}
+.bp-doc .tot .g span {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0b1f17;
+}
+.bp-doc .tot .g b {
+  font-size: 16px;
+  font-weight: 700;
+}
+.bp-doc .sig {
+  display: flex;
+  gap: 40px;
+  padding-top: 20px;
+}
+.bp-doc .sig > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.bp-doc .sig i {
+  display: block;
+  width: 280px;
+  height: 1px;
+  background: #0b1f17;
+}
+.bp-doc .sig b {
+  font-size: 10px;
+  font-weight: 600;
+  color: #69716c;
+}
+.bp-doc .sig span {
+  font-size: 10px;
+  color: #69716c;
+}
+
+/* side */
+.bp-side {
+  width: 420px;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.bp-es {
+  padding: 16px 20px 20px;
+  height: 588px;
+}
+.bp-es h2,
+.bp-st h2 {
+  margin: 0 0 16px;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 400;
+  color: #5c5c5c;
+}
+.bp-es .l {
+  display: block;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 590;
+  color: #2e2e2e;
+  margin-bottom: 16px;
+}
+.bp-es .slds-checkbox {
+  display: block;
+  margin-bottom: 16px;
+}
+.bp-es .sg {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 65px;
+  border-bottom: 1px solid #c9c9c9;
+  margin-bottom: 16px;
+}
+.bp-es .sg b {
+  display: block;
+  font-size: 13px;
+  font-weight: 590;
+  color: #03234d;
+}
+.bp-es .sg span {
+  font-size: 12px;
+  color: #5c5c5c;
+}
+.bp-es .f {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+.bp-es .lb {
+  font-size: 13px;
+  line-height: 18px;
+  color: #2e2e2e;
+  margin-bottom: 4px;
+}
+.bp-st {
+  padding: 16px 20px 20px;
+  height: 160px;
+}
+.bp-st p {
+  margin: 0 0 8px;
+  font-size: 13px;
+  line-height: 18px;
+  color: #2e2e2e;
+}

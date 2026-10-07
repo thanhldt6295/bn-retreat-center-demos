@@ -8,6 +8,7 @@ import { Card, Head, KV, Page, Pill, Qr, Stat, SumLine, Table, Link } from './ui
 
 export const U0 = ({ goto }: SceneProps) => (
   <SecureEmail
+    mail={{ box: { name: 'Priya Nair', role: 'Guest', email: 'priya@horizon.example' }, subject: 'Your stay portal is ready', from: { name: 'Cedar Valley Retreat & Conference Center', email: 'retreats@cedarvalley.example' }, date: 'Sep 24, 2026', snippet: 'Use this private link to see your room, schedule and charges.' }}
     subject="Your stay portal is ready"
     hi="Hi Priya,"
     lead="Use this private link to see your room, schedule, documents and charges, and to add activities. No account or password is needed: the link is unique to you."

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { MailShell } from '../../components/mail/Mail'
 import { ActionButton } from '../../components/shared/ActionButton'
 import { PlainShell } from '../../components/guest/Guest'
 import { PosHead, PosPill, PosQr, PosShell } from '../../components/pos/Pos'
@@ -14,6 +15,15 @@ import './v4.css'
 /* ---------------- Q1 check-in e-mail (Figma 263:272) ---------------- */
 export function Q1({ goto }: SceneProps) {
   return (
+    <MailShell
+      meta={{
+        box: { name: 'Priya Nair', role: 'Guest', email: 'priya@horizon.example' },
+        subject: 'Your check-in pass',
+        from: { name: venue.name, email: venue.email },
+        date: 'Sep 24, 2026',
+        snippet: 'Show this QR code at the front desk when you arrive on Thu, Nov 12.',
+      }}
+    >
     <div className="em">
       <div className="em-subject">
         <b>Your check-in pass</b>
@@ -60,6 +70,7 @@ export function Q1({ goto }: SceneProps) {
         </div>
       </div>
     </div>
+    </MailShell>
   )
 }
 

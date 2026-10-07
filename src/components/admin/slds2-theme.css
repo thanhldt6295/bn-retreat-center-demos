@@ -374,3 +374,28 @@
   box-shadow: 0 0 0 1px #0250d9;
   outline: 0;
 }
+
+/* ---- Field label + input metrics (Figma Input / Combobox / Datepicker: label 13/18 #5c5c5c, field px 8) ---- */
+.slds-scope .slds-form-element__label {
+  font-size: 13px;
+  line-height: 18px;
+  color: #5c5c5c;
+  margin-bottom: 4px;
+}
+.slds-scope .slds-input,
+.slds-scope .slds-select {
+  padding: 2px 8px;
+}
+.slds-scope .slds-input-has-icon_right .slds-input {
+  padding-right: 32px;
+}
+.slds-scope .slds-input-has-icon_left .slds-input {
+  padding-left: 32px;
+}
+.slds-scope .slds-textarea {
+  padding: 6px 8px;
+}
+.slds-scope .slds-text-link {
+  font-size: 13px;
+  line-height: 18px;
+}
