@@ -411,3 +411,8 @@
   margin-bottom: 0;
   max-height: calc(100vh - 32px);
 }
+
+/* two stacked modals: one dim layer (Figma ≈ #373737 over page and parent modal) */
+.slds-scope:has(.stacked-modal) .slds-backdrop:not(.stk) {
+  background: transparent;
+}

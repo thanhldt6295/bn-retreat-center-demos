@@ -122,7 +122,7 @@ export function Modal({
 }) {
   return (
     <>
-      <section role="dialog" tabIndex={-1} aria-modal="true" aria-label={title} className="slds-modal slds-fade-in-open" style={stacked ? { zIndex: 9101 } : undefined}>
+      <section role="dialog" tabIndex={-1} aria-modal="true" aria-label={title} className={`slds-modal slds-fade-in-open ${stacked ? "stacked-modal" : ""}`} style={stacked ? { zIndex: 9101 } : undefined}>
         <div className="slds-modal__container" style={{ width: width ?? 760, maxWidth: 'calc(100vw - 48px)', margin: top === undefined ? '0 auto' : `${top}px auto 0`, alignSelf: top === undefined ? undefined : 'flex-start' }}>
           <button className="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" style={{ background: '#fff', borderRadius: '50%' }}>
             <Icon name="close" size="x-small" color="#0250d9" />
@@ -136,7 +136,7 @@ export function Modal({
           {footer && <div className="slds-modal__footer">{footer}</div>}
         </div>
       </section>
-      <div className="slds-backdrop slds-backdrop_open" style={stacked ? { background: 'rgba(8,7,7,0.41)', zIndex: 9100 } : undefined} />
+      <div className={`slds-backdrop slds-backdrop_open ${stacked ? 'stk' : ''}`} style={stacked ? { background: 'rgba(8,7,7,0.78)', zIndex: 9100 } : undefined} />
     </>
   )
 }

@@ -35,7 +35,7 @@ export function Wizard({ step, next, prev, goto }: SceneProps) {
           Next
         </ActionButton>
       </>
-    ) : step === '2.2' ? (
+    ) : step === '2.2' || step === '2.2b' || step === '2.3' ? (
       <>
         <Neutral onClick={prev}>Back</Neutral>
         <ActionButton className="slds-button slds-button_brand" loadingMs={600} onDone={() => goto('2.4')}>
