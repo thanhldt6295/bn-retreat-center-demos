@@ -399,3 +399,15 @@
   font-size: 13px;
   line-height: 18px;
 }
+
+/* Modals are always centred in the viewport (both axes) */
+.slds-scope .slds-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.slds-scope .slds-modal__container {
+  margin-top: 0;
+  margin-bottom: 0;
+  max-height: calc(100vh - 32px);
+}

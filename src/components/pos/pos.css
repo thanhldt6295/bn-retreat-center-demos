@@ -559,3 +559,7 @@
 .po-items button:active {
   transform: scale(0.98);
 }
+.pos-back-dim {
+  align-items: center;
+  padding-top: 0;
+}

@@ -231,7 +231,6 @@ function AssignRoomModal({ onCancel, onAssign }: { onCancel: () => void; onAssig
     <Modal
       title="Assign Room"
       width={640}
-      top={342}
       footer={
         <>
           <button className="slds-button slds-button_neutral" onClick={onCancel}>
@@ -315,7 +314,6 @@ function ChangeRoomModal({ onCancel, onChange }: { onCancel: () => void; onChang
     <Modal
       title="Change room"
       width={640}
-      top={177}
       footer={
         <>
           <button className="slds-button slds-button_neutral" onClick={onCancel}>
