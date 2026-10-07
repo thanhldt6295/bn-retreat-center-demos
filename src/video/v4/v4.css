@@ -1,0 +1,254 @@
+/* V4 · QR e-mail card, check-in sheets, POS order screens */
+.q-card {
+  border: 1px solid #d9ddd8;
+  border-radius: 20px;
+  padding: 21px 21px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+}
+.q-card b {
+  color: #06503f;
+  font-size: 14px;
+}
+.q-card.big {
+  padding: 21px 21px 14px;
+}
+.q-card.big b {
+  font-size: 16px;
+}
+
+/* check-in sheets */
+.pos-find {
+  height: 66px;
+  border: 3px solid #0b66ff;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 18px;
+}
+.pos-matches {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7088;
+  margin-bottom: 10px;
+}
+.pos-match {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  border: 1px solid #e6e8f0;
+  border-radius: 14px;
+  margin-bottom: 14px;
+}
+.pos-match.on {
+  background: #e8f0ff;
+  border: 2px solid #0b66ff;
+}
+.pos-match > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.pos-match b {
+  font-size: 20px;
+  font-weight: 600;
+}
+.pos-match > div span {
+  font-size: 12px;
+  color: #6b7088;
+}
+.pos-guest {
+  display: flex;
+  gap: 16px;
+  padding: 18px 22px;
+  align-items: center;
+}
+.pos-guest b {
+  font-size: 26px;
+  font-weight: 600;
+}
+.pos-av.big {
+  width: 76px;
+  height: 76px;
+  border-radius: 38px;
+  font-size: 26px;
+}
+.pos-h3 {
+  margin: 26px 0 12px;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: inherit;
+}
+.pos-sheet .pos-btn.block {
+  margin-top: auto;
+}
+.pos-terms {
+  padding: 22px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 15px;
+}
+.pos-terms span {
+  font-size: 14px;
+  color: #6b7088;
+  margin-bottom: 8px;
+}
+.pos-sig-l {
+  margin: 64px 0 12px;
+  font-size: 18px;
+  font-weight: 600;
+}
+.pos-sig {
+  height: 168px;
+  border: 2px dashed #e1e4ee;
+  border-radius: 16px;
+  position: relative;
+  background: #fff;
+}
+.pos-sig .hint {
+  position: absolute;
+  left: 22px;
+  bottom: 14px;
+  font-size: 13px;
+  color: #6b7088;
+}
+.pos-sig .clear {
+  position: absolute;
+  right: 22px;
+  bottom: 12px;
+  border: 0;
+  background: none;
+  color: #0b66ff;
+  font-weight: 600;
+  font-size: 15px;
+}
+.pos-sig path.sig {
+  fill: none;
+  stroke: #1c2040;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  transform: translate(14px, 6px) scale(1.15);
+}
+.pos-sig path.sig.draw,
+.pos-sig path.sig.done {
+  stroke-dasharray: 520;
+  stroke-dashoffset: 520;
+  animation: pos-sign 1.2s ease-out forwards;
+}
+.pos-sig path.sig.done {
+  animation-duration: 0.01s;
+  stroke-dashoffset: 0;
+}
+@keyframes pos-sign {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.pos-agree {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 18px 0 40px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.pos-agree .bx {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  border: 2px solid #d5d8e4;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  transition: background-color 0.2s;
+}
+.pos-agree .bx.on {
+  background: #0b66ff;
+  border-color: #0b66ff;
+}
+.pos-agree .bx .slds-icon {
+  fill: #fff;
+}
+.pos-sheet .pos-btn:not(.block):not(.out) {
+  align-self: flex-start;
+  width: 312px;
+}
+.pos-busy {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  font-size: 24px;
+}
+.pos-okbig {
+  width: 120px;
+  height: 120px;
+  border-radius: 60px;
+  background: #16a34a;
+  display: grid;
+  place-items: center;
+  margin-top: 6px;
+  animation: g7-pop 0.5s cubic-bezier(0.2, 1.4, 0.4, 1) both;
+}
+.pos-okbig .slds-icon {
+  fill: #fff;
+  width: 56px;
+  height: 56px;
+}
+.pos-info {
+  margin-top: 56px;
+  background: #e8f0ff;
+  color: #1456d6;
+  font-size: 14px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  align-self: flex-start;
+  margin-left: 0;
+}
+
+/* final card */
+.final-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin: 2.4cqw 0 2.6cqw;
+  text-align: left;
+}
+.final-list > div {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 1.2cqw;
+  padding: 1.4cqw;
+  color: #fff;
+}
+.final-list .n {
+  width: 2.4cqw;
+  height: 2.4cqw;
+  border-radius: 50%;
+  background: #f6c945;
+  color: #0b1f17;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 1.2cqw;
+  margin-bottom: 0.8cqw;
+}
+.final-list b {
+  display: block;
+  font-size: 1.35cqw;
+  margin-bottom: 0.4cqw;
+}
+.final-list span {
+  font-size: 1cqw;
+  opacity: 0.8;
+}

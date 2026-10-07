@@ -5,7 +5,7 @@ import Index from './Index'
 const V1 = lazy(() => import('./video/v1'))
 const V2 = lazy(() => import('./video/v2'))
 const V3 = lazy(() => import('./video/v3'))
-const Soon = lazy(() => import('./video/Soon'))
+const V4 = lazy(() => import('./video/v4'))
 
 export default function App() {
   return (
@@ -15,7 +15,7 @@ export default function App() {
         <Route path="/v1" element={<V1 />} />
         <Route path="/v2" element={<V2 />} />
         <Route path="/v3" element={<V3 />} />
-        <Route path="/v4" element={<Soon n={4} />} />
+        <Route path="/v4" element={<V4 />} />
         <Route path="*" element={<Index />} />
       </Routes>
     </Suspense>

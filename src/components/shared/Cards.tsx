@@ -63,9 +63,10 @@ export function TitleCard({ title, sub }: { title: string; sub: string }) {
   )
 }
 
-export function EndCard({ line, onCta }: { line: string; onCta?: () => void }) {
+export function EndCard({ line, onCta, eyebrow }: { line: string; onCta?: () => void; eyebrow?: string }) {
   return (
     <Card>
+      {eyebrow && <p className="card-fine" style={{ letterSpacing: '.12em', fontWeight: 700, opacity: 0.9 }}>{eyebrow}</p>}
       <h1 className="card-title" style={{ fontSize: '3.3cqw' }}>{line}</h1>
       <ActionButton className="card-cta" instant onDone={onCta}>
         Schedule a call

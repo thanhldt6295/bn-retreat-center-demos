@@ -328,3 +328,6 @@
 .rv-cur b {
   font-weight: 700;
 }
+.rv-t1 .slds-badge {
+  align-self: center;
+}

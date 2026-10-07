@@ -1,0 +1,139 @@
+/* Invoice and contact records (Figma 260:1084, 260:1848) */
+.rc-page {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.rc-head {
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 86px;
+}
+.rc-head .s {
+  font-size: 13px;
+  color: #5c5c5c;
+}
+.rc-head .t {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 24px;
+  line-height: 32px;
+}
+.rc-act {
+  display: flex;
+  gap: 8px;
+}
+.rc-av {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background: #e5e5e5;
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  color: #2e2e2e;
+  flex: none;
+}
+.rc-cols {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.rc-main {
+  padding: 16px 16px 16px;
+  flex: 1;
+}
+.rc-lcol {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+.rc-rcol,
+.rc-side {
+  width: 300px;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.rc-lcol .rc-main {
+  padding: 12px 16px 16px;
+}
+.rc-main h2,
+.rc-c h2 {
+  margin: 0 0 12px;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 400;
+  color: #5c5c5c;
+}
+.rc-lcol .rc-main h2 {
+  font-size: 15px;
+}
+.rc-main h2 small,
+.rc-c h2 small {
+  font-size: 13px;
+}
+.rc-c {
+  padding: 16px 20px 20px;
+}
+.rc-c .sl {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 8px;
+  color: #2e2e2e;
+}
+.rc-c .sl.b {
+  font-weight: 700;
+  color: #03234d;
+}
+.rc-c .sl.b span:last-child {
+  font-size: 18px;
+  font-weight: 700;
+}
+.rc-c .sl span:last-child {
+  animation: rq-bump 0.6s ease;
+}
+.rc-c .pm {
+  display: block;
+  font-size: 13px;
+  color: #03234d;
+}
+.rc-c .pd {
+  display: block;
+  font-size: 12px;
+  color: #5c5c5c;
+  margin-top: 2px;
+}
+.rc-c .doc {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.rc-c .doc b {
+  display: block;
+  font-size: 13px;
+  color: #03234d;
+}
+.rc-c .doc span {
+  font-size: 12px;
+  color: #5c5c5c;
+}
+.rv-stay {
+  background: #e5e5e5 !important;
+  color: #2e2e2e !important;
+}
+.rc-rcol {
+  width: 420px;
+}
+.rc-side {
+  width: 400px;
+}

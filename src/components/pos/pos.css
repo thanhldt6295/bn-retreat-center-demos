@@ -1,0 +1,540 @@
+/* Tablet POS · values from Figma 264:270 (check-in) and 251:270 (ordering); canvas 1366 × 1080 */
+.pos {
+  --navy: #1c2040;
+  --blue: #0b66ff;
+  --green: #16a34a;
+  --red: #e3355a;
+  --panel: #f3f4f9;
+  --muted: #6b7088;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  color: var(--navy);
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 16px;
+}
+.pos * {
+  box-sizing: border-box;
+}
+.pos button {
+  font-family: inherit;
+  cursor: pointer;
+}
+.pos-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  position: relative;
+}
+.pos-nav {
+  height: 101px;
+  background: #2b2d4f;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 24px;
+}
+.pos-nav button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 21px;
+  font-weight: 500;
+  padding: 14px 24px;
+  border-radius: 999px;
+}
+.pos-nav button .slds-icon {
+  fill: currentColor;
+  width: 20px;
+  height: 20px;
+}
+.pos-nav button.on {
+  background: #fff;
+  color: var(--navy);
+}
+
+/* header */
+.pos-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 28px 24px 0;
+}
+.pos-head h1 {
+  margin: 0;
+  font-size: 32px;
+  line-height: 38px;
+  font-weight: 700;
+  font-family: inherit;
+  color: var(--navy);
+}
+.pos-head p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+.pos-search {
+  width: 320px;
+  height: 46px;
+  border-radius: 10px;
+  background: #f1f2f7;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  font-size: 15px;
+  color: #8b90a6;
+  margin-top: 4px;
+}
+.pos-search .slds-icon {
+  fill: #8b90a6;
+  width: 20px;
+  height: 20px;
+}
+.pos-body {
+  flex: 1;
+  display: flex;
+  gap: 32px;
+  padding: 24px 24px 24px;
+  min-height: 0;
+}
+.pos-left {
+  width: 806px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.pos-how {
+  flex: 1;
+  background: var(--panel);
+  border-radius: 20px;
+  padding: 24px 32px;
+  align-self: stretch;
+  margin-bottom: 0;
+  max-height: 763px;
+}
+.pos-how h2 {
+  margin: 0 0 22px;
+  font-size: 22px;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--navy);
+}
+.pos-step {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+.pos-step .n {
+  width: 56px;
+  height: 56px;
+  border-radius: 28px;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  font-weight: 600;
+  flex: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+.pos-step.on .n {
+  background: var(--blue);
+  color: #fff;
+}
+.pos-step b {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+.pos-step span {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 2px;
+  max-width: 340px;
+  line-height: 18px;
+}
+
+/* scanner */
+.pos-scan {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+}
+.pos-scan h2 {
+  margin: 0 0 36px;
+  font-size: 32px;
+  font-weight: 700;
+  font-family: inherit;
+  transition: color 0.3s;
+}
+.pos-frame {
+  width: 412px;
+  height: 412px;
+  background: #eef0f6;
+  position: relative;
+  display: grid;
+  place-items: center;
+  transition: background-color 0.3s;
+}
+.pos-frame i {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  border: 0 solid var(--blue);
+  transition: border-color 0.3s;
+}
+.pos-frame i:nth-child(1) {
+  left: -4px;
+  top: -4px;
+  border-width: 6px 0 0 6px;
+  border-top-left-radius: 14px;
+}
+.pos-frame i:nth-child(2) {
+  right: -4px;
+  top: -4px;
+  border-width: 6px 6px 0 0;
+  border-top-right-radius: 14px;
+}
+.pos-frame i:nth-child(3) {
+  left: -4px;
+  bottom: -4px;
+  border-width: 0 0 6px 6px;
+  border-bottom-left-radius: 14px;
+}
+.pos-frame i:nth-child(4) {
+  right: -4px;
+  bottom: -4px;
+  border-width: 0 6px 6px 0;
+  border-bottom-right-radius: 14px;
+}
+.pos-frame.ok {
+  background: #e6f5ec;
+}
+.pos-frame.ok i {
+  border-color: var(--green);
+}
+.pos-frame.err i {
+  border-color: var(--red);
+}
+.pos-frame .beam {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--blue), transparent);
+  top: 6px;
+  animation: pos-beam 1.6s ease-in-out infinite alternate;
+}
+@keyframes pos-beam {
+  to {
+    top: calc(100% - 9px);
+  }
+}
+.pos-cap {
+  margin-top: 28px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.pos-help {
+  margin-top: auto;
+  height: 100px;
+  border-radius: 16px;
+  background: var(--panel);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  font-size: 14px;
+  color: var(--muted);
+  align-self: stretch;
+}
+.pos-help button {
+  height: 55px;
+  padding: 0 28px;
+  border-radius: 10px;
+  border: 2px solid var(--blue);
+  background: #fff;
+  color: var(--blue);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* buttons */
+.pos-btn {
+  height: 66px;
+  border-radius: 10px;
+  border: 0;
+  background: var(--blue);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 0 28px;
+  position: relative;
+  transition: filter 0.15s, transform 0.08s;
+}
+.pos-btn:hover {
+  filter: brightness(1.08);
+}
+.pos-btn:active {
+  transform: scale(0.98);
+}
+.pos-btn:disabled {
+  background: #a3c3ff;
+  cursor: not-allowed;
+  filter: none;
+}
+.pos-btn.ghost {
+  background: #f3f4f9;
+  color: var(--navy);
+}
+.pos-btn.out {
+  background: #fff;
+  border: 2px solid var(--blue);
+  color: var(--blue);
+}
+.pos-btn.red {
+  background: #ffe3e8;
+  color: var(--red);
+}
+.pos-btn.dang {
+  background: #fff;
+  border: 2px solid var(--red);
+  color: var(--red);
+}
+.pos-btn.block {
+  width: 100%;
+}
+.pos-btn.ab-loading .ab-spinner {
+  border-color: #fff;
+  border-right-color: transparent;
+}
+.pos-link {
+  color: var(--blue);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+.pos-back {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--muted);
+  margin: 6px 0 14px;
+}
+.pos-sheet h2 {
+  margin: 0;
+  font-size: 28px;
+  font-family: inherit;
+  font-weight: 700;
+}
+.pos-sheet > p {
+  margin: 6px 0 20px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* pills */
+.pos-pill {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.pos-pill.green {
+  background: #dff5e7;
+  color: #138a3f;
+}
+.pos-pill.blue {
+  background: #e4edff;
+  color: #1456d6;
+}
+
+/* cards / rows */
+.pos-card {
+  border: 1px solid #e6e8f0;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.pos-kv {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 52px;
+  align-items: center;
+  border-top: 1px solid #eceef5;
+  font-size: 15px;
+}
+.pos-kv:first-child {
+  border-top: 0;
+}
+.pos-kv span:first-child {
+  color: var(--muted);
+}
+.pos-kv b {
+  font-weight: 500;
+}
+.pos-av {
+  width: 56px;
+  height: 56px;
+  border-radius: 28px;
+  background: #e8f0ff;
+  color: #1456d6;
+  font-weight: 600;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  flex: none;
+}
+
+/* sheet top bar */
+.pos-bar {
+  height: 56px;
+  background: #dadada;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+.pos-bar b {
+  font-size: 20px;
+  font-weight: 500;
+}
+.pos-bar button {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  background: transparent;
+  color: var(--navy);
+}
+.pos-bar button .slds-icon {
+  fill: currentColor;
+  width: 18px;
+  height: 18px;
+}
+
+/* dialog */
+.pos-back-dim {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 22, 40, 0.55);
+  display: grid;
+  place-items: center;
+  z-index: 20;
+  animation: pos-fade 0.2s ease both;
+}
+.pos-dialog {
+  width: 605px;
+  border-radius: 20px;
+  background: #fff;
+  padding: 32px 40px 36px;
+  text-align: center;
+  animation: pos-pop 0.28s cubic-bezier(0.2, 1.1, 0.4, 1) both;
+}
+.pos-dialog .ok {
+  width: 88px;
+  height: 88px;
+  border-radius: 44px;
+  background: var(--green);
+  display: grid;
+  place-items: center;
+  margin: 0 auto 14px;
+}
+.pos-dialog h3 {
+  margin: 0 0 18px;
+  font-size: 32px;
+  font-weight: 700;
+  font-family: inherit;
+}
+.pos-dialog .sub {
+  font-size: 14px;
+  color: var(--muted);
+}
+.pos-dialog .big {
+  font-size: 40px;
+  font-weight: 700;
+  margin: 22px 0 18px;
+}
+.pos-dialog .note {
+  background: var(--panel);
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+.pos-dialog .note small {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 4px;
+}
+.pos-dialog .row {
+  display: flex;
+  gap: 20px;
+}
+.pos-dialog .row .pos-btn {
+  flex: 1;
+  height: 62px;
+}
+@keyframes pos-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes pos-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+}
+.pos-toast {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  background: #1c2040;
+  color: #fff;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 15px;
+  animation: pos-pop 0.3s ease both;
+}
+.pos-body {
+  padding-top: 48px;
+}
+.pos-dialog {
+  padding: 34px 40px 46px;
+}
+.pos-dialog h3 {
+  margin-bottom: 22px;
+  font-size: 34px;
+}
+.pos-dialog .big {
+  font-size: 44px;
+  margin: 26px 0 22px;
+}
+.pos-dialog .note {
+  margin-bottom: 24px;
+}
+.pos-back-dim {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+}
+.pos-back-dim {
+  align-items: start;
+  padding-top: 250px;
+}

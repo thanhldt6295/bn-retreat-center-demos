@@ -68,6 +68,14 @@ export type RvProps = {
   confirmed: boolean
   /** extra header buttons (e.g. Confirm Reservation) */
   headActions?: ReactNode
+  /** status badge next to the number, e.g. Checked in */
+  headBadge?: ReactNode
+  /** extra line under the group block, e.g. who checked the guest in */
+  headNote?: string
+  checkInDisabled?: boolean
+  checkOutDisabled?: boolean
+  /** sections after the rooms table (POS orders, services) */
+  afterRooms?: ReactNode
   start: string
   end: string
   onStart: (v: string) => void
@@ -103,6 +111,7 @@ export function ReservationRecord(p: RvProps) {
             <div className="rv-t1">
               <span>Reservation</span>
               <a className="slds-text-link rv-num">{p.number}</a>
+              {p.headBadge}
             </div>
             {p.groupBlock && (
               <div className="rv-t2">
@@ -110,12 +119,13 @@ export function ReservationRecord(p: RvProps) {
                 <a className="slds-text-link">{p.groupBlock}</a>
               </div>
             )}
+            {p.headNote && <div className="rv-t2">{p.headNote}</div>}
           </div>
           <div className="rv-head-a">
-            <button className="slds-button slds-button_neutral" disabled={!p.confirmed}>
+            <button className="slds-button slds-button_neutral" disabled={p.checkInDisabled ?? !p.confirmed}>
               Check-In
             </button>
-            <button className="slds-button slds-button_neutral" disabled={!p.confirmed}>
+            <button className="slds-button slds-button_neutral" disabled={p.checkOutDisabled ?? !p.confirmed}>
               Check-Out
             </button>
             {p.headActions}
@@ -294,6 +304,8 @@ export function ReservationRecord(p: RvProps) {
           <div className="rv-add">
             <button className="slds-button slds-button_neutral">Add</button>
           </div>
+
+          {p.afterRooms}
 
           {p.items && (
             <>
