@@ -318,3 +318,59 @@
   opacity: 1;
   background: rgba(8, 7, 7, 0.667);
 }
+
+/* ---- Data table: Header cell / Cell components (Figma 6:390, 6:405) ----
+   px spacing-2 (8), header 13/18 weight 590 #5c5c5c on #f3f3f3, cells 13/18 #5c5c5c, 1px #c9c9c9 rules */
+.slds-scope .lds-list-table th,
+.slds-scope .rv-tbl .slds-table th {
+  padding: 0 8px;
+  color: #5c5c5c !important;
+  background: #f3f3f3;
+  border-bottom: 1px solid #c9c9c9;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 590;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.slds-scope .lds-list-table td,
+.slds-scope .rv-tbl .slds-table td {
+  padding: 0 8px;
+  color: #5c5c5c;
+  font-size: 13px;
+  line-height: 18px;
+  border-top: 0;
+  border-bottom: 1px solid #c9c9c9;
+}
+.slds-scope .lds-list-table tr:last-child td,
+.slds-scope .rv-tbl .slds-table tr:last-child td {
+  border-bottom: 0;
+}
+.slds-scope .lds-list-table td.num {
+  padding: 0;
+}
+
+/* ---- Interaction states (Figma only draws Default; these follow the SLDS 2 pattern) ---- */
+.slds-scope .slds-button_brand:hover:not(:disabled) {
+  background: #0250d9;
+  border-color: #0250d9;
+}
+.slds-scope .slds-button_neutral:hover:not(:disabled) {
+  background: #f3f3f3;
+}
+.slds-scope .slds-button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+.slds-scope .slds-button:focus-visible,
+.slds-scope .slds-text-link:focus-visible,
+.slds-scope .slds-tabs_default__link:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #0250d9;
+}
+.slds-scope .slds-input:focus,
+.slds-scope .slds-select:focus,
+.slds-scope .slds-textarea:focus {
+  border-color: #0250d9;
+  box-shadow: 0 0 0 1px #0250d9;
+  outline: 0;
+}

@@ -538,3 +538,24 @@
   align-items: start;
   padding-top: 250px;
 }
+
+/* ---- Interaction states ---- */
+.pos button:focus-visible {
+  outline: 3px solid #0b66ff;
+  outline-offset: 2px;
+}
+.pos-nav button:hover:not(.on) {
+  background: rgba(255, 255, 255, 0.12);
+}
+.pos-btn.ghost:hover {
+  background: #e8eaf3;
+  filter: none;
+}
+.po-temps button:hover:not(.on),
+.po-opt-r .mod:hover {
+  background: #e8eaf3;
+}
+.po-cats button:active,
+.po-items button:active {
+  transform: scale(0.98);
+}

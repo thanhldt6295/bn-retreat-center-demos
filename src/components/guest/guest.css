@@ -333,3 +333,24 @@
 .g-portal-bar.wide {
   padding: 0 120px;
 }
+
+/* ---- Interaction states (venue style: yellow primary, green outline) ---- */
+.g-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+.g-btn:focus-visible,
+.g-portal-bar nav a:focus-visible,
+.pt-chip:focus-visible,
+.as-link:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+.g-btn.yellow:focus-visible {
+  outline-color: var(--ink);
+}
+.g-portal-bar nav a:hover:not(.on) {
+  color: var(--ink);
+}
+.g-card.pt-add:hover:not(.on) {
+  border-color: #b7c0ba;
+}
