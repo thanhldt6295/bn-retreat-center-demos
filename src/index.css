@@ -16,3 +16,8 @@ html {
   color-scheme: light;
   background: #faf9f5;
 }
+
+/* fixed-size icons never shrink inside flex rows (keeps SVG icons square) */
+img[width][height] {
+  flex: none;
+}
