@@ -37,14 +37,14 @@ export function Wizard({ step, next, prev, goto }: SceneProps) {
       </>
     ) : step === '2.2' || step === '2.2r' || step === '2.2b' || step === '2.3' ? (
       <>
-        <Neutral onClick={prev}>Back</Neutral>
+        <Neutral onClick={() => goto('2.1')}>Back</Neutral>
         <ActionButton className="slds-button slds-button_brand" loadingMs={600} onDone={() => goto('2.4')}>
           Next
         </ActionButton>
       </>
     ) : step === '2.4' ? (
       <>
-        <Neutral onClick={prev}>Back</Neutral>
+        <Neutral onClick={() => goto('2.2')}>Back</Neutral>
         <ActionButton className="slds-button slds-button_brand" primary loadingMs={600} onDone={next}>
           Next
         </ActionButton>
@@ -72,8 +72,8 @@ export function Wizard({ step, next, prev, goto }: SceneProps) {
         </div>
         </div>
       </Modal>
-      {step === '2.2b' && <RoomTypes onApply={next} />}
-      {step === '2.3' && <AddOns onApply={next} />}
+      {step === '2.2b' && <RoomTypes onApply={() => goto('2.2')} onCancel={() => goto('2.2')} />}
+      {step === '2.3' && <AddOns onApply={() => goto('2.2')} onCancel={() => goto('2.2')} />}
     </RecordPage>
   )
 }
@@ -253,7 +253,7 @@ function StepFour() {
 }
 
 /* 2.2b */
-function RoomTypes({ onApply }: { onApply: () => void }) {
+function RoomTypes({ onApply, onCancel }: { onApply: () => void; onCancel: () => void }) {
   const rows = [
     ...roomTypes.map((r) => ({ ...r, on: true })),
     { key: 'acc', name: 'Accessible Double Room', bed: 'Double', qty: 0, available: 2, maxOcc: 2, rate: 140, on: false },
@@ -264,8 +264,8 @@ function RoomTypes({ onApply }: { onApply: () => void }) {
       title="Room Types"
       footer={
         <>
-          <Neutral>Cancel</Neutral>
-          <ActionButton className="slds-button slds-button_brand" primary loadingMs={700} onDone={onApply}>
+          <Neutral onClick={onCancel}>Cancel</Neutral>
+          <ActionButton className="slds-button slds-button_brand" loadingMs={700} onDone={onApply}>
             Apply
           </ActionButton>
         </>
@@ -309,15 +309,15 @@ function RoomTypes({ onApply }: { onApply: () => void }) {
 }
 
 /* 2.3 */
-function AddOns({ onApply }: { onApply: () => void }) {
+function AddOns({ onApply, onCancel }: { onApply: () => void; onCancel: () => void }) {
   return (
     <Modal
       stacked
       title="Add-ons"
       footer={
         <>
-          <Neutral>Cancel</Neutral>
-          <ActionButton className="slds-button slds-button_brand" primary loadingMs={700} onDone={onApply}>
+          <Neutral onClick={onCancel}>Cancel</Neutral>
+          <ActionButton className="slds-button slds-button_brand" loadingMs={700} onDone={onApply}>
             Apply
           </ActionButton>
         </>
