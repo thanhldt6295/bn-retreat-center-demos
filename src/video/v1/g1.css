@@ -141,6 +141,10 @@
   flex: 1;
   min-width: 0;
 }
+.g1f-val.ph {
+  font-size: 12px;
+  color: #999c96;
+}
 .g1-submit {
   border: 0;
   background: #f6c945;

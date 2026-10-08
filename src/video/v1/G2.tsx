@@ -1,5 +1,5 @@
 import { PublicShell } from '../../components/guest/Guest'
-import { group } from '../../data/demo'
+import { group, organizer } from '../../data/demo'
 import { asset } from '../../lib/asset'
 import type { SceneProps } from '../../player/Player'
 import './g2.css'
@@ -38,6 +38,7 @@ export function G2({ goto }: SceneProps) {
           <button className="g2-back ab" onClick={() => goto('G1')}>
             Back to form
           </button>
+          <p className="g2-note">We will send your quote to {organizer.email}.</p>
         </div>
       </section>
     </PublicShell>

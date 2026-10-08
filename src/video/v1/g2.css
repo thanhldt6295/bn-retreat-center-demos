@@ -90,3 +90,9 @@
 .g2-back:hover {
   background: #eab92f;
 }
+
+.g2-note {
+  margin: 0;
+  font-size: 13px;
+  color: #939393;
+}

@@ -28,8 +28,8 @@ const HIGHLIGHTS = [
   ['ic-user.svg', ['Planning help', 'from our team']],
 ] as const
 
-type FieldProps = { label: string; req?: boolean; value: string; active: boolean; icon?: string; area?: boolean; onPick?: (v: string) => void; min?: string }
-function Field({ label, req, value, active, icon, area, onPick, min }: FieldProps) {
+type FieldProps = { ph?: string; label: string; req?: boolean; value: string; active: boolean; icon?: string; area?: boolean; onPick?: (v: string) => void; min?: string }
+function Field({ ph, label, req, value, active, icon, area, onPick, min }: FieldProps) {
   return (
     <div className="g1f">
       <label>
@@ -40,14 +40,14 @@ function Field({ label, req, value, active, icon, area, onPick, min }: FieldProp
         <DatePicker value={value} onChange={onPick} min={min}>
           {(open) => (
             <div className={`g1f-input ${open || active ? 'focus' : ''}`}>
-              <span className={`g1f-val ${active ? 'caret' : ''}`}>{value}</span>
+              <span className={`g1f-val ${active ? 'caret' : ''} ${!value && !active ? 'ph' : ''}`}>{value || (active ? '' : ph)}</span>
               {icon && <img src={asset(`img/${icon}`)} width={12} height={12} alt="" />}
             </div>
           )}
         </DatePicker>
       ) : (
         <div className={`g1f-input ${area ? 'area' : ''} ${active ? 'focus' : ''}`}>
-          <span className={`g1f-val ${active ? 'caret' : ''}`}>{value}</span>
+          <span className={`g1f-val ${active ? 'caret' : ''} ${!value && !active ? 'ph' : ''}`}>{value || (active ? '' : ph)}</span>
           {icon && <img src={asset(`img/${icon}`)} width={12} height={12} alt="" />}
         </div>
       )}
@@ -110,26 +110,26 @@ export function G1({ next }: SceneProps) {
         </div>
         <form className="g1-form" onSubmit={(e) => e.preventDefault()}>
           <h2>Request a Group Quote</h2>
-          <Field label="Retreat / Group Name" value={v[0]} active={a(0)} />
+          <Field ph="e.g. Annual Leadership Retreat" label="Retreat / Group Name" value={v[0]} active={a(0)} />
           <div className="g1-row">
-            <Field label="Start Date" req value={picked[1] ?? v[1]} active={a(1)} icon="ic-calendar.svg" onPick={pick(1)} />
-            <Field label="End Date" req value={picked[2] ?? v[2]} active={a(2)} icon="ic-calendar.svg" onPick={pick(2)} min={picked[1] ?? v[1]} />
+            <Field ph="Select date" label="Start Date" req value={picked[1] ?? v[1]} active={a(1)} icon="ic-calendar.svg" onPick={pick(1)} />
+            <Field ph="Select date" label="End Date" req value={picked[2] ?? v[2]} active={a(2)} icon="ic-calendar.svg" onPick={pick(2)} min={picked[1] ?? v[1]} />
           </div>
-          <Field label="Group Type" req value={v[3]} active={a(3)} icon="ic-chevron-down.svg" />
+          <Field ph="Select a group type" label="Group Type" req value={v[3]} active={a(3)} icon="ic-chevron-down.svg" />
           <div className="g1-row">
-            <Field label="Rooms Qty" req value={v[4]} active={a(4)} />
-            <Field label="Ideal nightly budget" value={v[5]} active={a(5)} />
-          </div>
-          <div className="g1-row">
-            <Field label="Organization" value={v[6]} active={a(6)} />
-            <Field label="Number of guests" value={v[7]} active={a(7)} />
+            <Field ph="e.g. 20 rooms" label="Rooms Qty" req value={v[4]} active={a(4)} />
+            <Field ph="$ per room / night" label="Ideal nightly budget" value={v[5]} active={a(5)} />
           </div>
           <div className="g1-row">
-            <Field label="First Name" req value={v[8]} active={a(8)} />
-            <Field label="Last Name" req value={v[9]} active={a(9)} />
+            <Field ph="Organization name" label="Organization" value={v[6]} active={a(6)} />
+            <Field ph="e.g. 30" label="Number of guests" value={v[7]} active={a(7)} />
           </div>
-          <Field label="Where should we send quotes?" req value={v[10]} active={a(10)} />
-          <Field label="Any additional requests?" value={v[11]} active={a(11)} area />
+          <div className="g1-row">
+            <Field ph="First name" label="First Name" req value={v[8]} active={a(8)} />
+            <Field ph="Last name" label="Last Name" req value={v[9]} active={a(9)} />
+          </div>
+          <Field ph="name@company.com" label="Where should we send quotes?" req value={v[10]} active={a(10)} />
+          <Field ph="Meeting space, meals, accessibility needs…" label="Any additional requests?" value={v[11]} active={a(11)} area />
           <ActionButton className="g1-submit" primary loadingMs={1000} onDone={next}>
             Submit Request
           </ActionButton>
