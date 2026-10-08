@@ -651,3 +651,27 @@
   line-height: 17px;
   color: #737880;
 }
+
+/* Global navigation app name (Figma 23667:294515): waffle 20, gap 16, padding 0 24 0 16, 20/28 #03234d */
+.slds-scope .lds .slds-context-bar__primary,
+.slds-scope.lds .slds-context-bar__primary {
+  align-items: center;
+}
+.slds-scope .lds-appname {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 32px;
+  padding: 0 24px 0 16px;
+  color: #03234d;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+.slds-scope .lds-appname img {
+  display: block;
+  width: 20px;
+  height: 20px;
+  flex: none;
+}

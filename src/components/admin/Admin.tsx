@@ -28,20 +28,12 @@ export function GlobalNav({ active }: { active?: string }) {
       <div className="slds-context-bar">
         <div className="slds-context-bar__primary">
           <div className="slds-context-bar__item slds-no-hover">
-            <div className="slds-context-bar__icon-action">
-              <span className="slds-icon-waffle_container">
-                <span className="slds-icon-waffle">
-                  {Array.from({ length: 9 }).map((_, i) => (
-                    <span key={i} className={`slds-r${i + 1}`} />
-                  ))}
-                </span>
-              </span>
-            </div>
-            <span className="slds-context-bar__label-action slds-context-bar__app-name">
+            <div className="lds-appname">
+              <img src={`${import.meta.env.BASE_URL}img/sf-waffle.svg`} width={20} height={20} alt="" />
               <span className="slds-truncate" title="Booking Ninjas">
                 Booking Ninjas
               </span>
-            </span>
+            </div>
           </div>
         </div>
         <nav className="slds-context-bar__secondary" aria-label="Context Bar">
