@@ -9,70 +9,92 @@
   container-type: size;
   width: min(100vw, 177.78vh);
   aspect-ratio: 16 / 9;
-  background: #0b2e4f;
+  background: #0e0f0f;
   color: #fff;
   overflow: hidden;
   font-family: Inter, system-ui, sans-serif;
 }
-.card-ninja {
+.card-cover {
   position: absolute;
-  left: 33%;
-  top: 4%;
-  width: 22%;
-  color: rgba(120, 150, 185, 0.28);
+  inset: 0;
+  background: #0075c9;
+  opacity: 0.3;
+  overflow: hidden;
 }
-.card-rings {
+.card-logo {
   position: absolute;
-  width: 40%;
+  left: 32.71%;
+  top: 8.57%;
+  width: 22.13%;
+  height: 31.89%;
+  opacity: 0.3;
 }
-.card-rings.tr {
+.card-dots {
+  position: absolute;
   right: 0;
-  top: 0;
-  width: 42%;
+  top: calc(50% - 0.19cqw);
+  transform: translateY(-50%);
+  width: 51.72%;
+  height: 99.4%;
+  object-fit: cover;
+  opacity: 0.3;
 }
-.card-rings.bl {
-  left: 0;
-  bottom: 0;
-  width: 32%;
+.card-ring {
+  position: absolute;
+  width: 54.17cqw;
+  height: 52.6cqw;
+}
+.card-arc {
+  position: absolute;
+  display: block;
 }
 .card-body {
   position: absolute;
-  left: 8.3%;
-  right: 8%;
-  top: 34%;
+  inset: 0;
+  padding: 0 8.333cqw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.458cqw;
 }
 .card-brand {
   display: flex;
   align-items: center;
-  gap: 1.1cqw;
-  margin-bottom: 2.6cqw;
+  gap: 0.9375cqw;
+}
+.card-brand img {
+  width: 11.979cqw;
+  height: 2.708cqw;
+  display: block;
 }
 .card-brand i {
   width: 1px;
-  height: 1.6cqw;
-  background: rgba(255, 255, 255, 0.6);
+  height: 1.458cqw;
+  background: rgba(255, 255, 255, 0.45);
 }
 .card-brand .rc {
-  font-size: 0.85cqw;
-  letter-spacing: 0.12em;
-  font-weight: 500;
+  font-size: 0.9375cqw;
+  letter-spacing: 0.075cqw;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
 }
 .card-title {
-  font-size: 3.7cqw;
-  line-height: 1.12;
+  font-size: 3.75cqw;
+  line-height: normal;
   font-weight: 700;
   margin: 0;
-  max-width: 72cqw;
+  width: 100%;
 }
 .card-sub {
-  font-size: 1.35cqw;
-  margin: 2cqw 0 0;
-  color: #e6eef8;
+  font-size: 1.458cqw;
+  margin: 0;
+  color: #d8eefa;
 }
 .card-fine {
-  font-size: 0.72cqw;
-  margin: 2cqw 0 0;
-  color: #d3deec;
+  font-size: 0.833cqw;
+  margin: 0;
+  color: #d8eefa;
 }
 .card-cta {
   margin-top: 2.2cqw;

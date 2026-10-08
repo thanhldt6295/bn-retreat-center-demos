@@ -5,14 +5,7 @@ import './guest.css'
 
 export function Logo({ light }: { light?: boolean }) {
   if (!light) return <img src={asset('img/logo.svg')} width={213} height={48} alt="Booking Ninjas" style={{ display: 'block' }} />
-  return (
-    <span className={`g-logo ${light ? 'light' : ''}`}>
-      <svg width="30" height="26" viewBox="0 0 30 26" fill="none" stroke={light ? '#fff' : '#000'} strokeWidth="3" strokeLinecap="round">
-        <path d="M3 9l12-4-6 7 12-3M7 22l9-9 8 3" />
-      </svg>
-      BOOKING NINJAS<sup>®</sup>
-    </span>
-  )
+  return <img src={asset('img/card/55e9b.svg')} width={230} height={52} alt="Booking Ninjas" style={{ display: 'block' }} />
 }
 
 export const GUEST_TABS = ['My stay', 'Room', 'Payment', 'Schedule', 'Documents', 'Charges', 'Add-ons']

@@ -1,27 +1,34 @@
 import type { ReactNode } from 'react'
+import { asset } from '../../lib/asset'
 import { ActionButton } from './ActionButton'
 import '../guest/guest.css'
 import './cards.css'
 
-const Ninja = () => (
-  <svg className="card-ninja" viewBox="0 0 200 200" fill="currentColor" aria-hidden>
-    <path d="M118 12c16 0 28 12 28 27 0 8-4 15-9 20l32-23 8 8-40 30 10 26 30-6 3 11-38 10-13-25-20 24 24 36-10 10-35-34-14 46-12-4 14-52-28-12 4-12 33 12 22-27-13-22-36 20-6-10 46-26c-3-4-5-9-5-15 0-15 12-27 28-27z" />
-  </svg>
-)
+const A = (f: string) => asset(`img/card/${f}`)
+const ARCS: [string, number, number, number][] = [
+  ['8354c.svg', 1352.5, -427.5, 995],
+  ['688a2.svg', 1400, -380, 900],
+  ['5e60f.svg', 1447.5, -332.5, 805],
+  ['cad1a.svg', 1495, -285, 710],
+  ['a6416.svg', 1542.5, -237.5, 615],
+  ['5644f.svg', 1590, -190, 520],
+]
+const u = (n: number) => `${(n / 19.2).toFixed(4)}cqw`
+const v = (n: number) => `${(n / 10.8).toFixed(4)}cqh`
 
-function Rings() {
+/* Cover art from Figma 296:13580: official ninja mark, halftone dots, rings and brand arcs. */
+function Backdrop() {
   return (
     <>
-      <svg className="card-rings tr" viewBox="0 0 400 400" fill="none" stroke="rgba(255,255,255,.12)">
-        {[120, 150, 180, 210, 240, 270].map((r) => (
-          <circle key={r} cx="360" cy="40" r={r} />
-        ))}
-      </svg>
-      <svg className="card-rings bl" viewBox="0 0 400 400" fill="none" stroke="rgba(255,255,255,.1)">
-        {[120, 150, 180, 210, 240].map((r) => (
-          <circle key={r} cx="40" cy="360" r={r} />
-        ))}
-      </svg>
+      <div className="card-cover">
+        <img className="card-logo" src={A('fb043.svg')} alt="" />
+        <img className="card-dots" src={A('1b0fa.png')} alt="" />
+        <img className="card-ring" style={{ left: u(-683), top: v(-641) }} src={A('a30ab.svg')} alt="" />
+        <img className="card-ring" style={{ left: u(-252), top: v(575) }} src={A('a30ab.svg')} alt="" />
+      </div>
+      {ARCS.map(([f, x, y, w]) => (
+        <img key={f} className="card-arc" style={{ left: u(x), top: v(y), width: u(w), height: u(w) }} src={A(f)} alt="" />
+      ))}
     </>
   )
 }
@@ -29,9 +36,7 @@ function Rings() {
 function Brand() {
   return (
     <div className="card-brand">
-      <span className="g-logo light" style={{ fontSize: '1.9cqw' }}>
-        BOOKING NINJAS<sup>®</sup>
-      </span>
+      <img src={A('55e9b.svg')} alt="Booking Ninjas" />
       <i />
       <span className="rc">RETREAT CENTER</span>
     </div>
@@ -42,8 +47,7 @@ export function Card({ children }: { children: ReactNode }) {
   return (
     <div className="card-wrap">
       <div className="card">
-        <Ninja />
-        <Rings />
+        <Backdrop />
         <div className="card-body">
           <Brand />
           {children}
