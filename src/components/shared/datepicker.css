@@ -79,6 +79,7 @@
   cursor: pointer;
   color: inherit;
 }
+.dp-grid button.hov:not(:disabled),
 .dp-grid button:hover:not(:disabled) {
   background: var(--dp-soft);
 }

@@ -1,6 +1,6 @@
 import { ActionButton } from '../../components/shared/ActionButton'
 import { useTypedFields } from '../../components/shared/typing'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { DatePicker } from '../../components/shared/DatePicker'
 import { PublicShell } from '../../components/guest/Guest'
 import { group, organizer } from '../../data/demo'
@@ -28,8 +28,9 @@ const HIGHLIGHTS = [
   ['ic-user.svg', ['Planning help', 'from our team']],
 ] as const
 
-type FieldProps = { ph?: string; label: string; req?: boolean; value: string; active: boolean; icon?: string; area?: boolean; onPick?: (v: string) => void; min?: string }
-function Field({ ph, label, req, value, active, icon, area, onPick, min }: FieldProps) {
+type Ctl = { open: boolean; hover?: number }
+type FieldProps = { ctl?: Ctl; ph?: string; label: string; req?: boolean; value: string; active: boolean; icon?: string; area?: boolean; onPick?: (v: string) => void; min?: string }
+function Field({ ctl, ph, label, req, value, active, icon, area, onPick, min }: FieldProps) {
   return (
     <div className="g1f">
       <label>
@@ -37,7 +38,7 @@ function Field({ ph, label, req, value, active, icon, area, onPick, min }: Field
         {req && <span className="req"> *</span>}
       </label>
       {onPick ? (
-        <DatePicker value={value} onChange={onPick} min={min}>
+        <DatePicker value={value} onChange={onPick} min={min} forceOpen={ctl?.open} hoverDay={ctl?.hover}>
           {(open) => (
             <div className={`g1f-input ${open || active ? 'focus' : ''}`}>
               <span className={`g1f-val ${active ? 'caret' : ''} ${!value && !active ? 'ph' : ''}`}>{value || (active ? '' : ph)}</span>
@@ -71,9 +72,37 @@ export function G1({ next }: SceneProps) {
     organizer.email,
     group.special,
   ]
-  const { values: v, done } = useTypedFields(texts, { speed: 22, startDelay: 700 })
-  const cur = v.findIndex((x, i) => x.length < texts[i].length)
-  const a = (i: number) => !done && cur === i
+  /* name is typed first, then the date pickers open and a day is picked like a real user, then the rest is typed */
+  const head = useTypedFields([texts[0]], { speed: 22, startDelay: 700 })
+  const [dates, setDates] = useState<{ phase: number; hover?: number; start: string; end: string }>({ phase: 0, start: '', end: '' })
+  useEffect(() => {
+    if (!head.done) return
+    const timers: number[] = []
+    const at = (ms: number, fn: () => void) => timers.push(window.setTimeout(fn, ms))
+    at(300, () => setDates((d) => ({ ...d, phase: 1 })))
+    at(1000, () => setDates((d) => ({ ...d, hover: 9 })))
+    at(1500, () => setDates((d) => ({ ...d, hover: 12 })))
+    at(2100, () => setDates((d) => ({ ...d, phase: 2, hover: undefined, start: group.start })))
+    at(2700, () => setDates((d) => ({ ...d, phase: 3 })))
+    at(3400, () => setDates((d) => ({ ...d, hover: 13 })))
+    at(3900, () => setDates((d) => ({ ...d, hover: 15 })))
+    at(4500, () => setDates((d) => ({ ...d, phase: 4, hover: undefined, end: group.end })))
+    return () => timers.forEach(window.clearTimeout)
+  }, [head.done])
+  const rest = useTypedFields(texts.slice(3), { run: dates.phase === 4, speed: 22, startDelay: 500 })
+  const v = [head.values[0], dates.start, dates.end, ...rest.values]
+  const done = rest.done
+  const restCur = rest.values.findIndex((x, i) => x.length < texts[i + 3].length)
+  const a = (i: number) => {
+    if (i === 0) return !head.done && head.values[0].length < texts[0].length
+    if (i === 1 || i === 2) return false
+    return dates.phase === 4 && !done && restCur === i - 3
+  }
+  const ctl = (i: 1 | 2): Ctl | undefined => {
+    if (dates.phase === 4) return undefined
+    const mine = i === 1 ? dates.phase === 1 : dates.phase === 3
+    return { open: mine, hover: mine ? dates.hover : undefined }
+  }
   const [picked, setPicked] = useState<Record<number, string>>({})
   const pick = (i: number) => (x: string) => setPicked((p) => ({ ...p, [i]: x }))
 
@@ -112,8 +141,8 @@ export function G1({ next }: SceneProps) {
           <h2>Request a Group Quote</h2>
           <Field ph="e.g. Annual Leadership Retreat" label="Retreat / Group Name" value={v[0]} active={a(0)} />
           <div className="g1-row">
-            <Field ph="Select date" label="Start Date" req value={picked[1] ?? v[1]} active={a(1)} icon="ic-calendar.svg" onPick={pick(1)} />
-            <Field ph="Select date" label="End Date" req value={picked[2] ?? v[2]} active={a(2)} icon="ic-calendar.svg" onPick={pick(2)} min={picked[1] ?? v[1]} />
+            <Field ctl={ctl(1)} ph="Select date" label="Start Date" req value={picked[1] ?? v[1]} active={a(1)} icon="ic-calendar.svg" onPick={pick(1)} />
+            <Field ctl={ctl(2)} ph="Select date" label="End Date" req value={picked[2] ?? v[2]} active={a(2)} icon="ic-calendar.svg" onPick={pick(2)} min={picked[1] ?? v[1]} />
           </div>
           <Field ph="Select a group type" label="Group Type" req value={v[3]} active={a(3)} icon="ic-chevron-down.svg" />
           <div className="g1-row">

@@ -18,13 +18,19 @@ type Props = {
   children: (open: boolean) => ReactNode
   /** open on first render (e.g. when a scripted step wants to show it) */
   defaultOpen?: boolean
+  /** scripted demo: force the popover open/closed (leave undefined for normal clicking) */
+  forceOpen?: boolean
+  /** scripted demo: day of the shown month that looks hovered */
+  hoverDay?: number
 }
 
 /** Calendar popover that opens when the date field is clicked. */
-export function DatePicker({ value, onChange, theme = 'venue', min, max, children, defaultOpen }: Props) {
+export function DatePicker({ value, onChange, theme = 'venue', min, max, children, defaultOpen, forceOpen, hoverDay }: Props) {
   const parsed = new Date(value)
-  const base = Number.isNaN(parsed.getTime()) ? new Date(2026, 10, 12) : parsed
-  const [open, setOpen] = useState(!!defaultOpen)
+  const hasValue = !Number.isNaN(parsed.getTime())
+  const base = hasValue ? parsed : new Date(2026, 10, 12)
+  const [openState, setOpen] = useState(!!defaultOpen)
+  const open = forceOpen ?? openState
   const [month, setMonth] = useState(new Date(base.getFullYear(), base.getMonth(), 1))
   const ref = useRef<HTMLDivElement>(null)
 
@@ -52,7 +58,7 @@ export function DatePicker({ value, onChange, theme = 'venue', min, max, childre
 
   return (
     <div className={`dp dp-${theme}`} ref={ref}>
-      <div onClick={() => setOpen((o) => !o)} style={{ cursor: 'pointer' }}>
+      <div onClick={() => forceOpen === undefined && setOpen((o) => !o)} style={{ cursor: 'pointer' }}>
         {children(open)}
       </div>
       {open && theme === 'lds' && (
@@ -148,7 +154,7 @@ export function DatePicker({ value, onChange, theme = 'venue', min, max, childre
                   type="button"
                   key={i}
                   disabled={(lo && d < lo) || (hi && d > hi) || false}
-                  className={`${same(d, base) ? 'sel' : ''} ${same(d, today) ? 'today' : ''}`}
+                  className={`${hasValue && same(d, base) ? 'sel' : ''} ${same(d, today) ? 'today' : ''} ${hoverDay === d.getDate() ? 'hov' : ''}`}
                   onClick={() => {
                     onChange(fmt(d))
                     setOpen(false)
