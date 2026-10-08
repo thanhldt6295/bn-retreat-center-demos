@@ -675,3 +675,9 @@
   height: 20px;
   flex: none;
 }
+
+/* the app-name block already carries the 16px left padding (Figma): no extra context-bar inset, so the waffle lines up under the header logo */
+.slds-scope .slds-context-bar,
+.slds-scope.lds .slds-context-bar {
+  padding-left: 0;
+}
