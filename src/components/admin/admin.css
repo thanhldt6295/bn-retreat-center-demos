@@ -320,7 +320,8 @@
 .lds-rowact {
   width: 16px;
   height: 16px;
-  border: 1px solid #0250d9;
+  background: #fff;
+  border: 1px solid #5c5c5c;
   border-radius: 50%;
   display: inline-grid;
   place-items: center;

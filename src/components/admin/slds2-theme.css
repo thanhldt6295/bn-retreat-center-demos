@@ -561,3 +561,93 @@
 .slds-scope .lds-list-tools .slds-input__icon {
   fill: #2e2e2e !important;
 }
+
+/* ---- Button Group (Figma ⚡ Button Group 178:7646): one 1px #5c5c5c pill, 32px tall, 1px dividers, 16px padding ---- */
+.slds-scope .slds-button-group {
+  display: inline-flex;
+  align-items: stretch;
+  box-sizing: border-box;
+  height: 32px;
+  border: 1px solid #5c5c5c;
+  border-radius: 9999px;
+  overflow: hidden;
+  background: #fff;
+}
+.slds-scope .slds-button-group .slds-button {
+  margin: 0;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 14px;
+}
+.slds-scope .slds-button-group .slds-button + .slds-button {
+  border-left: 1px solid #5c5c5c;
+}
+.slds-scope .slds-button-group .slds-button_brand {
+  background: #0250d9;
+  color: #fff;
+}
+.slds-scope .slds-button-group .slds-button_brand + .slds-button {
+  border-left-color: #5c5c5c;
+}
+.slds-scope .slds-button-group .slds-button_neutral:hover:not(:disabled) {
+  background: #f3f3f3;
+}
+
+/* list row action + header icons (Figma 418:15781, 6:391): 8px blue caret in a 16px ring; 12px sort arrow and chevron */
+.slds-scope .lds-rowact .slds-icon {
+  width: 8px;
+  height: 8px;
+}
+.slds-scope .lds-th .slds-icon {
+  width: 12px;
+  height: 12px;
+}
+
+/* Rate setup panel (Figma 796:21580): #f4f9ff, 1px #9ec2f5, radius 8, padding 14/16/16 */
+.slds-scope .lds-ratesetup-row td {
+  padding: 8px 0 !important;
+  border-bottom: 0 !important;
+  background: transparent !important;
+  height: auto !important;
+}
+.slds-scope .lds-ratesetup {
+  background: #f4f9ff;
+  border: 1px solid #9ec2f5;
+  border-radius: 8px;
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  white-space: normal;
+}
+.slds-scope .lds-ratesetup .fields {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+}
+.slds-scope .lds-ratesetup .normal {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-bottom: 8px;
+  font-family: Inter, system-ui, sans-serif;
+}
+.slds-scope .lds-ratesetup .normal span {
+  font-size: 12px;
+  color: #737880;
+}
+.slds-scope .lds-ratesetup .normal b {
+  font-size: 13px;
+  font-weight: 600;
+  color: #025cd9;
+}
+.slds-scope .lds-ratesetup > p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 17px;
+  color: #737880;
+}

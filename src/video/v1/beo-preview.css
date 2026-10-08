@@ -51,8 +51,12 @@
   gap: 0;
   width: 320px;
 }
+.bp-tabs .slds-button-group {
+  width: 100%;
+}
 .bp-tabs .slds-button {
   flex: 1;
+  text-align: center;
   margin: 0;
   justify-content: center;
 }

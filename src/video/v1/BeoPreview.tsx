@@ -133,9 +133,11 @@ export function BeoPreview({ next }: SceneProps) {
         <div className="bp-cols">
           <section className="slds-card bp-stage-card">
             <div className="bp-tabs">
-              <span className="slds-button slds-button_brand">BEO</span>
-              <span className="slds-button slds-button_neutral">Contract</span>
-              <span className="slds-button slds-button_neutral">Agenda</span>
+              <div className="slds-button-group" role="group">
+                <span className="slds-button slds-button_brand">BEO</span>
+                <span className="slds-button slds-button_neutral">Contract</span>
+                <span className="slds-button slds-button_neutral">Agenda</span>
+              </div>
             </div>
             <div className="bp-stage">
               <Paper />

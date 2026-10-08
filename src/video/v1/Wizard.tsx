@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { Fragment, useState, type ReactNode } from 'react'
 import { ActionButton } from '../../components/shared/ActionButton'
 import { Check, Field, Input, Modal, Section, Select, Stepper, TextArea, Badge } from '../../components/admin/Admin'
 import { Icon } from '../../components/admin/Icon'
@@ -35,7 +35,7 @@ export function Wizard({ step, next, prev, goto }: SceneProps) {
           Next
         </ActionButton>
       </>
-    ) : step === '2.2' || step === '2.2b' || step === '2.3' ? (
+    ) : step === '2.2' || step === '2.2r' || step === '2.2b' || step === '2.3' ? (
       <>
         <Neutral onClick={prev}>Back</Neutral>
         <ActionButton className="slds-button slds-button_brand" loadingMs={600} onDone={() => goto('2.4')}>
@@ -66,7 +66,7 @@ export function Wizard({ step, next, prev, goto }: SceneProps) {
         <div style={{ fontSize: 13, lineHeight: "18px", color: "#5c5c5c" }}>{step === '2.1' ? SUB0 : SUB}</div>
         <div className="lds-stepbody lds-wiz" key={n}>
           {n === 1 && <StepOne />}
-          {n === 2 && <StepTwo onPick={() => goto('2.2b')} onAddOn={() => goto('2.3')} />}
+          {n === 2 && <StepTwo onPick={() => goto('2.2b')} onAddOn={() => goto('2.3')} rateOpen={step === '2.2r'} />}
           {n === 3 && <StepThree />}
           {n === 4 && <StepFour />}
         </div>
@@ -112,7 +112,9 @@ function StepOne() {
   )
 }
 
-function StepTwo({ onPick, onAddOn }: { onPick: () => void; onAddOn: () => void }) {
+function StepTwo({ onPick, onAddOn, rateOpen }: { onPick: () => void; onAddOn: () => void; rateOpen?: boolean }) {
+  const [open, setOpen] = useState<string | null>(rateOpen ? 'single' : null)
+  const [disc, setDisc] = useState<Record<string, number>>({ single: 20, double: 20, cabin: 20 })
   return (
     <>
       <Section>Space</Section>
@@ -158,18 +160,32 @@ function StepTwo({ onPick, onAddOn }: { onPick: () => void; onAddOn: () => void 
           </tr>
         </thead>
         <tbody>
-          {roomTypes.map((r) => (
-            <tr key={r.key} className="slds-hint-parent">
-              <td>{r.name}</td>
-              <td>{r.bed}</td>
-              <td>{r.qty}</td>
-              <td>{r.available}</td>
-              <td>{money(r.rate)}</td>
-              <td>
-                <a className="slds-text-link">Edit rate</a>
-              </td>
-            </tr>
-          ))}
+          {roomTypes.map((r) => {
+            const rate = r.rate + 20 - disc[r.key]
+            return (
+              <Fragment key={r.key}>
+                <tr className="slds-hint-parent">
+                  <td>{r.name}</td>
+                  <td>{r.bed}</td>
+                  <td>{r.qty}</td>
+                  <td>{r.available}</td>
+                  <td>{money(rate)}</td>
+                  <td>
+                    <a className="slds-text-link" role="button" tabIndex={0} onClick={() => setOpen(open === r.key ? null : r.key)}>
+                      {open === r.key ? 'Hide rate' : 'Edit rate'}
+                    </a>
+                  </td>
+                </tr>
+                {open === r.key && (
+                  <tr className="lds-ratesetup-row">
+                    <td colSpan={6}>
+                      <RateSetup room={r} discount={disc[r.key]} onChange={(v) => setDisc((d) => ({ ...d, [r.key]: v }))} />
+                    </td>
+                  </tr>
+                )}
+              </Fragment>
+            )
+          })}
         </tbody>
       </table>
       <div style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 13 }}>
@@ -340,5 +356,45 @@ function AddOns({ onApply }: { onApply: () => void }) {
         </tbody>
       </table>
     </Modal>
+  )
+}
+
+/* Rate setup panel under a room-type row (Figma 796:21580): group discount on the normal rate */
+function RateSetup({ room, discount, onChange }: { room: (typeof roomTypes)[number]; discount: number; onChange: (v: number) => void }) {
+  const normal = room.rate + 20
+  const rate = normal - discount
+  return (
+    <div className="lds-ratesetup">
+      <div className="fields">
+        <Field label="Discount Type">
+          <div style={{ width: 200 }}>
+            <Select value="Amount ($)" />
+          </div>
+        </Field>
+        <Field label="Discount">
+          <input
+            className="slds-input"
+            style={{ width: 150 }}
+            inputMode="decimal"
+            value={`$${discount.toFixed(2)}`}
+            onChange={(e) => {
+              const n = parseFloat(e.target.value.replace(/[^0-9.]/g, ''))
+              onChange(Number.isFinite(n) ? Math.min(n, normal) : 0)
+            }}
+            aria-label="Discount"
+          />
+        </Field>
+        <Field label="Rate / Unit">
+          <input className="slds-input" style={{ width: 150 }} readOnly value={money(rate)} aria-label="Rate per unit" />
+        </Field>
+        <div className="normal">
+          <span>Normal</span>
+          <b>{money(normal)}</b>
+        </div>
+      </div>
+      <p>
+        Group rate for {group.org}: {money(normal)} → {money(rate)} (−{money(discount).replace('.00', '')} per night) · applies to all {room.qty} {room.name}s in {group.code}
+      </p>
+    </div>
   )
 }

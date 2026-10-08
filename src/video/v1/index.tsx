@@ -25,6 +25,7 @@ export const steps: Step[] = [
   { id: '1.4d', label: 'Hover an Out of Order tag', view: 'avail' },
   { id: '2.1', label: 'Wizard · Group Block Info', view: 'wizard' },
   { id: '2.2', label: 'Wizard · Space, rooms & add-ons', view: 'wizard' },
+  { id: '2.2r', label: 'Wizard · Rate setup (Edit rate)', view: 'wizard' },
   { id: '2.2b', label: 'Wizard · Room types picker', view: 'wizard' },
   { id: '2.3', label: 'Wizard · Add-on picker', view: 'wizard' },
   { id: '2.4', label: 'Wizard · Billing', view: 'wizard' },

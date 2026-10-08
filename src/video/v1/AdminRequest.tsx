@@ -7,8 +7,8 @@ import { usePlayer, type SceneProps } from '../../player/Player'
 
 /* ---------------- 1.1 list view (Figma 178:7525: 8 items, sortable columns, checkboxes) ---------------- */
 const LIST_COLS: [string, number][] = [
-  ['', 44], ['', 40], ['Name', 100], ['Contact', 163], ['Start Date', 120], ['End Date', 120], ['Created Date', 160],
-  ['Group Type', 163], ['Maximu…', 110], ['Minimu…', 110], ['Number…', 110], ['Status', 100], ['', 50],
+  ['', 40], ['Name', 100], ['Contact', 185], ['Start Date', 120], ['End Date', 120], ['Created Date', 160],
+  ['Group Type', 185], ['Maximu…', 110], ['Minimu…', 110], ['Number…', 110], ['Status', 100], ['', 50],
 ]
 const TOOLS = ['settings', 'table', 'refresh', 'sort', 'edit', 'chart', 'filterList']
 
@@ -59,14 +59,14 @@ export function RequestList({ next }: SceneProps) {
             <tr>
               {LIST_COLS.map(([h], i) => (
                 <th key={i} scope="col">
-                  {i === 1 ? (
+                  {i === 0 ? (
                     <span className="lds-cb" />
                   ) : (
                     h && (
                       <div className="lds-th">
                         <span className="slds-truncate">{h}</span>
-                        {h === 'Created Date' && <Icon name="arrowdown" size="xx-small" color="#2e2e2e" />}
-                        <Icon name="chevrondown" size="xx-small" color="#2e2e2e" className="cv" />
+                        {h === 'Created Date' && <Icon name="arrowdown" size="xx-small" color="#5c5c5c" />}
+                        <Icon name="chevrondown" size="xx-small" color="#03234d" className="cv" />
                       </div>
                     )
                   )}
@@ -75,11 +75,10 @@ export function RequestList({ next }: SceneProps) {
             </tr>
           </thead>
           <tbody>
-            {gbrList.map((r, i) => {
+            {gbrList.map((r) => {
               const live = r.code === group.code
               return (
                 <tr key={r.code} className={live ? 'sel' : ''} onClick={live ? next : undefined} style={{ cursor: live ? 'pointer' : 'default' }}>
-                  <td className="num">{i + 1}</td>
                   <td>
                     <span className="lds-cb" />
                   </td>
