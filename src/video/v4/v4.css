@@ -258,6 +258,7 @@
   display: flex;
   gap: 20px;
   margin-top: auto;
+  padding-top: 24px;
   width: 560px;
 }
 .k3-acts .pos-btn {
@@ -277,6 +278,9 @@
 }
 .pos-info {
   margin-top: 72px;
+  align-self: center;
+  width: 560px;
+  box-sizing: border-box;
 }
 
 /* Q2 · Figma 263:307 (How it works: dots 30, title 16, text 13, gap 20) */
