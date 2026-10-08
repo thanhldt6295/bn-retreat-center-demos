@@ -389,15 +389,15 @@ export function O6({ goto }: SceneProps) {
         />
         <Card title="Schedule" flush>
           <Table
-            rowH={36}
-            cols={[{ h: 'Day', w: 100 }, { h: 'Time', w: 142 }, { h: 'Session', w: 311 }, { h: 'Location', w: 157 }, { h: 'Guests' }]}
+            rowH={50}
+            cols={[{ h: 'Day', w: 140 }, { h: 'Time', w: 200 }, { h: 'Session', w: 438 }, { h: 'Location', w: 220 }, { h: 'Guests' }]}
             rows={sched}
           />
         </Card>
         <Card title="Meals" flush>
           <Table
-            rowH={40}
-            cols={[{ h: 'Meal', w: 170 }, { h: 'When', w: 157 }, { h: 'Guests', w: 71 }, { h: 'Dietary needs', w: 290 }, { h: 'Status', align: 'right' }]}
+            rowH={56}
+            cols={[{ h: 'Meal', w: 240 }, { h: 'When', w: 220 }, { h: 'Guests', w: 100 }, { h: 'Dietary needs', w: 290 }, { h: 'Status', align: 'right' }]}
             rows={meals.map((m) => [m[0], m[1], m[2], m[3], <Pill key="s" t={m[4]} tone={m[5]} />])}
           />
         </Card>
@@ -427,7 +427,7 @@ export function O7({ goto, next }: SceneProps) {
               <span style={{ fontSize: 12, color: '#06503f', fontWeight: 600 }}>7 of 22 rooms are taken · 15 still open</span>
             </div>
           </Card>
-          <Card title="Send invitations" style={{ flex: 1 }} flush>
+          <Card title="Send invitations" style={{ flex: 1, alignSelf: 'stretch' }} flush>
             <div className="pt-card-b" style={{ gap: 14 }}>
               <div className="pt-form">
                 <label>Recipients</label>

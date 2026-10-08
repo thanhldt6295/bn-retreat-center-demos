@@ -25,7 +25,7 @@
   margin: 6px 0 0;
   color: var(--muted);
   font-size: 15px;
-  max-width: 560px;
+  max-width: none;
 }
 .pt-cards {
   display: flex;
@@ -171,7 +171,7 @@
 }
 .pt-table .head {
   background: var(--cream);
-  height: 40px;
+  height: 36px;
   border-bottom: 1px solid var(--line);
   font-size: 12px;
   font-weight: 600;
@@ -398,8 +398,10 @@
   text-align: center;
 }
 .pt-hero h1 {
-  margin: 0;
+  margin: 6px 0 0;
   font-size: 30px;
+  line-height: 36px;
+  font-weight: 700;
 }
 .pt-hero p {
   margin: 0;

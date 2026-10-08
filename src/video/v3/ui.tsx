@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import './portal.css'
+import '../v1/g4.css'
 
 /* Shared pieces of the V3 portal pages (Figma 272:270 organizer, 273:270 guest). */
 
