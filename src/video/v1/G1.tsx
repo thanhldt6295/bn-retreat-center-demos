@@ -103,6 +103,16 @@ export function G1({ next }: SceneProps) {
     const mine = i === 1 ? dates.phase === 1 : dates.phase === 3
     return { open: mine, hover: mine ? dates.hover : undefined }
   }
+  /* the form stays fixed on screen; on short windows it scales down to fit instead of scrolling away */
+  useEffect(() => {
+    const fit = () => document.documentElement.style.setProperty('--g1-scale', String(Math.min(1, (window.innerHeight - 24) / 840)))
+    fit()
+    window.addEventListener('resize', fit)
+    return () => {
+      window.removeEventListener('resize', fit)
+      document.documentElement.style.removeProperty('--g1-scale')
+    }
+  }, [])
   const [picked, setPicked] = useState<Record<number, string>>({})
   const pick = (i: number) => (x: string) => setPicked((p) => ({ ...p, [i]: x }))
 

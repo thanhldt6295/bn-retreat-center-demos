@@ -79,7 +79,8 @@
   position: fixed;
   right: 100px;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) scale(var(--g1-scale, 1));
+  transform-origin: right center;
   z-index: 5;
   width: 520px;
   box-sizing: border-box;
@@ -294,11 +295,3 @@
   flex: none;
 }
 
-/* viewports shorter than the form: fall back to scrolling with the page so nothing is cut off */
-@media (max-height: 880px) {
-  .g1-form {
-    position: absolute;
-    top: 80px;
-    transform: none;
-  }
-}
