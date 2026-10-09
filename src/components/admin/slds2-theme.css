@@ -681,3 +681,17 @@
 .slds-scope.lds .slds-context-bar {
   padding-left: 0;
 }
+
+/* buttons with icons (Figma Button - Neutral/Brand with Icon): 14px icons, 8px gap */
+.slds-scope .lds-btn-ic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.slds-scope .lds-btn-ic img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  flex: none;
+}

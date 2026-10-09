@@ -168,3 +168,8 @@
   font-size: 12px;
   color: #444;
 }
+
+/* Figma S1/S4: table column headers are upper-case */
+.slds-scope .rq-page .lds-list-table th {
+  text-transform: uppercase !important;
+}

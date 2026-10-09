@@ -1,3 +1,4 @@
+import { asset } from '../../lib/asset'
 import { useEffect } from 'react'
 import { AdminPage, Badge, Field, GlobalNav, Select, TextArea } from '../../components/admin/Admin'
 import { ActionButton } from '../../components/shared/ActionButton'
@@ -32,8 +33,11 @@ export function S1({ goto, from }: SceneProps) {
             <h1>Open requests</h1>
           </div>
           <div className="rq-act">
-            <button className="slds-button slds-button_neutral">List view</button>
-            <button className="slds-button slds-button_brand">New request</button>
+            <FiltersButton />
+            <button className="slds-button slds-button_brand lds-btn-ic">
+              <img src={asset('img/ic-add-white.svg')} width={14} height={14} alt="" />
+              New request
+            </button>
           </div>
         </div>
         <div className="slds-card rq-list">
@@ -220,6 +224,7 @@ export function S4(_: SceneProps) {
             <h1>Portal activity</h1>
           </div>
           <div className="rq-act">
+            <FiltersButton />
             <button className="slds-button slds-button_neutral">Export</button>
             <button className="slds-button slds-button_brand">Resend links</button>
           </div>
@@ -273,3 +278,14 @@ export function S4(_: SceneProps) {
   )
 }
 
+
+/* Figma "Button - Neutral" with a leading filter icon and a trailing caret (275:644) */
+function FiltersButton() {
+  return (
+    <button className="slds-button slds-button_neutral lds-btn-ic">
+      <img src={asset('img/ic-filters.svg')} width={14} height={14} alt="" />
+      Filters
+      <img src={asset('img/ic-caret-down.svg')} width={14} height={14} alt="" />
+    </button>
+  )
+}
