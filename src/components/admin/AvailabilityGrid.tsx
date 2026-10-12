@@ -174,10 +174,9 @@ const HOUR_DEFAULT: HourlyFilters = { date: 'Oct 9, 2026', time: '12:00 AM', dur
 const LEFT = 370
 const RELOAD_MS = 520
 
-const Label = ({ children, info }: { children: ReactNode; info?: boolean }) => (
-  <div className="lds-label" style={{ fontSize: 13, display: 'flex', alignItems: 'center', gap: 4 }}>
+const Label = ({ children }: { children: ReactNode }) => (
+  <div className="lds-label" style={{ fontSize: 13 }}>
     {children}
-    {info && <Icon name="info" size="x-small" color="#5c5c5c" title="Dates are shown in the property time zone" />}
   </div>
 )
 
@@ -215,7 +214,7 @@ export function AvailabilityPage(props: Props) {
 
   const dateField = (l: 'Start Date' | 'End Date') => (
     <div key={l} style={{ flex: 1 }}>
-      <Label info>{l}</Label>
+      <Label>{l}</Label>
       <DatePicker theme="lds" value={dates[l]} onChange={(x) => setDates((d) => ({ ...d, [l]: x }))} min={l === 'End Date' ? dates['Start Date'] : undefined}>
         {(open) => (
           <div className={`slds-input-has-icon slds-input-has-icon_right ${open ? 'slds-has-focus' : ''}`}>
