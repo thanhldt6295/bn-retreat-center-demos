@@ -56,7 +56,9 @@ G1 request form → G2 request received → 1.1 request list → 1.2 GBR-008 Pen
 
 ### V2 · Group Rooms → Individual Guest Reservations (~2:45)
 
-V1 G7 "Assign rooms" → A1 assign rooms, who pays → A2 send invitations → I1 invitation email → I2 → I3 Elena pays $462 → I4 confirmed #00034 → B1 enter GBR-008 → B2 choose Standard Double ("4 left in your block") → B3 Priya pays → B4 #00032 → C1 reservations list → C5 block usage → C6 assign room → C2 #00032 → C3 change room → C4 availability → C7 drag to move → C8 extend stay → end card.
+V1 G7 "Assign rooms" → A1 assign rooms, who pays → A2 send invitations → I1 invitation email → I2 → I3 Elena pays $462 → I4 confirmed #00034 → B1 enter GBR-008 → B2 choose Standard Double ("4 left in your block") → B3 Priya pays → B4 #00032 → A1e guests booked → admin reservation workspace (Figma page "V2 – Reservations – Admin", panels instead of modals): W0 reservations list → W14 group #00031 → W15 assign guests (panel) → W16 guests assigned → W1 reservation #00032 → W17 rate details → W28 edit rate → W29 rate updated → W18 invoice INV-00032 → W2 change room → W3 room changed → W4 add item → W5 add note → W11 add guest → W12 add room → W30 room added → W10 check in → W13 checked in → W26 check out → W27 checked out → W6 after POS charge → W7 create invoice → W8 take payment → W9 checked out, paid → W19 partial payment → W20 partially paid → W21 INV-00033 → W22 take payment (remaining) → W23 paid after partial → W24 check out with balance due → W25 checked out, balance due → W31 take payment after check-out → end card.
+
+Code: `src/video/v2/ws/` (`model.ts` derives every number from one reservation spec, `Workspace.tsx` page and panels, `Scenes.tsx` one scene per W-frame and the click targets from the Figma flow map).
 
 ### V3 · Organizer & Guest Portal
 

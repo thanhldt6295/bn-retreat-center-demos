@@ -56,12 +56,12 @@ export function GlobalNav({ active }: { active?: string }) {
 }
 
 /** Standard object icon (SLDS standard sprite: macros) as in the Figma record headers. */
-export const ObjectIcon = ({ size = 40, color, round }: { size?: number; color?: string; round?: boolean }) => (
+export const ObjectIcon = ({ size = 40, color, round, name = 'macros', sprite = 'standard' }: { size?: number; color?: string; round?: boolean; name?: string; sprite?: 'standard' | 'action' }) => (
   <span
     className="slds-icon_container slds-icon-standard-macros"
     style={{ width: size, height: size, borderRadius: round ? '50%' : 4, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flex: 'none', background: color }}
   >
-    <Icon name="macros" sprite="standard" size="large" style={{ width: size * 0.62, height: size * 0.62 }} />
+    <Icon name={name} sprite={sprite} size="large" style={{ width: size * 0.62, height: size * 0.62 }} />
   </span>
 )
 
