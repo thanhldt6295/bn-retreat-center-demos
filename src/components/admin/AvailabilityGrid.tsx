@@ -8,7 +8,7 @@ import './grid.css'
 
 /* Availability grid used by V1 (1.4, 4.5) and V2 (C4, C7, C8). */
 
-export type Kind = 'confirmed' | 'pending' | 'ooo' | 'held' | 'checkedin' | 'checkedout'
+export type Kind = 'confirmed' | 'pending' | 'ooo' | 'held'
 export type Booking = {
   row: number
   start: number // day index (0 = Mon Nov 9); Hourly: hours since midnight of the start date
@@ -56,34 +56,21 @@ export const BASE_BOOKINGS: Booking[] = [
 ]
 
 
-/* Hourly mode: spaces instead of rooms, bookings in hours since midnight of Oct 9, 2026. */
-export const HOURLY_UNITS: Unit[] = [
-  { type: 'Meeting Hall', label: 'MH-1', dot: 'space' },
-  { type: 'Meeting Hall', label: 'MH-2', dot: 'space' },
-  { type: 'Meeting Hall', label: 'MH-3', dot: 'space' },
-  { type: 'Dining Hall', label: 'DH-1', dot: 'space' },
+/* Hourly mode: same rows and legend as Nightly; bookings in hours since midnight of the start date (Meeting Hall rows). */
+const hb = (label: string, start: number, len: number, kind: Kind, name: string, window: string, extra: Partial<Booking> = {}) => ({ label, b: { row: 0, start, len, kind, name, sub: extra.sub, id: '#00031 · GBR-008', dates: window, group: 'Organizer: Maya Thompson', total: '$600.00', ...extra } as Booking })
+const HOURLY_SAMPLE = [
+  hb('MH-1', 9, 8, 'confirmed', 'Horizon Foundation', 'Oct 9, 2026 · 9:00 AM – 5:00 PM', { sub: 'Leadership Sessions' }),
+  hb('MH-1', 33, 3, 'confirmed', 'Board meeting', 'Oct 10, 2026 · 9:00 AM – 12:00 PM', { id: '#00041 · direct booking', group: 'No group · direct booking', total: '$225.00' }),
+  hb('MH-2', 6, 2, 'confirmed', 'Sunrise Yoga', 'Oct 9, 2026 · 6:00 – 8:00 AM', { id: '#00038 · direct booking', group: 'No group · direct booking', total: '$150.00' }),
+  hb('MH-3', 5, 1.5, 'pending', 'Staff briefing', 'Oct 9, 2026 · 5:00 – 6:30 AM', { id: '#00036 · direct booking', group: 'No group · direct booking', total: '$112.50' }),
+  hb('MH-3', 14, 4, 'ooo', 'Out of Order', '', { sub: 'MH-3 · Oct 9, 2:00 – 6:00 PM', id: undefined }),
+  hb('MH-4', 18.5, 2, 'confirmed', 'Group dinner', 'Oct 9, 2026 · 6:30 – 8:30 PM'),
 ]
-const hb = (row: number, start: number, len: number, kind: Kind, name: string, sub: string, window: string, extra: Partial<Booking> = {}): Booking => ({
-  row,
-  start,
-  len,
-  kind,
-  name,
-  sub,
-  id: kind === 'ooo' ? undefined : '#00031 · GBR-008',
-  dates: window,
-  group: 'Organizer: Maya Thompson',
-  total: '$600.00',
-  ...extra,
-})
-export const HOURLY_BOOKINGS: Booking[] = [
-  hb(0, 9, 8, 'confirmed', 'Horizon Foundation', 'Leadership Sessions', 'Oct 9, 2026 · 9:00 AM – 5:00 PM'),
-  hb(0, 33, 3, 'confirmed', 'Board meeting', 'Confirmed', 'Oct 10, 2026 · 9:00 AM – 12:00 PM', { id: '#00041 · direct booking', group: 'No group · direct booking', total: '$225.00' }),
-  hb(1, 6, 2, 'checkedin', 'Sunrise Yoga', 'Checked In', 'Oct 9, 2026 · 6:00 – 8:00 AM', { id: '#00038 · direct booking', group: 'No group · direct booking', total: '$150.00' }),
-  hb(2, 5, 1.5, 'checkedout', 'Shift briefing', 'Checked Out', 'Oct 9, 2026 · 5:00 – 6:30 AM', { id: '#00036 · direct booking', group: 'No group · direct booking', total: '$112.50' }),
-  hb(2, 14, 4, 'ooo', 'Out of Order', '', '', { sub: 'MH-3 · Oct 9, 2:00 – 6:00 PM' }),
-  hb(3, 18.5, 2, 'confirmed', 'Group dinner', 'Confirmed', 'Oct 9, 2026 · 6:30 – 8:30 PM'),
-]
+const hourlyBookings = (units: Unit[]): Booking[] =>
+  HOURLY_SAMPLE.flatMap(({ label, b }) => {
+    const row = units.findIndex((u) => u.label === label)
+    return row < 0 ? [] : [{ ...b, row }]
+  })
 
 export function PopCard({ title, badge, badgeTone, sub, rows, actions }: {
   title: string
@@ -335,8 +322,8 @@ export function AvailabilityGrid({
   onRefresh,
 }: Props) {
   const hourlyMode = mode === 'Hourly'
-  const units = hourlyMode ? HOURLY_UNITS : unitsProp
-  const bookings = hourlyMode ? HOURLY_BOOKINGS : bookingsProp
+  const units = unitsProp
+  const bookings = useMemo(() => (hourlyMode ? hourlyBookings(unitsProp) : bookingsProp), [hourlyMode, unitsProp, bookingsProp])
   const canDrag = !hourlyMode
 
   /* zoom: discrete level + continuous column width (slider) */
@@ -494,7 +481,7 @@ export function AvailabilityGrid({
   const shift = { transform: `translateX(${-scrollX}px)` }
 
   return (
-    <div className={`ag-card ${hourlyMode ? 'ag-hourly' : ''}`} onMouseLeave={() => setHover(null)}>
+    <div className="ag-card" onMouseLeave={() => setHover(null)}>
       <div className="ag-tools">
         <ZoomSlider value={slider} onChange={setSlider} />
         <button
@@ -592,7 +579,7 @@ export function AvailabilityGrid({
                       return (
                         <div
                           key={i}
-                          className={`ag-cell ${c.req && legendRequested ? 'req' : c.wk ? 'wk' : ''} ${inSel ? 'sel' : ''}`}
+                          className={`ag-cell ${c.req && legendRequested ? 'req' : c.wk ? 'wk' : ''} ${inSel ? 'sel' : ''} ${inSel && sel && i === sel.b ? 'cur' : ''}`}
                           onMouseEnter={() => {
                             if (requestedHover && dayLevel && c.req) setHover({ type: 'requested', row: r })
                             if (sel && !sel.done && sel.row === r) setSel({ ...sel, b: i })
@@ -602,6 +589,7 @@ export function AvailabilityGrid({
                         />
                       )
                     })}
+                    {sel && sel.row === r && selRange && <div className="ag-selbox" style={{ left: selRange[0] * colW, width: (selRange[1] - selRange[0] + 1) * colW }} />}
                     {bookings.map((b, bi) => {
                       if (b.row !== dataRow) return null
                       const x0 = X(ux(b.start))
@@ -639,25 +627,15 @@ export function AvailabilityGrid({
                       </div>
                     )}
                     {sel && sel.done && sel.row === r && selRange && (
-                      <div className="slds-dropdown slds-dropdown_left ag-menu" style={{ left: clampLeft((selRange[1] + 1) * colW + 14, 170), top: 30 }}>
-                        <ul className="slds-dropdown__list" role="menu">
-                          <li className="slds-dropdown__item" role="presentation">
-                            <a role="menuitem">
-                              <span className="slds-truncate">
-                                <Icon name="add" className="slds-icon-text-default slds-m-right_x-small" color="#5c5c5c" />
-                                New Reservation
-                              </span>
-                            </a>
-                          </li>
-                          <li className="slds-dropdown__item" role="presentation">
-                            <a role="menuitem">
-                              <span className="slds-truncate">
-                                <Icon name="user" className="slds-icon-text-default slds-m-right_x-small" color="#5c5c5c" />
-                                Out of Order
-                              </span>
-                            </a>
-                          </li>
-                        </ul>
+                      <div className="ag-menu" role="menu" style={{ left: clampLeft(selRange[1] * colW + 10, 190), top: 44 }}>
+                        <div className="ag-mi" role="menuitem">
+                          <img src={`${import.meta.env.BASE_URL}img/ic-menu-add.svg`} width={16} height={16} alt="" />
+                          New Reservation
+                        </div>
+                        <div className="ag-mi" role="menuitem">
+                          <img src={`${import.meta.env.BASE_URL}img/ic-out-of-order.svg`} width={16} height={16} alt="" />
+                          Out of Order
+                        </div>
                       </div>
                     )}
                   </div>
@@ -668,27 +646,15 @@ export function AvailabilityGrid({
           {drag && <DragGhost drag={drag} b={bookings[drag.index]} row={Math.max(0, order.indexOf(drag.row))} geom={geom()} X={(v) => X(ux(v)) + LEFT - scrollX} tip={drag.mode === 'resize' ? resizeTip?.(drag.index, drag.len) : undefined} />}
         </div>
       </div>
-      {hourlyMode ? (
-        <div className="ag-legend">
-          <span><i className="lg h-c" /> Confirmed</span>
-          <span><i className="lg h-i" /> Checked In</span>
-          <span><i className="lg h-o" /> Checked Out</span>
-          <span><i className="lg ban red" /> Out of Order</span>
-          <span><i className="lg ban" /> Unavailable</span>
-          <span><i className="lg h-m" /> Management Contracts</span>
-          <span style={{ marginLeft: 'auto' }}>Showing {units.length} of {units.length} spaces</span>
-        </div>
-      ) : (
-        <div className="ag-legend">
-          <span><i className="lg" /> Available</span>
-          <span><i className="lg c" /> Confirmed</span>
-          <span><i className="lg p" /> {legendPending}</span>
-          <span><i className="lg o" /> Out of Order</span>
-          <span><i className="lg w" /> Weekend</span>
-          {legendRequested && <span><i className="lg r" /> Requested stay</span>}
-          <span style={{ marginLeft: 'auto' }}>Showing 11 of 44 units</span>
-        </div>
-      )}
+      <div className="ag-legend">
+        <span><i className="lg" /> Available</span>
+        <span><i className="lg c" /> Confirmed</span>
+        <span><i className="lg p" /> {legendPending}</span>
+        <span><i className="lg o" /> Out of Order</span>
+        <span><i className="lg w" /> Weekend</span>
+        {legendRequested && <span><i className="lg r" /> Requested stay</span>}
+        <span style={{ marginLeft: 'auto' }}>Showing 11 of 44 units</span>
+      </div>
     </div>
   )
 }

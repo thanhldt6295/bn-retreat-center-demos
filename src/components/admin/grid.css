@@ -260,8 +260,20 @@
   border-left: 1px solid #ddd;
 }
 .ag-cell.sel {
-  background: #cfe0fb !important;
-  box-shadow: inset 0 0 0 2px #0b5cff;
+  background: #e6e9f8 !important;
+}
+.ag-cell.sel.cur {
+  background: #d5dff6 !important;
+}
+.ag-selbox {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border: 2px solid #3f63d6;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 2;
+  box-sizing: border-box;
 }
 .ag-dot {
   width: 14px;
@@ -378,19 +390,29 @@
   z-index: 40;
   background: #fff;
   border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.22);
-  padding: 6px;
-  font-size: 12.5px;
-  min-width: 140px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.16);
+  padding: 8px 4px;
+  min-width: 180px;
   animation: ag-pop 0.15s ease-out both;
 }
-.ag-menu div {
-  padding: 7px 10px;
-  border-radius: 4px;
+.ag-mi {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 24px 8px 12px;
+  font-size: 13px;
+  line-height: 18px;
+  color: #2e2e2e;
+  white-space: nowrap;
   cursor: pointer;
+  border-radius: 4px;
 }
-.ag-menu div:hover {
-  background: #eef4ff;
+.ag-mi:hover {
+  background: #f3f3f3;
+}
+.ag-mi img {
+  flex: none;
+  display: block;
 }
 .ag-legend {
   display: flex;
@@ -545,42 +567,6 @@
 }
 .ag-dd-list li:hover {
   background: #e5f0ff;
-}
-
-/* Hourly: booking colours follow the legend */
-.ag-hourly .ag-bk.confirmed {
-  background: #fbe08b;
-}
-.ag-hourly .ag-bk.checkedin {
-  background: #b5e8c9;
-}
-.ag-bk.checkedout {
-  background: #cfd3dc;
-}
-.ag-hourly .lg.h-c {
-  background: #fbe08b;
-  border-color: #fbe08b;
-}
-.ag-hourly .lg.h-i {
-  background: #b5e8c9;
-  border-color: #b5e8c9;
-}
-.ag-hourly .lg.h-o {
-  background: #cfd3dc;
-  border-color: #cfd3dc;
-}
-.ag-hourly .lg.h-m {
-  background: #c5b3ee;
-  border-color: #c5b3ee;
-}
-.ag-hourly .lg.ban {
-  border-radius: 50%;
-  border: 1.5px solid #8a8e99;
-  background: linear-gradient(135deg, transparent 44%, #8a8e99 44%, #8a8e99 56%, transparent 56%);
-}
-.ag-hourly .lg.ban.red {
-  border-color: #c23934;
-  background: linear-gradient(135deg, transparent 44%, #c23934 44%, #c23934 56%, transparent 56%);
 }
 
 .ag-row {
